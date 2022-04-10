@@ -6,6 +6,8 @@ Benchmarks for programming languages
   Test memory allocation time
 * **Empty program**  
   Test initialization time
+* **Send HTTPS request**
+  Test builtin or de facto standard HTTPS request overhead
 
 ## Hardware
 MacBook Pro (16-inch, 2021)  
