@@ -58,9 +58,9 @@ JIT: ON fold cse dce fwd dse narrow loop abc sink fuse
   Test built-in or de facto standard HTTPS response overhead
 * **Receive HTTPS response**  
   Test built-in or de facto standard HTTPS response overhead
-* **Query database**
+* **Query database**  
   Test built-in or de facto standard database connector/driver/bindings
-* **Draw**
+* **Draw**  
   Test graphics API command overhead
 
 ## Hardware
