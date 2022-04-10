@@ -42,19 +42,21 @@ JIT: ON fold cse dce fwd dse narrow loop abc sink fuse
 ```
 
 ## Tests
-* **Create a record/structure/object**  
-  Test memory allocation time
 * **Empty program**  
-  Test initialization time
+  Test initialization
+* **Create a record/structure/object**  
+  Test memory allocation
 * **Parse JSON**  
   Test built-in or de facto standard JSON parser
-* **Receive HTTPS request**  
-  Test built-in or de facto standard HTTPS request overhead
-* **Receive HTTPS response**  
-  Test built-in or de facto standard HTTPS response overhead
+* **Encode JSON**  
+  Test built-in or de facto standard JSON encoder
 * **Send HTTPS request**  
   Test built-in or de facto standard HTTPS request overhead
+* **Receive HTTPS request**  
+  Test built-in or de facto standard HTTPS request overhead
 * **Send HTTPS response**  
+  Test built-in or de facto standard HTTPS response overhead
+* **Receive HTTPS response**  
   Test built-in or de facto standard HTTPS response overhead
 
 ## Hardware
