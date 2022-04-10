@@ -17,6 +17,12 @@ InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault
 go version go1.18 darwin/arm64
 ```
 * Java
+```sh
+% java -version
+java version "1.8.0_321"
+Java(TM) SE Runtime Environment (build 1.8.0_321-b07)
+Java HotSpot(TM) 64-Bit Server VM (build 25.321-b07, mixed mode)
+```
 * JavaScript
 * Lua
 * LuaJIT
