@@ -24,6 +24,10 @@ Java(TM) SE Runtime Environment (build 1.8.0_321-b07)
 Java HotSpot(TM) 64-Bit Server VM (build 25.321-b07, mixed mode)
 ```
 * JavaScript
+```sh
+% node -v
+v17.3.0
+```
 * Lua
 * LuaJIT
 
