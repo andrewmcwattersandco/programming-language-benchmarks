@@ -1,6 +1,15 @@
 # programming-language-benchmarks
 Benchmarks for programming languages
 
+## Languages
+* C
+* C++
+* Go
+* Java
+* JavaScript
+* Lua
+* LuaJIT
+
 ## Tests
 * **Create a record/structure/object**  
   Test memory allocation time
