@@ -60,6 +60,8 @@ JIT: ON fold cse dce fwd dse narrow loop abc sink fuse
   Test built-in or de facto standard HTTPS response overhead
 * **Query database**
   Test built-in or de facto standard database connector/driver/bindings
+* **Draw**
+  Test graphics API command overhead
 
 ## Hardware
 MacBook Pro (16-inch, 2021)  
