@@ -12,6 +12,10 @@ Thread model: posix
 InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
 ```
 * Go
+```sh
+% go version
+go version go1.18 darwin/arm64
+```
 * Java
 * JavaScript
 * Lua
