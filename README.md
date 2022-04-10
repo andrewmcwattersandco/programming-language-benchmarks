@@ -46,6 +46,8 @@ JIT: ON fold cse dce fwd dse narrow loop abc sink fuse
   Test memory allocation time
 * **Empty program**  
   Test initialization time
+* **Parse JSON**
+  Test built-in or de facto standard JSON parser
 * **Receive HTTPS request**  
   Test built-in or de facto standard HTTPS request overhead
 * **Receive HTTPS response**  
