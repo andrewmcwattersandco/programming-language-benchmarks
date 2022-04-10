@@ -30,6 +30,12 @@ v17.3.0
 ```
 * Lua
 * LuaJIT
+```sh
+% luajit
+LuaJIT 2.1.0-beta3 -- Copyright (C) 2005-2021 Mike Pall. https://luajit.org/
+JIT: ON fold cse dce fwd dse narrow loop abc sink fuse
+>
+```
 
 ## Tests
 * **Create a record/structure/object**  
