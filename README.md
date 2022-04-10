@@ -46,13 +46,13 @@ JIT: ON fold cse dce fwd dse narrow loop abc sink fuse
   Test memory allocation time
 * **Empty program**  
   Test initialization time
-* **Send HTTPS request**  
-  Test built-in or de facto standard HTTPS request overhead
-* **Send HTTPS response**  
-  Test built-in or de facto standard HTTPS response overhead
 * **Receive HTTPS request**  
   Test built-in or de facto standard HTTPS request overhead
 * **Receive HTTPS response**  
+  Test built-in or de facto standard HTTPS response overhead
+* **Send HTTPS request**  
+  Test built-in or de facto standard HTTPS request overhead
+* **Send HTTPS response**  
   Test built-in or de facto standard HTTPS response overhead
 
 ## Hardware
