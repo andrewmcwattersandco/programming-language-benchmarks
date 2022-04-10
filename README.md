@@ -8,6 +8,12 @@ Benchmarks for programming languages
   Test initialization time
 * **Send HTTPS request**
   Test builtin or de facto standard HTTPS request overhead
+* **Receive HTTPS request**
+  Test builtin or de facto standard HTTPS request overhead
+* **Send HTTPS response**
+  Test builtin or de facto standard HTTPS response overhead
+* **Receive HTTPS response**
+  Test builtin or de facto standard HTTPS response overhead
 
 ## Hardware
 MacBook Pro (16-inch, 2021)  
