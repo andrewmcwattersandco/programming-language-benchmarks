@@ -23,6 +23,10 @@ java version "1.8.0_321"
 Java(TM) SE Runtime Environment (build 1.8.0_321-b07)
 Java HotSpot(TM) 64-Bit Server VM (build 25.321-b07, mixed mode)
 ```
+```sh
+% javac -version
+javac 1.8.0_321
+```
 * JavaScript
 ```sh
 % node -v
