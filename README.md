@@ -42,7 +42,7 @@ JIT: ON fold cse dce fwd dse narrow loop abc sink fuse
 ```
 
 ## Tests
-* **Empty program**  
+* **Minimal program**  
   Test initialization
 * **Create a record/structure/object**  
   Test memory allocation
