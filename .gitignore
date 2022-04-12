@@ -298,3 +298,5 @@ luac.out
 *.x86_64
 *.hex
 
+minimal/minimal
+record/record
