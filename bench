@@ -4,11 +4,7 @@ backup() {
 }
 
 restore() {
-    local file=$(
-        printf $1 |
-        awk '{ print substr($0, 1, length($0) - 1) }'
-    )
-    test -f $1 && mv -f $1 $file
+    test -f $1~ && mv -f $1~ $1
 }
 
 for d in */
@@ -33,8 +29,8 @@ do
     backup ${file}.c
     backup ${file}.cpp
     go build -v ./...
-    restore ${file}.c~
-    restore ${file}.cpp~
+    restore ${file}.c
+    restore ${file}.cpp
     printf " %s\t" go
     /usr/bin/time ./${file}
 
