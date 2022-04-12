@@ -75,8 +75,8 @@ Apple M1 Max chip with 10-core CPU, 32-core GPU, and 16-core Neural Engine
 1TB SSD storage  
 https://www.apple.com/shop/buy-mac/macbook-pro/16-inch-space-gray-10-core-cpu-32-core-gpu-1tb#
 
-### Cloud
-GitHub Actions
+<!-- ### Cloud
+GitHub Actions -->
 
 ## License
 GNU General Public License v3.0
