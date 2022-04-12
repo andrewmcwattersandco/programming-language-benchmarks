@@ -37,6 +37,8 @@ v17.9.0
 % lua5.1 -v
 Lua 5.1.5  Copyright (C) 1994-2012 Lua.org, PUC-Rio
 ```
+_Note: Lua 5.1 is used due LuaJIT's API-compatibility.[1]_
+
 * LuaJIT
 ```sh
 % luajit
@@ -85,3 +87,6 @@ GitHub Actions -->
 
 ## License
 GNU General Public License v3.0
+
+## References
+\[1]: https://luajit.org/install.html#embed
