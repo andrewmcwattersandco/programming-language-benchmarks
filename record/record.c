@@ -6,7 +6,7 @@ struct record {
 	int id;
 };
 
-struct record records[68453040];
+struct record records[112813858];
 
 int main(int argc, char *argv[])
 {

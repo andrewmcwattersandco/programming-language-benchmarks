@@ -14,7 +14,7 @@ private:
 // Bjarne Stroustrup
 // This material may be protected by copyright.
 
-Record records[68453040];
+Record records[112813858];
 
 int main(int argc, char *argv[])
 {
