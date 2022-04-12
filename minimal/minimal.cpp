@@ -1,4 +1,4 @@
-int main() { }     // the minimal C++ program
+int main() { }     // the minimal C++ program
 
 // Excerpt From
 // The C++ Programming Language, Fourth Edition
