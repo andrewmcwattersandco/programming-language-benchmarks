@@ -12,3 +12,5 @@ do
     file=$(basename ${d})
     echo ${file}/${file} >> .gitignore
 done
+
+echo '*~' >> .gitignore
