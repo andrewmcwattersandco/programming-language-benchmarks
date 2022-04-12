@@ -50,6 +50,11 @@ JIT: ON fold cse dce fwd dse narrow loop abc sink fuse
   Test initialization
 * **Create a record/structure/object**  
   Test memory allocation
+
+  _Note: Creates 112,813,858 records. As of node v17.9.0, this is the maximum
+  array size. All other test languages have their tests calibrated to this
+  number, which is the smallest array length of all of the test
+  languages before one of the tests "terminate[s] abnormally."_ (`time`)
 * **Parse JSON**  
   Test built-in or de facto standard JSON parser
 * **Encode JSON**  
