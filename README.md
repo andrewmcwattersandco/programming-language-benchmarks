@@ -30,7 +30,7 @@ javac 1.8.0_321
 * JavaScript
 ```sh
 % node -v
-v17.3.0
+v17.9.0
 ```
 * Lua
 ```sh
