@@ -1,0 +1,68 @@
+#!/bin/sh
+backup() {
+    test -f $1 && mv -f $1 $1~
+}
+
+restore() {
+    local file=$(
+        printf $1 |
+        awk '{ print substr($0, 1, length($0) - 1) }'
+    )
+    test -f $1 && mv -f $1 $file
+}
+
+for d in */
+do
+    file=$(basename $d)
+    cd $d
+    echo $file
+
+    # C
+    cc ${file}.c
+    printf " %s\t" c
+    /usr/bin/time ./a.out 2> /dev/null
+    /usr/bin/time ./a.out
+
+    # C++
+    cc ${file}.cpp
+    printf " %s\t" cpp
+    /usr/bin/time ./a.out
+
+    # Go
+    # C/C++ source files not allowed when not using cgo or SWIG
+    backup ${file}.c
+    backup ${file}.cpp
+    go build -v ./...
+    restore ${file}.c~
+    restore ${file}.cpp~
+    printf " %s\t" go
+    /usr/bin/time ./${file}
+
+    # Java
+    javac ${file}.java
+    class=$(
+        printf $file |
+        awk '{ print toupper(substr($0, 1, 1)) substr($0, 2) }'
+    )App
+    printf " %s\t" java
+    /usr/bin/time java $class
+
+    # Node
+    printf " %s\t" js
+    # nvm
+    # sudo ln -s $(which node) /usr/local/bin/node
+    /usr/bin/time node --max-old-space-size=8192 ${file}.js
+
+    # Lua
+    printf " %s\t" lua
+    # macos
+    # cd /opt/homebrew/bin/
+    # ln -s ../Cellar/lua@5.1/5.1.5_8/bin/lua-5.1 lua
+    /usr/bin/time lua ${file}.lua
+
+    # LuaJIT
+    printf " %s\t" luajit
+    /usr/bin/time luajit ${file}.lua
+
+    cd ..
+done
