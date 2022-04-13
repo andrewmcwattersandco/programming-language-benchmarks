@@ -1,6 +1,9 @@
 #!/bin/sh
 set -e
 
+command=/usr/bin/time
+options=-l
+
 clean() {
     # C/C++
     rm -f a.out
@@ -41,12 +44,12 @@ do
     # C
     cc ${file}.c
     printf " %s\t" c
-    /usr/bin/time ./a.out
+    $command $options ./a.out
 
     # C++
     cc ${file}.cpp
     printf " %s\t" cpp
-    /usr/bin/time ./a.out
+    $command $options ./a.out
 
     # Go
     # C/C++ source files not allowed when not using cgo or SWIG
@@ -56,30 +59,30 @@ do
     restore ${file}.c
     restore ${file}.cpp
     printf " %s\t" go
-    /usr/bin/time ./${file}
+    $command $options ./${file}
 
     # Java
     javac ${file}.java
     class=$(classname $file)
     printf " %s\t" java
-    /usr/bin/time java $class
+    $command $options java $class
 
     # Node
     printf " %s\t" js
     # nvm
     # sudo ln -s $(which node) /usr/local/bin/node
-    /usr/bin/time node --max-old-space-size=8192 ${file}.js
+    $command $options node --max-old-space-size=8192 ${file}.js
 
     # Lua
     printf " %s\t" lua
     # macOS
     # cd /opt/homebrew/bin/
     # ln -s ../Cellar/lua@5.1/5.1.5_8/bin/lua-5.1 lua
-    /usr/bin/time lua ${file}.lua
+    $command $options lua ${file}.lua
 
     # LuaJIT
     printf " %s\t" luajit
-    /usr/bin/time luajit ${file}.lua
+    $command $options luajit ${file}.lua
 
     cd ..
 done
