@@ -2,7 +2,7 @@
 set -e
 
 command=/usr/bin/time
-options=-l
+options=
 
 clean() {
     # C/C++
