@@ -99,8 +99,8 @@ do
     # Java
     if [ -f ${file}.java ]; then
         javac ${file}.java
-        class=$(classname $file)
         printf " %s\t" java
+        class=$(classname $file)
         $command $options java $class
     fi
 
