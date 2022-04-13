@@ -106,6 +106,9 @@ ln -s ../Cellar/lua@5.1/5.1.5_8/bin/lua-5.1 lua
   languages before one of the tests is terminated abnormally._
 * **Parse JSON**  
   Test built-in or de facto standard JSON parser
+
+  Reads and parses 13.76 GB of EDGAR API bulk data.  
+  See https://www.sec.gov/edgar/sec-api-documentation for more information.
 * **Encode JSON**  
   Test built-in or de facto standard JSON encoder
 * **Send HTTPS request**  
