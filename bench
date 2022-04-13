@@ -53,6 +53,7 @@ do
 
     # Go
     # C/C++ source files not allowed when not using cgo or SWIG
+    # Avoid setting CGO_ENABLED=0, backup and restore instead
     backup ${file}.c
     backup ${file}.cpp
     go build ./...
