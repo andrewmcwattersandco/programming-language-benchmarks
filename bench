@@ -33,15 +33,23 @@ prebuild() {
 }
 
 backup() {
-    if [ -f $1 ]; then
-        mv -f $1 $1~
-    fi
+    for source_file
+    do
+        local target_file=$source_file~
+        if [ -f $source_file ]; then
+            mv -f $source_file $target_file
+        fi
+    done
 }
 
 restore() {
-    if [ -f $1~ ]; then
-        mv -f $1~ $1
-    fi
+    for source_file
+    do
+        local target_file=$source_file
+        if [ -f $source_file~ ]; then
+            mv -f $source_file~ $target_file
+        fi
+    done
 }
 
 capitalize() {
@@ -81,11 +89,9 @@ do
     # C/C++ source files not allowed when not using cgo or SWIG
     # Avoid setting CGO_ENABLED=0, backup and restore instead
     if [ -f ${file}.go ]; then
-        backup ${file}.c
-        backup ${file}.cpp
+        backup ${file}.c ${file}.cpp
         go build ./...
-        restore ${file}.c
-        restore ${file}.cpp
+        restore ${file}.c ${file}.cpp
         printf " %s\t" go
         $command $options ./${file}
     fi
