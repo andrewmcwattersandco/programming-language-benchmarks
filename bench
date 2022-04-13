@@ -72,7 +72,7 @@ do
 
     # Lua
     printf " %s\t" lua
-    # macos
+    # macOS
     # cd /opt/homebrew/bin/
     # ln -s ../Cellar/lua@5.1/5.1.5_8/bin/lua-5.1 lua
     /usr/bin/time lua ${file}.lua
