@@ -53,11 +53,16 @@ JIT: ON fold cse dce fwd dse narrow loop abc sink fuse
 * **Real-world tests only**  
   Most developers are not writing code that looks like the 1994 FANNKUCH
   Benchmark, nor running N-body simulations.
-* **Use idiomatic code/Do not optimize**
+* **Use the most popular libraries**  
+  The speed and memory efficiency of programming languages should not be
+  evaluated without considering the ecosystems around them. When benchmarking
+  an HTTPS server in Node.js, most developers will be considering the speed of
+  Express, not `http.createServer()`.
+* **Use idiomatic code/Do not optimize**  
   One can write inline assembly in C with the non-standard `asm` keyword or use
-  `ffi.cdef` from LuaJIT to create C data structures instead of Lua tables, for
-  example, but the tests within this benchmark are designed to reflect typical
-  usage of each respective language.
+  `ffi.cdef` from LuaJIT to create C data structures instead of Lua tables, but
+  the tests within this benchmark are designed to reflect typical usage of each
+  respective language.
 
   Further, some implementations of languages rely on specific hinting to
   trigger optimizations, like knowing the exact layout of a record ahead of
