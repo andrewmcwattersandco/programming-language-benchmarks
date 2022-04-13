@@ -46,48 +46,59 @@ do
     prebuild
 
     # C
-    cc ${file}.c
-    printf " %s\t" c
-    $command $options ./a.out
+    if [ -f ${file}.c ]; then
+        cc ${file}.c
+        printf " %s\t" c
+        $command $options ./a.out
+    fi
 
     # C++
-    cc ${file}.cpp
-    printf " %s\t" cpp
-    $command $options ./a.out
+    if [ -f ${file}.cpp ]; then
+        cc ${file}.cpp
+        printf " %s\t" cpp
+        $command $options ./a.out
+    fi
 
     # Go
     # C/C++ source files not allowed when not using cgo or SWIG
     # Avoid setting CGO_ENABLED=0, backup and restore instead
-    backup ${file}.c
-    backup ${file}.cpp
-    go build ./...
-    restore ${file}.c
-    restore ${file}.cpp
-    printf " %s\t" go
-    $command $options ./${file}
+    if [ -f ${file}.go ]; then
+        backup ${file}.c
+        backup ${file}.cpp
+        go build ./...
+        restore ${file}.c
+        restore ${file}.cpp
+        printf " %s\t" go
+        $command $options ./${file}
+    fi
 
     # Java
-    javac ${file}.java
-    class=$(classname $file)
-    printf " %s\t" java
-    $command $options java $class
+    if [ -f ${file}.java ]; then
+        javac ${file}.java
+        class=$(classname $file)
+        printf " %s\t" java
+        $command $options java $class
+    fi
 
     # Node
-    printf " %s\t" js
-    # nvm
-    # sudo ln -s $(which node) /usr/local/bin/node
-    $command $options node --max-old-space-size=8192 ${file}.js
+    if [ -f ${file}.js ]; then
+        printf " %s\t" js
+        # nvm
+        # sudo ln -s $(which node) /usr/local/bin/node
+        $command $options node --max-old-space-size=8192 ${file}.js
+    fi
 
-    # Lua
-    printf " %s\t" lua
-    # macOS
-    # cd /opt/homebrew/bin/
-    # ln -s ../Cellar/lua@5.1/5.1.5_8/bin/lua-5.1 lua
-    $command $options lua ${file}.lua
+    # Lua/LuaJIT
+    if [ -f ${file}.lua ]; then
+        printf " %s\t" lua
+        # macOS
+        # cd /opt/homebrew/bin/
+        # ln -s ../Cellar/lua@5.1/5.1.5_8/bin/lua-5.1 lua
+        $command $options lua ${file}.lua
 
-    # LuaJIT
-    printf " %s\t" luajit
-    $command $options luajit ${file}.lua
+        printf " %s\t" luajit
+        $command $options luajit ${file}.lua
+    fi
 
     cd ..
 done
