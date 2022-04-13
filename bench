@@ -1,6 +1,16 @@
 #!/bin/sh
 set -e
 
+tests=*/
+while getopts t: name
+do
+    case $name in
+    t)    tests="$OPTARG";;
+    ?)    printf "usage: %s: [-t tests]\n" $0
+          exit 2;;
+    esac
+done
+shift $(($OPTIND - 1))
 
 command=/usr/bin/time
 options=
@@ -44,7 +54,7 @@ classname() {
     echo ${1}App | capitalize
 }
 
-for d in */
+for d in $tests
 do
     file=$(basename $d)
     cd $d
