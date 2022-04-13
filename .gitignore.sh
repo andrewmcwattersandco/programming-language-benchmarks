@@ -13,4 +13,4 @@ do
     echo ${file}/${file} >> .gitignore
 done
 
-echo '*~' >> .gitignore
+echo '*.orig' >> .gitignore
