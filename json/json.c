@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-static char *fext(const char *name)
+char *fext(const char *name)
 {
 	return strrchr(name, '.') + 1;
 }
