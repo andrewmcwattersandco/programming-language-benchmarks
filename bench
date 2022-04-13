@@ -9,6 +9,16 @@ restore() {
     test -f $1~ && mv -f $1~ $1
 }
 
+capitalize() {
+    local input
+    read input
+    printf $input | awk '{ print toupper(substr($0, 1, 1)) substr($0, 2) }'
+}
+
+classname() {
+    echo ${1}App | capitalize
+}
+
 for d in */
 do
     file=$(basename $d)
@@ -38,10 +48,7 @@ do
 
     # Java
     javac ${file}.java
-    class=$(
-        printf $file |
-        awk '{ print toupper(substr($0, 1, 1)) substr($0, 2) }'
-    )App
+    class=$(classname $file)
     printf " %s\t" java
     /usr/bin/time java $class
 
