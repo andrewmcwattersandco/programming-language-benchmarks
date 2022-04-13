@@ -47,6 +47,13 @@ JIT: ON fold cse dce fwd dse narrow loop abc sink fuse
 >
 ```
 
+## Philosophy
+* No warm-ups
+  Users do not warm up programs before use.
+* Real-world tests only
+  Most developers are not writing code that looks like the 1994 FANNKUCH
+  Benchmark, nor running N-body simulations.
+
 ## Run
 ```sh
 ./bench
