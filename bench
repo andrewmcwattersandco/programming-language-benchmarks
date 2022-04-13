@@ -1,4 +1,6 @@
 #!/bin/sh
+set -e
+
 
 command=/usr/bin/time
 options=
@@ -15,15 +17,21 @@ clean() {
 }
 
 prebuild() {
-    test -f prebuild && ./prebuild
+    if [ -f prebuild ]; then
+        ./prebuild
+    fi
 }
 
 backup() {
-    test -f $1 && mv -f $1 $1~
+    if [ -f $1 ]; then
+        mv -f $1 $1~
+    fi
 }
 
 restore() {
-    test -f $1~ && mv -f $1~ $1
+    if [ -f $1~ ]; then
+        mv -f $1~ $1
+    fi
 }
 
 capitalize() {
