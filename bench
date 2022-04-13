@@ -53,7 +53,7 @@ do
     # C/C++ source files not allowed when not using cgo or SWIG
     backup ${file}.c
     backup ${file}.cpp
-    go build -v ./...
+    go build ./...
     restore ${file}.c
     restore ${file}.cpp
     printf " %s\t" go
