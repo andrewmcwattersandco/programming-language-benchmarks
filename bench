@@ -41,7 +41,6 @@ do
     # C
     cc ${file}.c
     printf " %s\t" c
-    /usr/bin/time ./a.out 2> /dev/null
     /usr/bin/time ./a.out
 
     # C++
