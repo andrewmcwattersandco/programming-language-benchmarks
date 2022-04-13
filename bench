@@ -1,6 +1,17 @@
 #!/bin/sh
 set -e
 
+clean() {
+    # C/C++
+    rm -f a.out
+
+    # Go
+    rm -f $1
+
+    # Java
+    rm -f $(classname $1).class
+}
+
 backup() {
     test -f $1 && mv -f $1 $1~
 }
@@ -24,6 +35,8 @@ do
     file=$(basename $d)
     cd $d
     echo $file
+
+    clean $file
 
     # C
     cc ${file}.c
