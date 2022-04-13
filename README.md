@@ -48,11 +48,25 @@ JIT: ON fold cse dce fwd dse narrow loop abc sink fuse
 ```
 
 ## Philosophy
-* No warm-ups  
+* **No warm-ups**  
   Users do not warm up programs before use.
-* Real-world tests only  
+* **Real-world tests only**  
   Most developers are not writing code that looks like the 1994 FANNKUCH
   Benchmark, nor running N-body simulations.
+* **Use idiomatic code/Do not optimize**
+  One can write inline assembly in C with the non-standard `asm` keyword or use
+  `ffi.cdef` from LuaJIT to create C data structures instead of Lua tables, for
+  example, but the tests within this benchmark are designed to reflect typical
+  usage of each respective language.
+
+  Further, some implementations of languages rely on specific hinting to
+  trigger optimizations, like knowing the exact layout of a record ahead of
+  time to avoid growing or shrinking backing memory by powers of two.
+
+  Most developers are not aware of such optimizations and this benchmark makes
+  no attempts to catalog them. Instead, tests are written in a way that first
+  reflects the documentation provided by the language authors, who themselves
+  often do not publicize such optimizations.
 
 ## Run
 ```sh
