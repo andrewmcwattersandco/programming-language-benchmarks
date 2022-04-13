@@ -126,20 +126,20 @@ ln -s ../Cellar/lua@5.1/5.1.5_8/bin/lua-5.1 lua
 % ./bench
 minimal
  c	        0.15 real         0.00 user         0.00 sys
- cpp	      0.10 real         0.00 user         0.00 sys
- go	       0.10 real         0.00 user         0.00 sys
- java	     0.09 real         0.06 user         0.02 sys
- js	       0.03 real         0.02 user         0.00 sys
- lua	      0.00 real         0.00 user         0.00 sys
- luajit	   0.00 real         0.00 user         0.00 sys
+ cpp	        0.10 real         0.00 user         0.00 sys
+ go	        0.10 real         0.00 user         0.00 sys
+ java	        0.09 real         0.06 user         0.02 sys
+ js	        0.03 real         0.02 user         0.00 sys
+ lua	        0.00 real         0.00 user         0.00 sys
+ luajit	        0.00 real         0.00 user         0.00 sys
 record
  c	        0.25 real         0.11 user         0.03 sys
- cpp	      0.40 real         0.27 user         0.03 sys
- go	       0.21 real         0.04 user         0.06 sys
- java	    31.91 real       255.92 user         4.90 sys
- js	      15.78 real        19.49 user         4.90 sys
- lua	     29.42 real        26.68 user         2.58 sys
- luajit	   9.84 real         8.07 user         1.77 sys
+ cpp	        0.40 real         0.27 user         0.03 sys
+ go	        0.21 real         0.04 user         0.06 sys
+ java	       31.91 real       255.92 user         4.90 sys
+ js	       15.78 real        19.49 user         4.90 sys
+ lua	       29.42 real        26.68 user         2.58 sys
+ luajit	        9.84 real         8.07 user         1.77 sys
 ```
 
 ## Hardware
