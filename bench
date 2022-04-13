@@ -1,5 +1,4 @@
 #!/bin/sh
-set -e
 
 command=/usr/bin/time
 options=
@@ -13,6 +12,10 @@ clean() {
 
     # Java
     rm -f $(classname $1).class
+}
+
+prebuild() {
+    test -f prebuild && ./prebuild
 }
 
 backup() {
@@ -40,6 +43,7 @@ do
     echo $file
 
     clean $file
+    prebuild
 
     # C
     cc ${file}.c
