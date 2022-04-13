@@ -35,7 +35,7 @@ prebuild() {
 backup() {
     for source_file
     do
-        local target_file=$source_file~
+        local target_file=${source_file}.orig
         if [ -f $source_file ]; then
             mv -f $source_file $target_file
         fi
@@ -46,8 +46,8 @@ restore() {
     for source_file
     do
         local target_file=$source_file
-        if [ -f $source_file~ ]; then
-            mv -f $source_file~ $target_file
+        if [ -f ${source_file}.orig ]; then
+            mv -f ${source_file}.orig $target_file
         fi
     done
 }
