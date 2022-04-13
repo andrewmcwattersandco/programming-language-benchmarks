@@ -47,6 +47,27 @@ JIT: ON fold cse dce fwd dse narrow loop abc sink fuse
 >
 ```
 
+## Run
+```sh
+./bench
+```
+
+### macOS
+#### node
+`bench` runs from `/bin/sh`. If you have `node` installed through `nvm`, you may
+need to create a symbolic link to the default installation path.
+```
+sudo ln -s $(which node) /usr/local/bin/node
+```
+
+#### lua
+`brew` installs `lua` as `lua-5.1`. To install Lua with its default name, create
+a symbolic link to `/opt/homebrew/bin/`.
+```sh
+cd /opt/homebrew/bin/
+ln -s ../Cellar/lua@5.1/5.1.5_8/bin/lua-5.1 lua
+```
+
 ## Tests
 * **Minimal program**  
   Test initialization
