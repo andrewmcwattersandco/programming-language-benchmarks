@@ -1,6 +1,8 @@
 #!/bin/sh
 set -e
 
+CGO_ENABLED=0
+
 command=/usr/bin/time
 options=
 
@@ -13,14 +15,6 @@ clean() {
 
     # Java
     rm -f $(classname $1).class
-}
-
-backup() {
-    test -f $1 && mv -f $1 $1~
-}
-
-restore() {
-    test -f $1~ && mv -f $1~ $1
 }
 
 capitalize() {
@@ -52,12 +46,7 @@ do
     $command $options ./a.out
 
     # Go
-    # C/C++ source files not allowed when not using cgo or SWIG
-    backup ${file}.c
-    backup ${file}.cpp
     go build ./...
-    restore ${file}.c
-    restore ${file}.cpp
     printf " %s\t" go
     $command $options ./${file}
 
