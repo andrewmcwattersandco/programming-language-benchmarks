@@ -1,15 +1,15 @@
 #!/bin/sh
 printf '' > .gitignore
-languages="C C++ Go Java Node Lua"
+langs="C C++ Go Java Node Lua"
 
-for i in ${languages}
+for lang in ${langs}
 do
-    curl -o - https://raw.githubusercontent.com/github/gitignore/main/${i}.gitignore >> .gitignore
+    curl -o - https://raw.githubusercontent.com/github/gitignore/main/${lang}.gitignore >> .gitignore
 done
 
-for d in */
+for dir in */
 do
-    file=$(basename ${d})
+    file=$(basename ${dir})
     echo ${file}/${file} >> .gitignore
 done
 
