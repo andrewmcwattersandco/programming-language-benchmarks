@@ -3,7 +3,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
-#include "yyjson.h"
+#include "simdjson.h"
+using namespace simdjson;
 
 int main()
 {
@@ -21,7 +22,7 @@ int main()
         off_t size;
         FILE *fp;
         char *json;
-        yyjson_doc *doc;
+        ondemand::document doc;
 
         if (strcmp(strrchr(dp->d_name, '.'), ".json") != 0)
             continue;
@@ -45,7 +46,8 @@ int main()
             continue;
         }
 
-        if ((json = (char *)malloc(size)) == NULL)
+        size_t padded_size = size+SIMDJSON_PADDING;
+        if ((json = (char *)malloc(padded_size)) == NULL)
             continue;
 
         if (fread(json, size, 1, fp) != 1
@@ -55,12 +57,11 @@ int main()
             fclose(fp);
             continue;
         }
+        json[size] = '\0';
 
-        /* Read JSON */
-        doc = yyjson_read(json, size, 0);
+        ondemand::parser parser;
+        doc = parser.iterate(json, strlen(json), padded_size);
 
-        /* Free the doc */
-        yyjson_doc_free(doc);
         free(json);
         fclose(fp);
     }
