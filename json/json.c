@@ -45,7 +45,9 @@ int main()
             continue;
         }
 
-        json = malloc(size);
+        if ((json = malloc(size)) == NULL)
+            continue;
+
         if (fread(json, size, 1, fp) != 1
             && (feof(fp) != 0 || ferror(fp) != 0)) {
             printf("json: can′t read %s\n", name);
