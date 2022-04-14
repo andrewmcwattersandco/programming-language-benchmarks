@@ -47,13 +47,13 @@ int main()
         }
 
         size_t padded_size = size+SIMDJSON_PADDING;
-        if ((json = (char *)malloc(padded_size)) == NULL)
+        if ((json = new char[padded_size]) == NULL)
             continue;
 
         if (fread(json, size, 1, fp) != 1
             && (feof(fp) != 0 || ferror(fp) != 0)) {
             printf("json: can′t read %s\n", name);
-            free(json);
+            delete json;
             fclose(fp);
             continue;
         }
@@ -62,7 +62,7 @@ int main()
         ondemand::parser parser;
         doc = parser.iterate(json, strlen(json), padded_size);
 
-        free(json);
+        delete json;
         fclose(fp);
     }
     closedir(dfd);
