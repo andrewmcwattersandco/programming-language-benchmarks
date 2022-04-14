@@ -41,29 +41,31 @@ prebuild() {
 backup() {
     for source_file
     do
-        local target_file=${source_file}.orig
+        target_file=${source_file}.orig
         if [ -f $source_file ]
         then
             mv -f $source_file $target_file
         fi
+        unset target_file
     done
 }
 
 restore() {
     for source_file
     do
-        local target_file=$source_file
+        target_file=$source_file
         if [ -f ${source_file}.orig ]
         then
             mv -f ${source_file}.orig $target_file
         fi
+        unset target_file
     done
 }
 
 capitalize() {
-    local input
     read input
     printf $input | awk '{ print toupper(substr($0, 1, 1)) substr($0, 2) }'
+    unset input
 }
 
 classname() {
