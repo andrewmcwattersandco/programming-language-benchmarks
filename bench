@@ -48,6 +48,7 @@ backup() {
         fi
         unset target_file
     done
+    unset source_file
 }
 
 restore() {
@@ -60,6 +61,7 @@ restore() {
         fi
         unset target_file
     done
+    unset source_file
 }
 
 capitalize() {
@@ -121,6 +123,7 @@ do
         printf " %s\t" java
         class=$(classname $file)
         $command $options java $class
+        unset class
     fi
 
     # Node
@@ -146,4 +149,5 @@ do
     fi
 
     cd ..
+    unset file
 done
