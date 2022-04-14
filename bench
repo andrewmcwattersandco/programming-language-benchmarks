@@ -73,7 +73,7 @@ do
 
     # C
     if [ -f ${file}.c ]; then
-        cc ${file}.c
+        c89 ${file}.c
         printf " %s\t" c
         $command $options ./a.out
     fi
