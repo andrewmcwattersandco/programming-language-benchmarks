@@ -17,7 +17,11 @@ options=
 
 clean() {
     # C/C++
-    rm -f a.out
+    if [ -f makefile ]; then
+      make clean
+    else
+      rm -f a.out
+    fi
 
     # Go
     rm -f $1
@@ -73,7 +77,11 @@ do
 
     # C
     if [ -f ${file}.c ]; then
-        c89 ${file}.c
+        if [ -f makefile ]; then
+            make
+        else
+            c89 ${file}.c
+        fi
         printf " %s\t" c
         $command $options ./a.out
     fi
