@@ -17,7 +17,8 @@ options=
 
 clean() {
     # C/C++
-    if [ -f makefile ]; then
+    if [ -f makefile ]
+    then
       make -s clean
     else
       rm -f a.out
@@ -31,7 +32,8 @@ clean() {
 }
 
 prebuild() {
-    if [ -f prebuild ]; then
+    if [ -f prebuild ]
+    then
         ./prebuild
     fi
 }
@@ -40,7 +42,8 @@ backup() {
     for source_file
     do
         local target_file=${source_file}.orig
-        if [ -f $source_file ]; then
+        if [ -f $source_file ]
+        then
             mv -f $source_file $target_file
         fi
     done
@@ -50,7 +53,8 @@ restore() {
     for source_file
     do
         local target_file=$source_file
-        if [ -f ${source_file}.orig ]; then
+        if [ -f ${source_file}.orig ]
+        then
             mv -f ${source_file}.orig $target_file
         fi
     done
@@ -76,8 +80,10 @@ do
     prebuild
 
     # C
-    if [ -f ${file}.c ]; then
-        if [ -f makefile ]; then
+    if [ -f ${file}.c ]
+    then
+        if [ -f makefile ]
+        then
             make -s
         else
             c89 ${file}.c
@@ -87,7 +93,8 @@ do
     fi
 
     # C++
-    if [ -f ${file}.cpp ]; then
+    if [ -f ${file}.cpp ]
+    then
         cc ${file}.cpp
         printf " %s\t" cpp
         $command $options ./a.out
@@ -96,7 +103,8 @@ do
     # Go
     # C/C++ source files not allowed when not using cgo or SWIG
     # Avoid setting CGO_ENABLED=0, backup and restore instead
-    if [ -f ${file}.go ]; then
+    if [ -f ${file}.go ]
+    then
         backup ${file}.c ${file}.cpp
         go build ./...
         restore ${file}.c ${file}.cpp
@@ -105,7 +113,8 @@ do
     fi
 
     # Java
-    if [ -f ${file}.java ]; then
+    if [ -f ${file}.java ]
+    then
         javac ${file}.java
         printf " %s\t" java
         class=$(classname $file)
@@ -113,7 +122,8 @@ do
     fi
 
     # Node
-    if [ -f ${file}.js ]; then
+    if [ -f ${file}.js ]
+    then
         printf " %s\t" js
         # nvm
         # sudo ln -s $(which node) /usr/local/bin/node
@@ -121,7 +131,8 @@ do
     fi
 
     # Lua/LuaJIT
-    if [ -f ${file}.lua ]; then
+    if [ -f ${file}.lua ]
+    then
         printf " %s\t" lua
         # macOS
         # cd /opt/homebrew/bin/
