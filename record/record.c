@@ -10,7 +10,9 @@ struct record records[112813858];
 
 int main(int argc, char *argv[])
 {
-	for (size_t i = 0; i < NRECORDS; i++) {
+	int i;
+
+	for (i = 0; i < NRECORDS; i++) {
 		struct record r;
 
 		r.id = i;
