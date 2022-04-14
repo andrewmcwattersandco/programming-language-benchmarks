@@ -11,6 +11,7 @@ do
     esac
 done
 shift $(($OPTIND - 1))
+unset name
 
 command=/usr/bin/time
 options=
