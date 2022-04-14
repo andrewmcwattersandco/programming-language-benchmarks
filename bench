@@ -151,3 +151,4 @@ do
     cd ..
     unset file
 done
+unset d
