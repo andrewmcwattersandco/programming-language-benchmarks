@@ -18,7 +18,7 @@ options=
 clean() {
     # C/C++
     if [ -f makefile ]; then
-      make clean
+      make -s clean
     else
       rm -f a.out
     fi
@@ -78,7 +78,7 @@ do
     # C
     if [ -f ${file}.c ]; then
         if [ -f makefile ]; then
-            make
+            make -s
         else
             c89 ${file}.c
         fi
