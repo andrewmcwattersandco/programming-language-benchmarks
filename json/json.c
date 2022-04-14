@@ -2,59 +2,66 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/stat.h>
 #include "includes/yyjson.h"
 
 int main(int argc, char *argv[])
 {
-	DIR *dir;
-	struct dirent *dp;
+    const char dir[] = "companyfacts";
+    struct dirent *dp;
+    DIR *dfd;
 
-	if ((dir = opendir ("companyfacts")) == NULL) {
-		perror ("Cannot open companyfacts");
-		exit (1);
-	}
+    if ((dfd = opendir (dir)) == NULL) {
+        fprintf(stderr, "json: can′t open %s\n", dir);
+        return 1;
+    }
+    while ((dp = readdir (dfd)) != NULL) {
+        char name[PATH_MAX];
+        struct stat stbuf;
+        off_t size;
+        FILE *fp;
+        char *json;
+        yyjson_doc *doc;
 
-	while ((dp = readdir (dir)) != NULL) {
-		char pathname[PATH_MAX];
-		FILE *fp;
-		long size;
-		char *json;
-		yyjson_doc *doc;
+        if (strcmp(strrchr(dp->d_name, '.'), ".json") != 0)
+            continue;
 
-		if (strcmp(strrchr(dp->d_name, '.') + 1, "json") != 0)
-			continue;
+        if (strlen(dir)+strlen(dp->d_name)+2 > sizeof(name)) {
+            fprintf(stderr, "json: name %s/%s too long\n",
+                dir, dp->d_name);
+            continue;
+        } else {
+            sprintf(name, "%s/%s", dir, dp->d_name);
+        }
 
-		strlcpy(pathname, "companyfacts/", sizeof pathname);
-		strlcat(pathname, dp->d_name, sizeof pathname);
+        if (stat(name, &stbuf) == -1) {
+            fprintf(stderr, "json: can′t access %s\n", name);
+            continue;
+        }
+        size = stbuf.st_size;
 
-		if ((fp = fopen(pathname, "r")) == NULL)
-			continue;
+        if ((fp = fopen(name, "r")) == NULL) {
+            printf("json: can′t open %s\n", name);
+            continue;
+        }
 
-		if (fseek(fp, 0L, SEEK_END) == 0) {
-			if ((size = ftell(fp)) == -1L) {
-				perror ("ftell");
-				exit (1);
-			}
-		} else {
-			perror ("fseek");
-			exit (1);
-		}
-		rewind(fp);
+        json = malloc(size);
+        if (fread(json, size, 1, fp) != 1
+            && (feof(fp) != 0 || ferror(fp) != 0)) {
+            printf("json: can′t read %s\n", name);
+            free(json);
+            fclose(fp);
+            continue;
+        }
 
-		json = malloc(size);
-		if (fread(json, size, 1, fp) < 1) {
-			perror ("fread");
-			exit (1);
-		}
+        /* Read JSON */
+        doc = yyjson_read(json, size, 0);
 
-		/* Read JSON */
-		doc = yyjson_read(json, size, 0);
-
-		/* Free the doc */
-		yyjson_doc_free(doc);
-		free(json);
-		fclose(fp);
-	}
-
-	return 0;
+        /* Free the doc */
+        yyjson_doc_free(doc);
+        free(json);
+        fclose(fp);
+    }
+    closedir(dfd);
+    return 0;
 }
