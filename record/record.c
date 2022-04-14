@@ -8,7 +8,7 @@ struct record {
 
 struct record records[112813858];
 
-int main(int argc, char *argv[])
+int main()
 {
     int i;
 

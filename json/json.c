@@ -5,7 +5,7 @@
 #include <sys/stat.h>
 #include "includes/yyjson.h"
 
-main()
+int main()
 {
     const char dir[] = "companyfacts";
     struct dirent *dp;
