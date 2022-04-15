@@ -52,8 +52,7 @@ class JsonApp {
             for (Iterator<Path> it = files.iterator(); it.hasNext(); ) {
                 Path name = it.next();
 
-                if (!name.toString().endsWith(".json"))
-                    continue;
+                if (!name.toString().endsWith(".json")) continue;
 
                 byte[] bytes = Files.readAllBytes(name);
 
