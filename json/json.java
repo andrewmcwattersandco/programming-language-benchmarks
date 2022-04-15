@@ -48,6 +48,7 @@ class JsonApp {
 
         try (Stream<Path> files = Files.list(Paths.get(dir))) {
             ObjectMapper mapper = new ObjectMapper(); // create once, reuse
+
             for (Iterator<Path> it = files.iterator(); it.hasNext(); ) {
                 Path name = it.next();
 
