@@ -1,7 +1,6 @@
 #include <dirent.h>
 #include <iostream>
 #include <stdio.h>
-#include <stdlib.h>
 #include <string>
 #include <sys/stat.h>
 #include "simdjson.h"
