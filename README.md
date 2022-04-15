@@ -145,6 +145,9 @@ record
  luajit	        9.84 real         8.07 user         1.77 sys
 ```
 
+### Google Sheets
+https://docs.google.com/spreadsheets/d/1oBtZTcp4UzRTWnTsBwxr465XAZhVuso33EJINMAKUQo/edit?usp=sharing
+
 ## Hardware
 ### Physical
 MacBook Pro (16-inch, 2021)  
