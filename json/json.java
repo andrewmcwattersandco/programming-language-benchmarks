@@ -52,7 +52,6 @@ class JsonApp {
                 if (!name.toString().endsWith(".json"))
                     continue;
 
-                System.out.println(name);
                 byte[] bytes = Files.readAllBytes(name);
 
                 mapper.readTree(bytes);
