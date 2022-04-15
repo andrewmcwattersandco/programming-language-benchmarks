@@ -100,7 +100,12 @@ do
     # C++
     if [ -f ${file}.cpp ]
     then
-        cc ${file}.cpp
+        if [ -f makefile ]
+        then
+            make -s c++
+        else
+            c++ ${file}.cpp
+        fi
         printf " %s\t" cpp
         $command $options ./a.out
     fi
