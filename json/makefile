@@ -3,4 +3,4 @@ c : json.c yyjson.c
 c++ : json.cpp simdjson.cpp
 	c++ -std=c++17 json.cpp simdjson.cpp
 clean :
-	rm a.out
+	rm -f a.out
