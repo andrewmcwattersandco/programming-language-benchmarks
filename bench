@@ -85,7 +85,12 @@ classname() {
 for d in $tests
 do
     file=$(basename $d)
-    cd $d
+    if [ -d $d ]
+    then
+        cd $d
+    else
+        continue
+    fi
     echo $file
 
     clean $file
