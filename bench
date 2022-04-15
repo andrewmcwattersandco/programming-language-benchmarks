@@ -40,7 +40,7 @@ prebuild() {
 }
 
 backup() {
-    for source_file
+    for source_file in $@
     do
         target_file=${source_file}.orig
         if [ -f $source_file ]
@@ -53,13 +53,20 @@ backup() {
 }
 
 restore() {
-    for source_file
+    for source_file in $@
     do
-        target_file=$source_file
-        if [ -f ${source_file}.orig ]
+        if [ -f $source_file ]
         then
-            mv -f ${source_file}.orig $target_file
+            target_file=${source_file%.orig}
+            mv -f $source_file $target_file
         fi
+
+        if [ -f $source_file ]
+        then
+            target_file=${source_file%~}
+            mv -f $source_file $target_file
+        fi
+
         unset target_file
     done
     unset source_file
@@ -115,9 +122,9 @@ do
     # Avoid setting CGO_ENABLED=0, backup and restore instead
     if [ -f ${file}.go ]
     then
-        backup ${file}.c ${file}.cpp
+        backup *.c *.cpp
         go build ./...
-        restore ${file}.c ${file}.cpp
+        restore *.c* *.cpp*
         printf " %s\t" go
         $command $options ./${file}
     fi
