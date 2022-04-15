@@ -132,10 +132,10 @@ do
     # Java
     if [ -f ${file}.java ]
     then
-        javac ${file}.java
+        javac -cp '.:*' ${file}.java
         printf " %s\t" java
         class=$(classname $file)
-        $command $options java $class
+        $command $options java -cp '.:*' $class
         unset class
     fi
 
