@@ -57,10 +57,9 @@ int main()
             continue;
         }
         json.resize(size);
-        json.shrink_to_fit();
 
         ondemand::parser parser;
-        doc = parser.iterate(json.c_str(), json.size(), padded_size);
+        doc = parser.iterate(json);
 
         fclose(fp);
     }
