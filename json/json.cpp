@@ -14,11 +14,11 @@ int main()
     struct dirent *dp;
     DIR *dfd;
 
-    if ((dfd = opendir (dir.c_str())) == NULL) {
+    if ((dfd = opendir (dir.c_str())) == nullptr) {
         cerr << "json: can′t open " << dir << endl;
         return 1;
     }
-    while ((dp = readdir (dfd)) != NULL) {
+    while ((dp = readdir (dfd)) != nullptr) {
         string name = dir;
         struct stat stbuf;
         off_t size;
@@ -43,7 +43,7 @@ int main()
         }
         size = stbuf.st_size;
 
-        if ((fp = fopen(name.c_str(), "r")) == NULL) {
+        if ((fp = fopen(name.c_str(), "r")) == nullptr) {
             cout << "json: can′t open " << name << endl;
             continue;
         }
