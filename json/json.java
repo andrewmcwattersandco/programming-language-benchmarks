@@ -45,10 +45,12 @@ import java.util.stream.Stream;
 class JsonApp {
     public static void main(String[] args) throws IOException {
         String dir = "companyfacts";
+
         try (Stream<Path> files = Files.list(Paths.get(dir))) {
             ObjectMapper mapper = new ObjectMapper(); // create once, reuse
             for (Iterator<Path> it = files.iterator(); it.hasNext(); ) {
                 Path name = it.next();
+
                 if (!name.toString().endsWith(".json"))
                     continue;
 
