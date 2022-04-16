@@ -58,13 +58,19 @@ restore() {
         if [ -f $source_file ]
         then
             target_file=${source_file%.orig}
-            mv -f $source_file $target_file
+            if [ $source_file != $target_file ]
+            then
+                mv -f $source_file $target_file
+            fi
         fi
 
         if [ -f $source_file ]
         then
             target_file=${source_file%~}
-            mv -f $source_file $target_file
+            if [ $source_file != $target_file ]
+            then
+                mv -f $source_file $target_file
+            fi
         fi
 
         unset target_file
