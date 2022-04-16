@@ -48,7 +48,7 @@ jobs:
             -O \
             https://www.sec.gov/Archives/edgar/daily-index/xbrl/companyfacts.zip
         fi
-        unzip companyfacts.zip
+        unzip companyfacts.zip -d companyfacts
         ls -la
 
     - name: bench
