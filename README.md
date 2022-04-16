@@ -75,7 +75,7 @@ JIT: ON fold cse dce fwd dse narrow loop abc sink fuse
 
 ## Run
 ```sh
-./bench [-t tests]
+./bench [-t tests...]
 ```
 
 ### macOS
