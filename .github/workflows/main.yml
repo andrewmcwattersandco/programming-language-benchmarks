@@ -15,9 +15,20 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - name: Cache dependencies
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/lua-5.1.5.tar.gz
+        key: ${{ runner.os }}-${{ hashFiles('lua-5.1.5.tar.gz') }}
+
     - name: Set up Lua
       run: |
-        curl -O https://www.lua.org/ftp/lua-5.1.5.tar.gz
+        cd /root
+        if [ ! -f lua-5.1.5.tar.gz ]
+        then
+          curl -O https://www.lua.org/ftp/lua-5.1.5.tar.gz
+        fi
         tar xzf lua-5.1.5.tar.gz
         cd lua-5.1.5
         sudo make linux install
