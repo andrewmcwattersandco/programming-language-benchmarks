@@ -113,8 +113,9 @@ do
             c89 ${file}.c
         fi
         printf " %s\t" c
-        $command $options ./a.out \
+        $command $options ./a.out 2>&1 \
         | tr -s '\n' '\t'
+        printf '\n'
     fi
 
     # C++
@@ -127,8 +128,9 @@ do
             c++ ${file}.cpp
         fi
         printf " %s\t" cpp
-        $command $options ./a.out \
+        $command $options ./a.out 2>&1 \
         | tr -s '\n' '\t'
+        printf '\n'
     fi
 
     # Go
@@ -141,8 +143,9 @@ do
         go build ./...
         restore *.c* *.cpp*
         printf " %s\t" go
-        $command $options ./${file} \
+        $command $options ./${file} 2>&1 \
         | tr -s '\n' '\t'
+        printf '\n'
     fi
 
     # Java
@@ -153,8 +156,9 @@ do
         javac -cp '.:*' ${file}.java
         printf " %s\t" java
         class=$(classname $file)
-        $command $options java -cp '.:*' $class \
+        $command $options java -cp '.:*' $class 2>&1 \
         | tr -s '\n' '\t'
+        printf '\n'
         unset class
     fi
 
@@ -165,8 +169,9 @@ do
         printf " %s\t" js
         # nvm
         # sudo ln -s $(which node) /usr/local/bin/node
-        $command $options node --max-old-space-size=8192 ${file}.js \
+        $command $options node --max-old-space-size=8192 ${file}.js 2>&1 \
         | tr -s '\n' '\t'
+        printf '\n'
     fi
 
     # Lua/LuaJIT
@@ -182,15 +187,17 @@ do
             # macOS
             # cd /opt/homebrew/bin/
             # ln -s ../Cellar/lua@5.1/5.1.5_8/bin/lua-5.1 lua
-            $command $options lua ${file}.lua \
+            $command $options lua ${file}.lua 2>&1 \
             | tr -s '\n' '\t'
+            printf '\n'
         fi
 
         if [ -f luajit ]
         then
             printf " %s\t" luajit
-            $command $options luajit ${file}.lua \
+            $command $options luajit ${file}.lua 2>&1 \
             | tr -s '\n' '\t'
+            printf '\n'
         fi
     fi
 
