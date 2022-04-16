@@ -44,7 +44,7 @@ jobs:
             -H "Accept-Encoding: gzip, deflate" \
             -H "Host: www.sec.gov" \
             -O \
-            https://www.sec.gov/Archives/edgar/daily-index/bulkdata/companyfacts.zip
+            https://www.sec.gov/Archives/edgar/daily-index/xbrl/companyfacts.zip
         fi
         unzip companyfacts.zip
         ls -la
