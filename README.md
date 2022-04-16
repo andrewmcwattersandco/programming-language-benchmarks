@@ -127,22 +127,28 @@ ln -s ../Cellar/lua@5.1/5.1.5_8/bin/lua-5.1 lua
 ## Results
 ```sh
 % ./bench
+json
+ c	       31.66 real        27.86 user         3.63 sys
+ cpp	      351.16 real       340.68 user         4.33 sys
+ go	      133.40 real       205.27 user        10.96 sys
+ java	       50.25 real        49.58 user         3.26 sys
+ js	       57.25 real        53.87 user         4.69 sys
 minimal
  c	        0.15 real         0.00 user         0.00 sys
  cpp	        0.10 real         0.00 user         0.00 sys
- go	        0.10 real         0.00 user         0.00 sys
- java	        0.09 real         0.06 user         0.02 sys
+ go	        0.11 real         0.00 user         0.00 sys
+ java	        0.08 real         0.06 user         0.02 sys
  js	        0.03 real         0.02 user         0.00 sys
  lua	        0.00 real         0.00 user         0.00 sys
  luajit	        0.00 real         0.00 user         0.00 sys
 record
- c	        0.25 real         0.11 user         0.03 sys
- cpp	        0.40 real         0.27 user         0.03 sys
- go	        0.21 real         0.04 user         0.06 sys
- java	       31.91 real       255.92 user         4.90 sys
- js	       15.78 real        19.49 user         4.90 sys
- lua	       29.42 real        26.68 user         2.58 sys
- luajit	        9.84 real         8.07 user         1.77 sys
+ c	        0.25 real         0.11 user         0.02 sys
+ cpp	        0.42 real         0.27 user         0.02 sys
+ go	        0.21 real         0.04 user         0.05 sys
+ java	       32.08 real       259.28 user         4.94 sys
+ js	       15.79 real        19.62 user         4.60 sys
+ lua	       29.88 real        27.02 user         2.69 sys
+ luajit	        9.81 real         8.16 user         1.65 sys
 ```
 
 ### Google Sheets
