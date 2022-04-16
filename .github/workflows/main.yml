@@ -24,7 +24,7 @@ jobs:
 
     - name: Set up Lua
       run: |
-        cd /root
+        cd ~
         if [ ! -f lua-5.1.5.tar.gz ]
         then
           curl -O https://www.lua.org/ftp/lua-5.1.5.tar.gz
