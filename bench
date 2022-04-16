@@ -132,7 +132,8 @@ do
     # Go
     # C/C++ source files not allowed when not using cgo or SWIG
     # Avoid setting CGO_ENABLED=0, backup and restore instead
-    if [ -f ${file}.go ]
+    if [ -f ${file}.go ] \
+    && [ -f go ]
     then
         backup *.c *.cpp
         go build ./...
@@ -142,7 +143,9 @@ do
     fi
 
     # Java
-    if [ -f ${file}.java ]
+    if [ -f ${file}.java ] \
+    && [ -f javac ] \
+    && [ -f java ]
     then
         javac -cp '.:*' ${file}.java
         printf " %s\t" java
@@ -152,7 +155,8 @@ do
     fi
 
     # Node
-    if [ -f ${file}.js ]
+    if [ -f ${file}.js ] \
+    && [ -f node ]
     then
         printf " %s\t" js
         # nvm
@@ -167,14 +171,20 @@ do
         then
             make -s lua
         fi
-        printf " %s\t" lua
-        # macOS
-        # cd /opt/homebrew/bin/
-        # ln -s ../Cellar/lua@5.1/5.1.5_8/bin/lua-5.1 lua
-        $command $options lua ${file}.lua
+        if [ -f lua ]
+        then
+            printf " %s\t" lua
+            # macOS
+            # cd /opt/homebrew/bin/
+            # ln -s ../Cellar/lua@5.1/5.1.5_8/bin/lua-5.1 lua
+            $command $options lua ${file}.lua
+        fi
 
-        printf " %s\t" luajit
-        $command $options luajit ${file}.lua
+        if [ -f luajit ]
+        then
+            printf " %s\t" luajit
+            $command $options luajit ${file}.lua
+        fi
     fi
 
     cd ..
