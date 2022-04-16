@@ -20,7 +20,8 @@ jobs:
       with:
         path: |
           ~/lua-5.1.5.tar.gz
-        key: ${{ runner.os }}-${{ hashFiles('~/lua-5.1.5.tar.gz') }}
+          ~/companyfacts.zip
+        key: ${{ runner.os }}-${{ hashFiles('~/**') }}
 
     - name: Set up Lua
       run: |
@@ -32,6 +33,21 @@ jobs:
         tar xzf lua-5.1.5.tar.gz
         cd lua-5.1.5
         sudo make linux install
+
+    - name: Set up EDGAR API bulk data
+      run: |
+        cd ~
+        if [ ! -f companyfacts.zip ]
+        then
+          curl \
+          -H "User-Agent: Andrew McWatters & Co. github@andrewmcwatters.com" \
+          -H "Accept-Encoding: gzip, deflate" \
+          -H "Host: www.sec.gov" \
+          -O \
+          https://www.sec.gov/Archives/edgar/daily-index/xbrl/companyfacts.zip
+        fi
+        unzip companyfacts.zip
+        ls -la
 
     - name: bench
       run: ./bench
