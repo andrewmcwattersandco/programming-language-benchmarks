@@ -14,7 +14,7 @@ shift $(($OPTIND - 1))
 unset name
 
 command=/usr/bin/time
-options=
+options=-p
 
 clean() {
     # C/C++
