@@ -109,17 +109,17 @@ ln -s ../Cellar/lua@5.1/5.1.5_8/bin/lua-5.1 lua
 
   Reads and parses 13.76 GB of EDGAR API bulk data.  
   See https://www.sec.gov/edgar/sec-api-documentation for more information.
-* **Encode JSON**  
+* Planned: Encode JSON  
   Test built-in or de facto standard JSON encoder
-* **Send HTTPS request**  
+* Planned: Send HTTPS request  
   Test built-in or de facto standard HTTPS request overhead
-* **Receive HTTPS request**  
+* Planned: Receive HTTPS request  
   Test built-in or de facto standard HTTPS request overhead
-* **Send HTTPS response**  
+* Planned: Send HTTPS response  
   Test built-in or de facto standard HTTPS response overhead
-* **Receive HTTPS response**  
+* Planned: Receive HTTPS response  
   Test built-in or de facto standard HTTPS response overhead
-* **Query database**  
+* Planned: Query database  
   Test built-in or de facto standard database connector/driver/bindings
 * **Draw**  
   Test graphics API command overhead
