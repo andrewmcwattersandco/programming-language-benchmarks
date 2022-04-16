@@ -1,4 +1,7 @@
 #include <dirent.h>
+#if defined(__linux__)
+#include <linux/limits.h>
+#endif
 #include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
