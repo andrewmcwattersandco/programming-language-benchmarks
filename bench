@@ -99,6 +99,7 @@ do
     # C
     if [ -f ${file}.c ]
     then
+        restore *.c* *.cpp*
         if [ -f makefile ]
         then
             make -s
