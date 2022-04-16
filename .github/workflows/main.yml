@@ -25,6 +25,7 @@ jobs:
 
     - name: Set up Lua
       run: |
+        pwd
         cd ~
         if [ ! -f lua-5.1.5.tar.gz ]
         then
@@ -36,6 +37,7 @@ jobs:
 
     - name: Set up EDGAR API bulk data
       run: |
+        pwd
         cd ~
         if [ ! -f companyfacts.zip ]
         then
