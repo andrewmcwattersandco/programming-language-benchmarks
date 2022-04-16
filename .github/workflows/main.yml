@@ -15,5 +15,12 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - name: Set up Lua
+      run: |
+        curl -O https://www.lua.org/ftp/lua-5.1.5.tar.gz
+        tar xzf lua-5.1.5.tar.gz
+        cd lua-5.1.5
+        make linux install
+
     - name: bench
       run: ./bench
