@@ -40,11 +40,11 @@ jobs:
         if [ ! -f companyfacts.zip ]
         then
           curl \
-          -H "User-Agent: Andrew McWatters & Co. github@andrewmcwatters.com" \
-          -H "Accept-Encoding: gzip, deflate" \
-          -H "Host: www.sec.gov" \
-          -O \
-          https://www.sec.gov/Archives/edgar/daily-index/xbrl/companyfacts.zip
+            -H "User-Agent: Sample Company Name AdminContact@<sample company domain>.com" \
+            -H "Accept-Encoding: gzip, deflate" \
+            -H "Host: www.sec.gov" \
+            -O \
+            https://www.sec.gov/Archives/edgar/daily-index/bulkdata/submissions.zip
         fi
         unzip companyfacts.zip
         ls -la
