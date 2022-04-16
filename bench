@@ -156,6 +156,10 @@ do
     # Lua/LuaJIT
     if [ -f ${file}.lua ]
     then
+        if [ -f makefile ]
+        then
+            make -s lua
+        fi
         printf " %s\t" lua
         # macOS
         # cd /opt/homebrew/bin/
