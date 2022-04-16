@@ -20,7 +20,7 @@ jobs:
       with:
         path: |
           ~/lua-5.1.5.tar.gz
-        key: ${{ runner.os }}-${{ hashFiles('lua-5.1.5.tar.gz') }}
+        key: ${{ runner.os }}-${{ hashFiles('~/lua-5.1.5.tar.gz') }}
 
     - name: Set up Lua
       run: |
