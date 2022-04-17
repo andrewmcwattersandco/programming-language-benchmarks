@@ -90,6 +90,16 @@ classname() {
     echo ${1}App | capitalize
 }
 
+if [ ! -z "$version" ]
+then
+    cc -v
+    if command -v go; then go version; fi
+    if command -v java; then java -version; fi
+    if command -v node; then node -v; fi
+    if command -v lua; then lua -v; fi
+    if command -v luajit; then luajit -v; fi
+fi
+
 for d in $tests
 do
     file=$(basename $d)
@@ -105,10 +115,6 @@ do
     prebuild
 
     # C
-    if [ ! -z "$version" ]
-    then
-        cc -v
-    fi
     if [ -f ${file}.c ]
     then
         restore *.c* *.cpp*
@@ -140,15 +146,10 @@ do
     fi
 
     # Go
-    if [ ! -z "$version" ] \
-    && [ -f go ]
-    then
-        go version
-    fi
     # C/C++ source files not allowed when not using cgo or SWIG
     # Avoid setting CGO_ENABLED=0, backup and restore instead
     if [ -f ${file}.go ] \
-    && [ -f go ]
+    && command -v go > /dev/null
     then
         backup *.c *.cpp
         go build ./...
@@ -160,14 +161,9 @@ do
     fi
 
     # Java
-    if [ ! -z "$version" ] \
-    && [ -f java ]
-    then
-        java -version
-    fi
     if [ -f ${file}.java ] \
-    && [ -f javac ] \
-    && [ -f java ]
+    && command -v javac > /dev/null \
+    && command -v java  > /dev/null
     then
         javac -cp '.:*' ${file}.java
         printf " %s\t" java
@@ -179,13 +175,8 @@ do
     fi
 
     # Node
-    if [ ! -z "$version" ] \
-    && [ -f node ]
-    then
-        node -v
-    fi
     if [ -f ${file}.js ] \
-    && [ -f node ]
+    && command -v node > /dev/null
     then
         printf " %s\t" js
         # nvm
@@ -196,24 +187,13 @@ do
     fi
 
     # Lua/LuaJIT
-    if [ ! -z "$version" ]
-    then
-        if [ -f lua ]
-        then
-            lua -v
-        fi
-        if [ -f luajit ]
-        then
-            luajit -v
-        fi
-    fi
     if [ -f ${file}.lua ]
     then
         if [ -f makefile ]
         then
             make -s lua
         fi
-        if [ -f lua ]
+        if command -v lua > /dev/null
         then
             printf " %s\t" lua
             # macOS
@@ -224,7 +204,7 @@ do
             printf '\n'
         fi
 
-        if [ -f luajit ]
+        if command -v luajit > /dev/null
         then
             printf " %s\t" luajit
             $command $options luajit ${file}.lua 2>&1 \
