@@ -81,4 +81,4 @@ jobs:
     - name: bench
       run: |
         . ~/.profile
-        ./bench -v
+        ./bench
