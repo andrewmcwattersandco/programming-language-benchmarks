@@ -65,7 +65,7 @@ int main()
         // doc = parser.iterate(json);
 
         /* Read JSON */
-        doc = yyjson_read(json, size, 0);
+        doc = yyjson_read(json.c_str(), size, 0);
 
         /* Free the doc */
         yyjson_doc_free(doc);
