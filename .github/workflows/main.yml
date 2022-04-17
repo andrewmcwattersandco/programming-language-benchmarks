@@ -37,6 +37,7 @@ jobs:
         tar xzf lua-5.1.5.tar.gz
         cd lua-5.1.5
         sudo make linux install
+        lua -v
 
     - name: Set up Go
       run: |
