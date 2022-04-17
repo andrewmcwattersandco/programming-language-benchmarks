@@ -71,8 +71,8 @@ jobs:
         then
           curl -O https://luajit.org/download/LuaJIT-2.1.0-beta3.tar.gz
         fi
-        tar xzf LuaJIT-2.1.0-beta3
-        cd lua-5.1.5
+        tar xzf LuaJIT-2.1.0-beta3.tar.gz
+        cd LuaJIT-2.1.0-beta3
         make && sudo make install
         luajit -v
 
