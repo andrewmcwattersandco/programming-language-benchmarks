@@ -3,9 +3,10 @@
 #include <stdio.h>
 #include <string>
 #include <sys/stat.h>
-#include "simdjson.h"
+// #include "simdjson.h"
+#include "yyjson.h"
 using namespace std;
-using namespace simdjson;
+// using namespace simdjson;
 
 int main()
 {
@@ -23,7 +24,8 @@ int main()
         off_t size;
         FILE *fp;
         string json;
-        ondemand::document doc;
+        // ondemand::document doc;
+        yyjson_doc *doc;
 
         if (strcmp(strrchr(dp->d_name, '.'), ".json") != 0)
             continue;
@@ -47,8 +49,9 @@ int main()
             continue;
         }
 
-        size_t padded_size = size+SIMDJSON_PADDING;
-        json.reserve(padded_size);
+        // size_t padded_size = size+SIMDJSON_PADDING;
+        // json.reserve(padded_size);
+        json.reserve(size);
 
         if (fread(&json[0], size, 1, fp) != 1
             && (feof(fp) != 0 || ferror(fp) != 0)) {
@@ -58,9 +61,14 @@ int main()
         }
         json.resize(size);
 
-        ondemand::parser parser;
-        doc = parser.iterate(json);
+        // ondemand::parser parser;
+        // doc = parser.iterate(json);
 
+        /* Read JSON */
+        doc = yyjson_read(json, size, 0);
+
+        /* Free the doc */
+        yyjson_doc_free(doc);
         fclose(fp);
     }
     closedir(dfd);
