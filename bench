@@ -8,7 +8,7 @@ do
     case $name in
     t)    tests="$OPTARG";;
     v)    version=1;;
-    ?)    printf "usage: %s: [-t tests...]\n" $0
+    ?)    printf "usage: %s: [-t tests...] [-v]\n" $0
           exit 2;;
     esac
 done
