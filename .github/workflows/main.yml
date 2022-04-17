@@ -61,7 +61,7 @@ jobs:
         tar zxvf jdk-8u321-linux-x64.tar.gz
         echo 'export PATH=/usr/local/jdk1.8.0_321/bin:$PATH' >> .profile
         . .profile
-        rm $(which java)
+        sudo rm $(which java)
         java -version
 
     - name: Set up EDGAR API bulk data
