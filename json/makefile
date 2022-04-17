@@ -6,4 +6,4 @@ lua : dir.so
 dir.so: lua/ldirlib.c
 	cc -fPIC -llua -o dir.so -shared lua/ldirlib.c
 clean :
-	rm -f a.out
+	rm -f a.out dir.so
