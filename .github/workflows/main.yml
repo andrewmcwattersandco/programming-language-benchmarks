@@ -47,7 +47,7 @@ jobs:
         then
           curl -LO https://github.com/andrewmcwattersandco/programming-language-benchmarks/releases/download/jdk-8u321-linux-x64/jdk-8u321-linux-x64.tar.gz
         fi
-        sudo rm $(command -v java) && tar zxf jdk-8u321-linux-x64.tar.gz
+        sudo rm $(command -v java) && tar -C /usr/local/ zxf jdk-8u321-linux-x64.tar.gz
         echo 'export PATH=/usr/local/jdk1.8.0_321/bin:$PATH' >> .profile
         . .profile
         java -version
