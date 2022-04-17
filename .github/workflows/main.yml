@@ -20,6 +20,7 @@ jobs:
       with:
         path: |
           ~/lua-5.1.5.tar.gz
+          ~/go1.18.1.linux-amd64.tar.gz
           ~/companyfacts.zip
         key: ${{ runner.os }}-${{ hashFiles('~/**') }}
         restore-keys: |
@@ -37,9 +38,16 @@ jobs:
         sudo make linux install
 
     - name: Set up Go
-      uses: actions/setup-go@v3
-      with:
-        go-version: 1.18
+      run: |
+        cd ~
+        if [ ! -f go1.18.1.linux-amd64.tar.gz ]
+        then
+          curl -O https://go.dev/dl/go1.18.1.linux-amd64.tar.gz
+        fi
+        rm -rf /usr/local/go && tar -C /usr/local -xzf go1.18.1.linux-amd64.tar.gz
+        export PATH=$PATH:/usr/local/go/bin
+        source $HOME/.profile
+        go version
 
     - name: Set up EDGAR API bulk data
       run: |
