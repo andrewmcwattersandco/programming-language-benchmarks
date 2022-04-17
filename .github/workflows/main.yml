@@ -79,4 +79,6 @@ jobs:
         ls -la
 
     - name: bench
-      run: ./bench -v
+      run: |
+        . ~/.profile
+        ./bench -v
