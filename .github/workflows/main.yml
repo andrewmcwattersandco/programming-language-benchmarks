@@ -46,7 +46,7 @@ jobs:
           curl -LO https://go.dev/dl/go1.18.1.linux-amd64.tar.gz
         fi
         sudo rm $(which go) && sudo tar -C /usr/local -xzf go1.18.1.linux-amd64.tar.gz
-        export PATH=$PATH:/usr/local/go/bin
+        echo 'export PATH=$PATH:/usr/local/go/bin' >> .profile
         source $HOME/.profile
         go version
 
@@ -58,6 +58,9 @@ jobs:
           curl -LO https://github.com/andrewmcwattersandco/programming-language-benchmarks/releases/download/jdk-8u321-linux-x64/jdk-8u321-linux-x64.tar.gz
         fi
         tar zxvf jdk-8u321-linux-x64.tar.gz
+        echo 'export PATH=/usr/local/jdk1.8.0_321/bin:$PATH' >> .profile
+        . /.profile
+        java -version
 
     - name: Set up EDGAR API bulk data
       run: |
