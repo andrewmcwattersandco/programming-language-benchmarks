@@ -3,12 +3,11 @@ set -e
 
 tests="*/"
 version=
-while getopts t:v name
+while getopts t: name
 do
     case $name in
     t)    tests="$OPTARG";;
-    v)    version=1;;
-    ?)    printf "usage: %s: [-t tests...] [-v]\n" $0
+    ?)    printf "usage: %s: [-t tests...]\n" $0
           exit 2;;
     esac
 done
@@ -89,16 +88,6 @@ capitalize() {
 classname() {
     echo ${1}App | capitalize
 }
-
-if [ ! -z "$version" ]
-then
-    cc -v
-    if command -v go; then go version; fi
-    if command -v java; then java -version; fi
-    if command -v node; then node -v; fi
-    if command -v lua; then lua -v; fi
-    if command -v luajit; then luajit -v; fi
-fi
 
 for d in $tests
 do
