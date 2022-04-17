@@ -55,7 +55,7 @@ jobs:
         cd ~
         if [ ! -f jdk-8u321-linux-x64.tar.gz ]
         then
-          curl -O https://github.com/andrewmcwattersandco/programming-language-benchmarks/releases/download/jdk-8u321-linux-x64/jdk-8u321-linux-x64.tar.gz
+          curl -LO https://github.com/andrewmcwattersandco/programming-language-benchmarks/releases/download/jdk-8u321-linux-x64/jdk-8u321-linux-x64.tar.gz
         fi
         tar zxvf jdk-8u321-linux-x64.tar.gz
 
