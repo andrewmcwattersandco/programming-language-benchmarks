@@ -51,7 +51,7 @@ jobs:
         go version
 
     - name: Set up Java
-      run:
+      run: |
         cd ~
         if [ ! -f ]
         then
