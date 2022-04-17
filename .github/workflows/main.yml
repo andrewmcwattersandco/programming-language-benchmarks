@@ -79,4 +79,4 @@ jobs:
         ls -la
 
     - name: bench
-      run: ./bench
+      run: ./bench -v

@@ -2,10 +2,12 @@
 set -e
 
 tests="*/"
-while getopts t: name
+version=
+while getopts tv: name
 do
     case $name in
     t)    tests="$OPTARG";;
+    v)    version=1;;
     ?)    printf "usage: %s: [-t tests...]\n" $0
           exit 2;;
     esac
@@ -103,6 +105,10 @@ do
     prebuild
 
     # C
+    if [ ! -z "$version" ]
+    then
+        cc -v
+    fi
     if [ -f ${file}.c ]
     then
         restore *.c* *.cpp*
@@ -134,6 +140,11 @@ do
     fi
 
     # Go
+    if [ ! -z "$version" ] \
+    && [ -f go ]
+    then
+        go version
+    fi
     # C/C++ source files not allowed when not using cgo or SWIG
     # Avoid setting CGO_ENABLED=0, backup and restore instead
     if [ -f ${file}.go ] \
@@ -149,6 +160,11 @@ do
     fi
 
     # Java
+    if [ ! -z "$version" ] \
+    && [ -f java ]
+    then
+        java -version
+    fi
     if [ -f ${file}.java ] \
     && [ -f javac ] \
     && [ -f java ]
@@ -163,6 +179,11 @@ do
     fi
 
     # Node
+    if [ ! -z "$version" ] \
+    && [ -f node ]
+    then
+        node -v
+    fi
     if [ -f ${file}.js ] \
     && [ -f node ]
     then
@@ -175,6 +196,17 @@ do
     fi
 
     # Lua/LuaJIT
+    if [ ! -z "$version" ]
+    then
+        if [ -f lua ]
+        then
+            lua -v
+        fi
+        if [ -f luajit ]
+        then
+            luajit -v
+        fi
+    fi
     if [ -f ${file}.lua ]
     then
         if [ -f makefile ]
