@@ -21,6 +21,7 @@ jobs:
         path: |
           ~/lua-5.1.5.tar.gz
           ~/go1.18.1.linux-amd64.tar.gz
+          ~/jdk-8u321-linux-x64.tar.gz
           ~/companyfacts.zip
         key: ${{ runner.os }}-${{ hashFiles('~/**') }}
         restore-keys: |
@@ -48,6 +49,15 @@ jobs:
         export PATH=$PATH:/usr/local/go/bin
         source $HOME/.profile
         go version
+
+    - name: Set up Java
+      run:
+        cd ~
+        if [ ! -f ]
+        then
+          curl -O https://github.com/andrewmcwattersandco/programming-language-benchmarks/releases/download/jdk-8u321-linux-x64/jdk-8u321-linux-x64.tar.gz
+        fi
+        tar zxvf jdk-8u321-linux-x64/jdk-8u321-linux-x64.tar.gz
 
     - name: Set up EDGAR API bulk data
       run: |
