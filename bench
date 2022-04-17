@@ -3,7 +3,7 @@ set -e
 
 tests="*/"
 version=
-while getopts tv: name
+while getopts t:v name
 do
     case $name in
     t)    tests="$OPTARG";;
