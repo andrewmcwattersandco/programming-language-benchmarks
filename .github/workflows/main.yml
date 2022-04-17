@@ -59,10 +59,10 @@ jobs:
           curl -LO https://github.com/andrewmcwattersandco/programming-language-benchmarks/releases/download/jdk-8u321-linux-x64/jdk-8u321-linux-x64.tar.gz
         fi
         tar zxvf jdk-8u321-linux-x64.tar.gz
+        sudo rm $(which java)
         echo 'export PATH=/usr/local/jdk1.8.0_321/bin:$PATH' >> .profile
         echo 'export PATH=/usr/local/jdk1.8.0_321/jre/bin:$PATH' >> .profile
         . .profile
-        sudo rm $(which java)
         java -version
 
     - name: Set up EDGAR API bulk data
