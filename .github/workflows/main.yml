@@ -75,7 +75,7 @@ jobs:
             -O \
             https://www.sec.gov/Archives/edgar/daily-index/xbrl/companyfacts.zip
         fi
-        unzip companyfacts.zip -d ${{ github.workspace }}/json/companyfacts
+        unzip -q companyfacts.zip -d ${{ github.workspace }}/json/companyfacts
         ls -la
 
     - name: bench
