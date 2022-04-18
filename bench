@@ -84,6 +84,7 @@ classname() {
 for d in $tests
 do
     file=$(basename $d)
+    cd $file
     echo $file
     clean $file
 
