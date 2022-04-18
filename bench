@@ -2,7 +2,6 @@
 set -e
 
 tests="*/"
-version=
 while getopts t: name
 do
     case $name in
@@ -31,13 +30,6 @@ clean() {
 
     # Java
     rm -f "$(classname $1)".class
-}
-
-prebuild() {
-    if [ -f prebuild ]
-    then
-        ./prebuild
-    fi
 }
 
 backup() {
@@ -92,16 +84,8 @@ classname() {
 for d in $tests
 do
     file=$(basename $d)
-    if [ -d $d ]
-    then
-        cd $d
-    else
-        continue
-    fi
     echo $file
-
     clean $file
-    prebuild
 
     # C
     if [ -f ${file}.c ]
