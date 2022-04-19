@@ -100,6 +100,7 @@ do
         then
             make -s
         else
+            # ISO POSIX-2:1993
             c89 ${file}.c
         fi
         printf " %s\t" c
@@ -115,7 +116,8 @@ do
         then
             make -s c++
         else
-            c++ ${file}.cpp
+            # CXX
+            g++ ${file}.cpp
         fi
         printf " %s\t" cpp
         $command $options ./a.out 2>&1 \
