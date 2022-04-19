@@ -87,7 +87,7 @@ JIT: ON fold cse dce fwd dse narrow loop abc sink fuse
 `bench` runs from `/bin/sh`. If you have `node` installed through `nvm`, you may
 need to create a symbolic link to the default installation path.
 ```
-sudo ln -s $(which node) /usr/local/bin/node
+sudo ln -s $(command -v node) /usr/local/bin/node
 ```
 
 #### lua
