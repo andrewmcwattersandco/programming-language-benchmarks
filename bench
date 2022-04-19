@@ -32,6 +32,8 @@ clean() {
     rm -f "$(classname $1)".class
 }
 
+# backup - backup files as *.orig
+# usage: backup source_file...
 backup() {
     for source_file in $@
     do
@@ -45,6 +47,8 @@ backup() {
     unset source_file
 }
 
+# restore - restore files from *.orig and ~
+# usage: restore source_file...
 restore() {
     for source_file in $@
     do
