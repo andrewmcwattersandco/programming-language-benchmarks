@@ -18,14 +18,14 @@ go version go1.18 darwin/arm64
 ```
 * Java
 ```sh
+% javac -version
+javac 1.8.0_321
+```
+```sh
 % java -version
 java version "1.8.0_321"
 Java(TM) SE Runtime Environment (build 1.8.0_321-b07)
 Java HotSpot(TM) 64-Bit Server VM (build 25.321-b07, mixed mode)
-```
-```sh
-% javac -version
-javac 1.8.0_321
 ```
 * JavaScript
 ```sh
@@ -40,6 +40,10 @@ Lua 5.1.5  Copyright (C) 1994-2012 Lua.org, PUC-Rio
 _Note: Lua 5.1 is used due LuaJIT's API-compatibility.[1]_
 
 * LuaJIT
+```sh
+luajit % git branch --show-current
+v2.1
+```
 ```sh
 % luajit
 LuaJIT 2.1.0-beta3 -- Copyright (C) 2005-2021 Mike Pall. https://luajit.org/
