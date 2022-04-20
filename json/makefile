@@ -6,6 +6,6 @@ c++ : json.cpp simdjson.cpp
 	$(CXX) $(CXXFLAGS) json.cpp simdjson.cpp
 lua : dir.so
 dir.so : lua/ldirlib.c
-	$(CC) $(CFLAGS) -fPIC -llua -o dir.so -shared lua/ldirlib.c
+	$(CC) $(CFLAGS) -fPIC -llua -o $@ -shared lua/ldirlib.c
 clean :
 	rm -f a.out dir.so
