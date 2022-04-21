@@ -189,7 +189,7 @@ do
         then
             if [ -f makefile ]
             then
-                make -s luajit
+                make -s clean luajit
             fi
 
             printf " %s\t" luajit
