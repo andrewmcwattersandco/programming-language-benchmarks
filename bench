@@ -169,12 +169,13 @@ do
     # Lua/LuaJIT
     if [ -f ${file}.lua ]
     then
-        if [ -f makefile ]
-        then
-            make -s lua
-        fi
         if command -v lua > /dev/null
         then
+            if [ -f makefile ]
+            then
+                make -s lua
+            fi
+
             printf " %s\t" lua
             # macOS
             # cd /opt/homebrew/bin/
@@ -186,6 +187,11 @@ do
 
         if command -v luajit > /dev/null
         then
+            if [ -f makefile ]
+            then
+                make -s luajit
+            fi
+
             printf " %s\t" luajit
             $command $options luajit ${file}.lua 2>&1 \
             | tr -s '\n' '\t'
