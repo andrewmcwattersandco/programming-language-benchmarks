@@ -30,6 +30,9 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-
 
+    - name: free
+      run: free
+
     - name: Set up Go
       run: |
         cd ~
@@ -53,7 +56,8 @@ jobs:
         echo 'export PATH=/usr/local/jdk1.8.0_321/bin:$PATH' >> .profile
         . .profile
         javac -version
-        java -version
+        # https://docs.oracle.com/javase/8/docs/technotes/guides/vm/gctuning/parallel.html#default_heap_size
+        java -XX:+PrintFlagsFinal -version | grep MaxHeapSize
 
     - name: Set up Lua
       run: |
