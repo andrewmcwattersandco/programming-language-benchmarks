@@ -30,6 +30,9 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-
 
+    - name: free
+      run: free
+
     - name: Set up Go
       run: |
         cd ~
