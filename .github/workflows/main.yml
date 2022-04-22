@@ -53,7 +53,7 @@ jobs:
         echo 'export PATH=/usr/local/jdk1.8.0_321/bin:$PATH' >> .profile
         . .profile
         javac -version
-        java -version
+        java -XX:+PrintFlagsFinal -version | grep MaxHeapSize
 
     - name: Set up Lua
       run: |
