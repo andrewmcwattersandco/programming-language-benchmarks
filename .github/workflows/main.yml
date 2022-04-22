@@ -22,7 +22,7 @@ jobs:
       with:
         path: |
           ~/go1.18.1.linux-amd64.tar.gz
-          ~/jdk-8u321-linux-x64.tar.gz
+          ~/jdk-8u331-linux-x64.tar.gz
           ~/lua-5.1.5.tar.gz
           ~/LuaJIT-2.1.0-beta3.tar.gz
           ~/companyfacts.zip
@@ -45,11 +45,11 @@ jobs:
     - name: Set up Java
       run: |
         cd ~
-        if [ ! -f jdk-8u321-linux-x64.tar.gz ]
+        if [ ! -f jdk-8u331-linux-x64.tar.gz ]
         then
-          curl -LO https://github.com/andrewmcwattersandco/programming-language-benchmarks/releases/download/jdk-8u321-linux-x64/jdk-8u321-linux-x64.tar.gz
+          curl -LO https://github.com/andrewmcwattersandco/programming-language-benchmarks/releases/download/jdk-8u331-linux-x64/jdk-8u331-linux-x64.tar.gz
         fi
-        sudo rm $(command -v java) && sudo tar -C /usr/local/ -xzf jdk-8u321-linux-x64.tar.gz
+        sudo rm $(command -v java) && sudo tar -C /usr/local/ -xzf jdk-8u331-linux-x64.tar.gz
         echo 'export PATH=/usr/local/jdk1.8.0_321/bin:$PATH' >> .profile
         . .profile
         javac -version
