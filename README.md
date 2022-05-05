@@ -170,7 +170,7 @@ https://www.apple.com/shop/buy-mac/macbook-pro/16-inch-space-gray-10-core-cpu-32
 GitHub Actions
 
 ## License
-GNU General Public License v3.0
+GNU General Public License v2.0
 
 ## References
 \[1]: https://luajit.org/install.html#embed
