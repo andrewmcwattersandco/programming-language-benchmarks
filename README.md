@@ -34,7 +34,7 @@ v18.0.0
 ```
 * Lua
 ```sh
-% lua5.1 -v
+% lua -v
 Lua 5.1.5  Copyright (C) 1994-2012 Lua.org, PUC-Rio
 ```
 _Note: Lua 5.1 is used due LuaJIT's API-compatibility.[1]_
