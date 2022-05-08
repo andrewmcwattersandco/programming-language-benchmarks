@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/andrewmcwattersandco/programming-language-benchmarks/issues"
   },
-  "homepage": "https://github.com/andrewmcwattersandco/programming-language-benchmarks/tree/main#readme"
+  "homepage": "https://github.com/andrewmcwattersandco/programming-language-benchmarks/tree/main#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
 }
