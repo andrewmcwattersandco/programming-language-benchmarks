@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/andrewmcwattersandco/programming-language-benchmarks/tree/main#readme",
   "dependencies": {
-    "express": "^4.18.1"
+    "express": "^4.21.2"
   }
 }
