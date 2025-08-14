@@ -29,7 +29,8 @@ clean() {
     rm -f $1
 
     # C#
-    rm -f *.dll *.exe
+    rm -f *.dll $1.csproj
+    rm -rf bin obj
 
     # Java
     rm -f "$(classname $1)".class
@@ -147,9 +148,12 @@ do
     if [ -f ${file}.cs ] \
     && command -v dotnet > /dev/null
     then
-        dotnet build -c Release -o . > /dev/null 2>&1
+        dotnet new console > /dev/null 2>&1
+        mv -f ${file}.cs Program.cs
+        dotnet build > /dev/null 2>&1
+        mv -f Program.cs ${file}.cs
         printf " %s\t" cs
-        $command $options dotnet ${file}.dll 2>&1 \
+        $command $options dotnet run 2>&1 \
         | tr -s '\n' '\t'
         printf '\n'
     fi
