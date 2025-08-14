@@ -1,6 +1,7 @@
 #include <stddef.h>
+#include <memory>
 
-#define  NRECORDS  (sizeof records / sizeof records[0])
+#define  NRECORDS  112813858
 
 class Record {
 public:
@@ -14,10 +15,10 @@ private:
 // Bjarne Stroustrup
 // This material may be protected by copyright.
 
-Record records[112813858];
-
 int main(int argc, char *argv[])
 {
+	auto records = std::make_unique<Record[]>(NRECORDS);
+	
 	for (size_t i = 0; i < NRECORDS; i++) {
 		Record r;
 
