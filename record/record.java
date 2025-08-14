@@ -15,13 +15,18 @@ class RecordApp {
     static Record[] records;
 
     public static void main(String[] args) {
-        records = new Record[112813858];
+        try {
+            records = new Record[112813858];
 
-        for (int i = 0; i < records.length; i++) {
-            Record r = new Record();
+            for (int i = 0; i < records.length; i++) {
+                Record r = new Record();
 
-            r.setId(i);
-            records[i] = r;
+                r.setId(i);
+                records[i] = r;
+            }
+        } catch (OutOfMemoryError e) {
+            System.err.println("record: out of memory: " + e.getMessage());
+            System.exit(1);
         }
     }
 }
