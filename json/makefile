@@ -1,16 +1,29 @@
 CFLAGS=-std=c89
 CXXFLAGS=-std=c++17
+
+# macOS Homebrew detection
+ifeq ($(shell uname -s),Darwin)
+    ifeq ($(shell uname -m),arm64)
+        LUA_INCLUDE=-I/opt/homebrew/opt/lua/include/lua
+        LUA_LIB=-L/opt/homebrew/opt/lua/lib
+    else
+        LUA_INCLUDE=-I/usr/local/opt/lua/include/lua
+        LUA_LIB=-L/usr/local/opt/lua/lib
+    endif
+endif
+
 LDFLAGS=-llua -shared -fpic
-LUA_INCLUDE=-I/opt/homebrew/opt/lua/include/lua
-LUA_LIB=-L/opt/homebrew/opt/lua/lib
+
 c : json.c yyjson.c
 	$(CC) $(CFLAGS) json.c yyjson.c
 c++ : json.cpp simdjson.cpp
 	$(CXX) $(CXXFLAGS) json.cpp simdjson.cpp
 lua : dir.so
 luajit :
-	$(MAKE) lua "LDFLAGS=-lluajit-5.1 -shared -fpic"
+	$(MAKE) lua "LUA_LIB=-lluajit-5.1"
 dir.so : lua/ldirlib.c
 	$(CC) $(CFLAGS) $(LUA_INCLUDE) $(LUA_LIB) $(LDFLAGS) -o $@ $<
 clean :
 	rm -f a.out dir.so
+
+.PHONY: c c++ lua luajit clean
