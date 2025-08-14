@@ -50,14 +50,6 @@ need to create a symbolic link to the default installation path.
 sudo ln -s $(command -v node) /usr/local/bin/node
 ```
 
-#### lua
-`brew` installs `lua` as `lua-5.1`. To install Lua with its default name, create
-a symbolic link to `/opt/homebrew/bin/`.
-```sh
-cd /opt/homebrew/bin/
-ln -s ../Cellar/lua@5.1/5.1.5_8/bin/lua-5.1 lua
-```
-
 ## Tests
 * **Minimal program**  
   Test initialization
