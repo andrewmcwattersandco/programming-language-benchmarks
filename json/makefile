@@ -3,13 +3,8 @@ CXXFLAGS=-std=c++17
 
 # macOS Homebrew detection
 ifeq ($(shell uname -s),Darwin)
-    ifeq ($(shell uname -m),arm64)
-        LUA_INCLUDE=-I/opt/homebrew/opt/lua/include/lua
-        LUA_LIB=-L/opt/homebrew/opt/lua/lib
-    else
-        LUA_INCLUDE=-I/usr/local/opt/lua/include/lua
-        LUA_LIB=-L/usr/local/opt/lua/lib
-    endif
+	LUA_INCLUDE=-I/opt/homebrew/opt/lua/include/lua
+	LUA_LIB=-L/opt/homebrew/opt/lua/lib
 endif
 
 LDFLAGS=-llua -shared -fpic
