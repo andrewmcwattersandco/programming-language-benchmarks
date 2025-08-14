@@ -41,7 +41,7 @@ Benchmarks for programming languages
 
 ## Run
 ```sh
-./bench [-t tests...]
+./bench [-t tests...] [-l languages...] [-s languages...]
 ```
 
 ### macOS
@@ -67,20 +67,6 @@ sudo ln -s $(command -v node) /usr/local/bin/node
 
   Reads and parses 13.76 GB of EDGAR API bulk data.  
   See https://www.sec.gov/edgar/sec-api-documentation for more information.
-<!-- * **Encode JSON**  
-  Test built-in or de facto standard JSON encoder
-* **Send HTTPS request**  
-  Test built-in or de facto standard HTTPS request overhead
-* **Receive HTTPS request**  
-  Test built-in or de facto standard HTTPS request overhead
-* **Send HTTPS response**  
-  Test built-in or de facto standard HTTPS response overhead
-* **Receive HTTPS response**  
-  Test built-in or de facto standard HTTPS response overhead
-* **Query database**  
-  Test built-in or de facto standard database connector/driver/bindings
-* **Draw**  
-  Test graphics API command overhead -->
 
 ## Results
 ```sh
