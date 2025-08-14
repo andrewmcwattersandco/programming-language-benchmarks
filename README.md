@@ -69,30 +69,39 @@ sudo ln -s $(command -v node) /usr/local/bin/node
   See https://www.sec.gov/edgar/sec-api-documentation for more information.
 
 ## Results
+### Physical
+*Last updated: Thu Aug 14 10:52:08 MST 2025*
 ```sh
 % ./bench
-json
- c	       31.66 real        27.86 user         3.63 sys
- cpp	      351.16 real       340.68 user         4.33 sys
- go	      133.40 real       205.27 user        10.96 sys
- java	       50.25 real        49.58 user         3.26 sys
- js	       57.25 real        53.87 user         4.69 sys
 minimal
- c	        0.15 real         0.00 user         0.00 sys
- cpp	        0.10 real         0.00 user         0.00 sys
- go	        0.11 real         0.00 user         0.00 sys
- java	        0.08 real         0.06 user         0.02 sys
- js	        0.03 real         0.02 user         0.00 sys
- lua	        0.00 real         0.00 user         0.00 sys
- luajit	        0.00 real         0.00 user         0.00 sys
+ c       real 0.00    user 0.00    sys 0.00	
+ cpp     real 0.00    user 0.00    sys 0.00	
+ go      real 0.00    user 0.00    sys 0.00	
+ lua     real 0.00    user 0.00    sys 0.00	
+ luajit  real 0.00    user 0.00    sys 0.00	
+ python3 real 0.01    user 0.01    sys 0.00	
+ js      real 0.03    user 0.02    sys 0.00	
+ java    real 0.05    user 0.04    sys 0.01	
+ cs      real 1.44    user 1.34    sys 0.17	
 record
- c	        0.25 real         0.11 user         0.02 sys
- cpp	        0.42 real         0.27 user         0.02 sys
- go	        0.21 real         0.04 user         0.05 sys
- java	       32.08 real       259.28 user         4.94 sys
- js	       15.79 real        19.62 user         4.60 sys
- lua	       29.88 real        27.02 user         2.69 sys
- luajit	        9.81 real         8.16 user         1.65 sys
+ c       real 0.19    user 0.08    sys 0.10	
+ go      real 0.22    user 0.04    sys 0.18	
+ cpp     real 1.03    user 0.96    sys 0.07	
+ cs      real 6.13    user 5.33    sys 1.51	
+ js      real 10.39   user 10.80   sys 2.82	
+ java    real 13.79   user 52.76   sys 0.55	
+ lua     real 16.60   user 12.68   sys 3.82	
+ python3 real 31.53   user 28.20   sys 3.31	
+json
+ c       real 82.87   user 73.13   sys 3.54	
+ java    real 83.42   user 71.20   sys 10.54	
+ cs      real 101.48  user 75.97   sys 18.94	
+ js      real 128.45  user 110.73  sys 13.17	
+ python3 real 167.52  user 148.80  sys 11.08	
+ cpp     real 195.10  user 184.63  sys 3.91	
+ luajit  real 227.05  user 196.96  sys 18.00	
+ go      real 284.91  user 394.26  sys 28.12	
+ lua     real 2275.80 user 2258.55 sys 10.57	
 ```
 
 ### Google Sheets
