@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"log"
 	"os"
 	"strings"
 )
@@ -12,7 +11,8 @@ func main() {
 	dir := "companyfacts"
 	files, err := os.ReadDir(dir)
 	if err != nil {
-		log.Fatal(err)
+		fmt.Fprintf(os.Stderr, "json: can't open %s: %v\n", dir, err)
+		os.Exit(1)
 	}
 
 	for _, file := range files {
@@ -21,26 +21,31 @@ func main() {
 		}
 
 		name := dir + "/" + file.Name()
-		file, err := os.Open(name) // For read access.
+		jsonFile, err := os.Open(name) // For read access.
 		if err != nil {
-			log.Fatal(err)
+			fmt.Fprintf(os.Stderr, "json: can't open %s: %v\n", name, err)
+			continue
 		}
+		defer jsonFile.Close()
 
-		stat, err := file.Stat()
+		stat, err := jsonFile.Stat()
 		if err != nil {
-			log.Fatal(err)
+			fmt.Fprintf(os.Stderr, "json: can't stat %s: %v\n", name, err)
+			continue
 		}
 
 		jsonBlob := make([]byte, stat.Size())
-		_, err = file.Read(jsonBlob)
+		_, err = jsonFile.Read(jsonBlob)
 		if err != nil {
-			log.Fatal(err)
+			fmt.Fprintf(os.Stderr, "json: can't read %s: %v\n", name, err)
+			continue
 		}
 
 		var f interface{}
 		err = json.Unmarshal(jsonBlob, &f)
 		if err != nil {
-			fmt.Println("error:", err)
+			fmt.Fprintf(os.Stderr, "json: can't parse %s: %v\n", name, err)
+			continue
 		}
 	}
 }
