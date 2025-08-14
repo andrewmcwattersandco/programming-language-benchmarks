@@ -4,6 +4,7 @@ Benchmarks for programming languages
 ## Languages and Implementations
 * C
 * C++
+* C#
 * Go
 * Java
 * JavaScript
