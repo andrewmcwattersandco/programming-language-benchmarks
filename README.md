@@ -109,9 +109,9 @@ ln -s ../Cellar/lua@5.1/5.1.5_8/bin/lua-5.1 lua
 * **Create a record/structure/object**  
   Test memory allocation
 
-  _Note: Creates 112,813,858 records. As of node v17.9.0, this is the maximum
-  array size. All other test languages have their tests calibrated to this
-  number, which is the smallest array length of all of the test
+  _Note: Creates 67,108,864 records. Last tested against node v24.3.0, this is
+  the maximum array size. All other test languages have their tests calibrated
+  to this number, which is the smallest array length of all of the test
   languages before one of the tests is terminated abnormally._
 * **Parse JSON**  
   Test built-in or de facto standard JSON parser
