@@ -6,7 +6,7 @@ while getopts t: name
 do
     case $name in
     t)    tests="$OPTARG";;
-    ?)    printf "usage: %s: [-t tests...]\n" $0
+    ?)    printf "usage: %s: [-t tests...]\n" "$0"
           exit 2;;
     esac
 done
@@ -35,12 +35,12 @@ clean() {
 # backup - backup files as *.orig
 # usage: backup source_file...
 backup() {
-    for source_file in $@
+    for source_file in "$@"
     do
         target_file=${source_file}.orig
-        if [ -f $source_file ]
+        if [ -f "$source_file" ]
         then
-            mv -f $source_file $target_file
+            mv -f "$source_file" "$target_file"
         fi
         unset target_file
     done
@@ -50,23 +50,23 @@ backup() {
 # restore - restore files from *.orig and ~
 # usage: restore source_file...
 restore() {
-    for source_file in $@
+    for source_file in "$@"
     do
-        if [ -f $source_file ]
+        if [ -f "$source_file" ]
         then
             target_file=${source_file%.orig}
-            if [ $source_file != $target_file ]
+            if [ "$source_file" != "$target_file" ]
             then
-                mv -f $source_file $target_file
+                mv -f "$source_file" "$target_file"
             fi
         fi
 
-        if [ -f $source_file ]
+        if [ -f "$source_file" ]
         then
             target_file=${source_file%~}
-            if [ $source_file != $target_file ]
+            if [ "$source_file" != "$target_file" ]
             then
-                mv -f $source_file $target_file
+                mv -f "$source_file" "$target_file"
             fi
         fi
 
@@ -77,7 +77,7 @@ restore() {
 
 capitalize() {
     read input
-    printf "%s" $input | awk '{ print toupper(substr($0, 1, 1)) substr($0, 2) }'
+    printf "%s" "$input" | awk '{ print toupper(substr($0, 1, 1)) substr($0, 2) }'
     unset input
 }
 
@@ -87,10 +87,10 @@ classname() {
 
 for d in $tests
 do
-    file=$(basename $d)
-    cd $file
-    echo $file
-    clean $file
+    file=$(basename "$d")
+    cd "$file"
+    echo "$file"
+    clean "$file"
 
     # C
     if [ -f ${file}.c ]
@@ -197,6 +197,16 @@ do
             | tr -s '\n' '\t'
             printf '\n'
         fi
+    fi
+
+    # Python
+    if [ -f ${file}.py ] \
+    && command -v python3 > /dev/null
+    then
+        printf " %s\t" python3
+        $command $options python3 ${file}.py 2>&1 \
+        | tr -s '\n' '\t'
+        printf '\n'
     fi
 
     cd ..
