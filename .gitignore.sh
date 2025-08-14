@@ -1,6 +1,6 @@
 #!/bin/sh
 printf '' > .gitignore
-langs="C C++ Go Java Maven Node Lua"
+langs="C C++ C# Go Java Maven Node Lua"
 
 for lang in ${langs}
 do
