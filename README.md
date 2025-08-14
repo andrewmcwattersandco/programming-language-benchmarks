@@ -1,60 +1,15 @@
 # programming-language-benchmarks
 Benchmarks for programming languages
 
-## Languages
+## Languages and Implementations
 * C
 * C++
-```sh
-% cc -v
-Apple clang version 13.1.6 (clang-1316.0.21.2)
-Target: arm64-apple-darwin21.4.0
-Thread model: posix
-InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
-```
 * Go
-```sh
-% go version
-go version go1.25.0 darwin/arm64
-```
 * Java
-```sh
-% javac -version
-javac 24.0.2
-```
-```sh
-% java -version
-java version "24.0.2" 2025-07-15
-Java(TM) SE Runtime Environment (build 24.0.2+12-54)
-Java HotSpot(TM) 64-Bit Server VM (build 24.0.2+12-54, mixed mode, sharing)
-```
 * JavaScript
-```sh
-% node -v
-v18.1.0
-```
 * Lua
-```sh
-% lua -v
-Lua 5.1.5  Copyright (C) 1994-2012 Lua.org, PUC-Rio
-```
-_Note: Lua 5.1 is used due LuaJIT's API-compatibility.[1]_
-
 * LuaJIT
-```sh
-luajit % git branch --show-current
-v2.1
-```
-```sh
-% luajit
-LuaJIT 2.1.0-beta3 -- Copyright (C) 2005-2021 Mike Pall. https://luajit.org/
-JIT: ON fold cse dce fwd dse narrow loop abc sink fuse
->
-```
 * Python
-```sh
-% python3 --version
-Python 3.9.6
-```
 
 ## Philosophy
 * **No warm-ups**  
