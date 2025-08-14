@@ -28,7 +28,8 @@ int main()
         char *json;
         yyjson_doc *doc;
 
-        if (strcmp(strrchr(dp->d_name, '.'), ".json") != 0)
+        char *ext = strrchr(dp->d_name, '.');
+        if (ext == NULL || strcmp(ext, ".json") != 0)
             continue;
 
         if (strlen(dir)+strlen(dp->d_name)+2 > sizeof(name)) {
@@ -36,7 +37,7 @@ int main()
                 dir, dp->d_name);
             continue;
         } else {
-            sprintf(name, "%s/%s", dir, dp->d_name);
+            snprintf(name, sizeof(name), "%s/%s", dir, dp->d_name);
         }
 
         if (stat(name, &stbuf) == -1) {
