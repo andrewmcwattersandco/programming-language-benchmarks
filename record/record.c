@@ -1,16 +1,21 @@
 #include <stddef.h>
+#include <stdlib.h>
 
-#define  NRECORDS  (sizeof records / sizeof records[0])
+#define  NRECORDS  112813858
 
 struct record {
     int id;
 };
 
-struct record records[112813858];
-
-int main()
+int main(int argc, char *argv[])
 {
     int i;
+    struct record *records;
+
+    records = malloc(NRECORDS * sizeof(struct record));
+    if (records == NULL) {
+        return 1;
+    }
 
     for (i = 0; i < NRECORDS; i++) {
         struct record r;
@@ -19,5 +24,6 @@ int main()
         records[i] = r;
     }
 
+    free(records);
     return 0;
 }
