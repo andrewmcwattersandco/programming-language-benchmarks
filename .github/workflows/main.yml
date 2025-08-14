@@ -92,7 +92,7 @@ jobs:
         if [ ! -f companyfacts.zip ]
         then
           curl \
-            -H "User-Agent: Sample Company Name AdminContact@<sample company domain>.com" \
+            -H "User-Agent: Andrew McWatters and Co. andrew@andrewmcwatters.com" \
             -H "Accept-Encoding: gzip, deflate" \
             -H "Host: www.sec.gov" \
             -O \
