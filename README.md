@@ -69,7 +69,7 @@ sudo ln -s $(command -v node) /usr/local/bin/node
   See https://www.sec.gov/edgar/sec-api-documentation for more information.
 
 ## Results
-### Physical
+### Cloud
 *Last updated: Thu Aug 14 10:52:08 MST 2025*
 ```sh
 % ./bench
