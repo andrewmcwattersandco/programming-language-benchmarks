@@ -76,14 +76,14 @@ jobs:
     - name: Set up LuaJIT
       run: |
         cd ~
-        if [ ! -f LuaJIT-2.1.0-beta3.tar.gz ]
+        if [ ! -f v2.1.0-beta3.tar.gz ]
         then
           curl -O https://github.com/LuaJIT/LuaJIT/archive/refs/tags/v2.1.0-beta3.tar.gz
         fi
-        tar xzf LuaJIT-2.1.0-beta3.tar.gz
+        tar xzf v2.1.0-beta3.tar.gz
         cd LuaJIT-2.1.0-beta3
         make && sudo make install
-        sudo ln -sf luajit-2.1.0-beta3 /usr/local/bin/luajit
+        sudo ln -sf LuaJIT-2.1.0-beta3 /usr/local/bin/luajit
         luajit -v
 
     - name: Set up EDGAR API bulk data
