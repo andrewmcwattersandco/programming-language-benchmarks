@@ -24,7 +24,7 @@ jobs:
           ~/go1.18.1.linux-amd64.tar.gz
           ~/jdk-8u331-linux-x64.tar.gz
           ~/lua-5.1.5.tar.gz
-          ~/LuaJIT-2.1.0-beta3.tar.gz
+          ~/v2.1.0-beta3.tar.gz
           ~/companyfacts.zip
         key: ${{ runner.os }}-${{ hashFiles('~/*.tar.gz', '~/*.zip') }}
         restore-keys: |
