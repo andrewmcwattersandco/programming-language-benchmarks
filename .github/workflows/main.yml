@@ -61,6 +61,8 @@ jobs:
 
     - name: Set up Lua
       run: |
+        sudo apt-get update
+        sudo apt-get install -y libreadline-dev
         cd ~
         if [ ! -f lua-5.1.5.tar.gz ]
         then
