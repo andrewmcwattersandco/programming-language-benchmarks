@@ -12,10 +12,16 @@ touch $TMPDIR/.gitignore
 grep -v '^\*.mod' .gitignore > $TMPDIR/.gitignore
 mv $TMPDIR/.gitignore .gitignore
 
+# C/C++
 for dir in */
 do
     file=$(basename ${dir})
     echo ${file}/${file} >> .gitignore
 done
+
+# C#
+echo 'bin/' >> .gitignore
+echo 'obj/' >> .gitignore
+echo '*.csproj' >> .gitignore
 
 echo '*.orig' >> .gitignore

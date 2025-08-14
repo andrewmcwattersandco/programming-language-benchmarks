@@ -349,4 +349,7 @@ http/http
 json/json
 minimal/minimal
 record/record
+bin/
+obj/
+*.csproj
 *.orig
