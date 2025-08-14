@@ -50,6 +50,11 @@ LuaJIT 2.1.0-beta3 -- Copyright (C) 2005-2021 Mike Pall. https://luajit.org/
 JIT: ON fold cse dce fwd dse narrow loop abc sink fuse
 >
 ```
+* Python
+```sh
+% python3 --version
+Python 3.9.6
+```
 
 ## Philosophy
 * **No warm-ups**  
