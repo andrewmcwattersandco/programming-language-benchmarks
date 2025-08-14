@@ -2,11 +2,18 @@
 set -e
 
 tests=$(ls -d */ | grep -v 'http/')
-while getopts t: name
+languages=""
+skip=""
+while getopts t:l:s: name
 do
     case $name in
     t)    tests="$OPTARG";;
-    ?)    printf "usage: %s: [-t tests...]\n" "$0"
+    l)    languages="$OPTARG";;
+    s)    skip="$OPTARG";;
+    ?)    printf "usage: %s: [-t tests...] [-l languages...] [-s languages...]\n" "$0"
+          printf "  -t: run specific tests (e.g., 'minimal/ record/')\n"
+          printf "  -l: run specific languages (e.g., 'c go rust')\n"
+          printf "  -s: skip specific languages (e.g., 'lua python3')\n"
           exit 2;;
     esac
 done
@@ -34,6 +41,12 @@ clean() {
 
     # Java
     rm -f "$(classname $1)".class
+
+    # Rust
+    rm -f ${1}
+    if [ -f Cargo.toml ]; then
+        rm -rf target
+    fi
 }
 
 # backup - backup files as *.orig
@@ -89,6 +102,26 @@ classname() {
     echo ${1}App | capitalize
 }
 
+should_run_language() {
+    lang="$1"
+
+    if [ -n "$languages" ]; then
+        case " $languages " in
+            *" $lang "*) return 0 ;;
+            *) return 1 ;;
+        esac
+    fi
+
+    if [ -n "$skip" ]; then
+        case " $skip " in
+            *" $lang "*) return 1 ;;
+            *) return 0 ;;
+        esac
+    fi
+
+    return 0
+}
+
 for d in $tests
 do
     file=$(basename "$d")
@@ -97,7 +130,7 @@ do
     clean "$file"
 
     # C
-    if [ -f ${file}.c ]
+    if [ -f ${file}.c ] && should_run_language "c"
     then
         restore *.c* *.cpp*
         if [ -f makefile ]
@@ -114,7 +147,7 @@ do
     fi
 
     # C++
-    if [ -f ${file}.cpp ]
+    if [ -f ${file}.cpp ] && should_run_language "cpp"
     then
         if [ -f makefile ]
         then
@@ -133,7 +166,8 @@ do
     # C/C++ source files not allowed when not using cgo or SWIG
     # Avoid setting CGO_ENABLED=0, backup and restore instead
     if [ -f ${file}.go ] \
-    && command -v go > /dev/null
+    && command -v go > /dev/null \
+    && should_run_language "go"
     then
         backup *.c *.cpp
         go build ./...
@@ -146,7 +180,8 @@ do
 
     # C#
     if [ -f ${file}.cs ] \
-    && command -v dotnet > /dev/null
+    && command -v dotnet > /dev/null \
+    && should_run_language "cs"
     then
         dotnet new console > /dev/null 2>&1
         mv -f ${file}.cs Program.cs
@@ -161,7 +196,8 @@ do
     # Java
     if [ -f ${file}.java ] \
     && command -v javac > /dev/null \
-    && command -v java  > /dev/null
+    && command -v java  > /dev/null \
+    && should_run_language "java"
     then
         javac -cp '.:*' ${file}.java
         printf " %s\t" java
@@ -174,7 +210,8 @@ do
 
     # Node
     if [ -f ${file}.js ] \
-    && command -v node > /dev/null
+    && command -v node > /dev/null \
+    && should_run_language "js"
     then
         printf " %s\t" js
         # nvm
@@ -187,7 +224,8 @@ do
     # Lua/LuaJIT
     if [ -f ${file}.lua ]
     then
-        if command -v lua > /dev/null
+        if command -v lua > /dev/null \
+        && should_run_language "lua"
         then
             if [ -f makefile ]
             then
@@ -203,7 +241,8 @@ do
             printf '\n'
         fi
 
-        if command -v luajit > /dev/null
+        if command -v luajit > /dev/null \
+        && should_run_language "luajit"
         then
             if [ -f makefile ]
             then
@@ -219,12 +258,35 @@ do
 
     # Python
     if [ -f ${file}.py ] \
-    && command -v python3 > /dev/null
+    && command -v python3 > /dev/null \
+    && should_run_language "python3"
     then
         printf " %s\t" python3
         $command $options python3 ${file}.py 2>&1 \
         | tr -s '\n' '\t'
         printf '\n'
+    fi
+
+    # Rust
+    if [ -f ${file}.rs ] \
+    && command -v rustc > /dev/null \
+    && should_run_language "rust"
+    then
+        if [ -f Cargo.toml ]; then
+            if command -v cargo > /dev/null; then
+                cargo build --release > /dev/null 2>&1
+                printf " %s\t" rust
+                $command $options ./target/release/${file} 2>&1 \
+                | tr -s '\n' '\t'
+                printf '\n'
+            fi
+        else
+            rustc -O ${file}.rs -o ${file}
+            printf " %s\t" rust
+            $command $options ./${file} 2>&1 \
+            | tr -s '\n' '\t'
+            printf '\n'
+        fi
     fi
 
     cd ..

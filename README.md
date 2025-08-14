@@ -11,6 +11,7 @@ Benchmarks for programming languages
 * Lua
 * LuaJIT
 * Python
+* Rust
 
 ## Philosophy
 * **No warm-ups**  
