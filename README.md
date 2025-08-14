@@ -14,18 +14,18 @@ InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault
 * Go
 ```sh
 % go version
-go version go1.18 darwin/arm64
+go version go1.25.0 darwin/arm64
 ```
 * Java
 ```sh
 % javac -version
-javac 1.8.0_321
+javac 24.0.2
 ```
 ```sh
 % java -version
-java version "1.8.0_321"
-Java(TM) SE Runtime Environment (build 1.8.0_321-b07)
-Java HotSpot(TM) 64-Bit Server VM (build 25.321-b07, mixed mode)
+java version "24.0.2" 2025-07-15
+Java(TM) SE Runtime Environment (build 24.0.2+12-54)
+Java HotSpot(TM) 64-Bit Server VM (build 24.0.2+12-54, mixed mode, sharing)
 ```
 * JavaScript
 ```sh

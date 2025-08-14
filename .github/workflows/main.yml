@@ -21,7 +21,7 @@ jobs:
       uses: actions/cache@v3
       with:
         path: |
-          ~/go1.18.1.linux-amd64.tar.gz
+          ~/go1.25.0.linux-amd64.tar.gz
           ~/jdk-8u331-linux-x64.tar.gz
           ~/lua-5.1.5.tar.gz
           ~/v2.1.0-beta3.tar.gz
@@ -36,11 +36,11 @@ jobs:
     - name: Set up Go
       run: |
         cd ~
-        if [ ! -f go1.18.1.linux-amd64.tar.gz ]
+        if [ ! -f go1.25.0.linux-amd64.tar.gz ]
         then
-          curl -LO https://go.dev/dl/go1.18.1.linux-amd64.tar.gz
+          curl -LO https://go.dev/dl/go1.25.0.linux-amd64.tar.gz
         fi
-        sudo rm $(command -v go) && sudo tar -C /usr/local -xzf go1.18.1.linux-amd64.tar.gz
+        sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.25.0.linux-amd64.tar.gz
         echo 'export PATH=$PATH:/usr/local/go/bin' >> .profile
         source $HOME/.profile
         go version
