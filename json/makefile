@@ -15,7 +15,11 @@ c++ : json.cpp simdjson.cpp
 	$(CXX) $(CXXFLAGS) json.cpp simdjson.cpp
 lua : dir.so
 luajit :
-	$(MAKE) lua "LUA_LIB=-lluajit-5.1"
+ifeq ($(shell uname -s),Darwin)
+	$(MAKE) lua "LUA_INCLUDE=-I/opt/homebrew/opt/luajit/include/luajit-2.1" "LUA_LIB=-L/opt/homebrew/opt/luajit/lib" "LDFLAGS=-lluajit-5.1 -shared -fpic"
+else
+	$(MAKE) lua "LDFLAGS=-lluajit-5.1 -shared -fpic"
+endif
 dir.so : lua/ldirlib.c
 	$(CC) $(CFLAGS) $(LUA_INCLUDE) $(LUA_LIB) $(LDFLAGS) -o $@ $<
 clean :
