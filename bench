@@ -4,16 +4,19 @@ set -e
 tests=$(ls -d */ | grep -v 'http/')
 languages=""
 skip=""
-while getopts t:l:s: name
+cpu_cycles=false
+while getopts t:l:s:c name
 do
     case $name in
     t)    tests="$OPTARG";;
     l)    languages="$OPTARG";;
     s)    skip="$OPTARG";;
-    ?)    printf "usage: %s: [-t tests...] [-l languages...] [-s languages...]\n" "$0"
+    c)    cpu_cycles=true;;
+    ?)    printf "usage: %s: [-t tests...] [-l languages...] [-s languages...] [-c]\n" "$0"
           printf "  -t: run specific tests (e.g., 'minimal/ record/')\n"
           printf "  -l: run specific languages (e.g., 'c go rust')\n"
           printf "  -s: skip specific languages (e.g., 'lua python3')\n"
+          printf "  -c: show CPU cycles elapsed instead of time (macOS only)\n"
           exit 2;;
     esac
 done
@@ -21,7 +24,11 @@ shift $(($OPTIND - 1))
 unset name
 
 command=/usr/bin/time
-options=-p
+if [ "$cpu_cycles" = true ]; then
+    options="-l"
+else
+    options="-p"
+fi
 
 clean() {
     # C/C++
@@ -122,6 +129,15 @@ should_run_language() {
     return 0
 }
 
+# Extract cycles from time -l output when using CPU cycles mode
+extract_cycles() {
+    if [ "$cpu_cycles" = true ]; then
+        grep "cycles elapsed" | awk '{printf "cycles elapsed %s", $1}'
+    else
+        cat
+    fi
+}
+
 for d in $tests
 do
     file=$(basename "$d")
@@ -142,7 +158,7 @@ do
         fi
         printf " %s\t" c
         $command $options ./a.out 2>&1 \
-        | tr -s '\n' '\t'
+        | extract_cycles | tr -s '\n' '\t'
         printf '\n'
     fi
 
@@ -158,7 +174,7 @@ do
         fi
         printf " %s\t" cpp
         $command $options ./a.out 2>&1 \
-        | tr -s '\n' '\t'
+        | extract_cycles | tr -s '\n' '\t'
         printf '\n'
     fi
 
@@ -174,7 +190,7 @@ do
         restore *.c* *.cpp*
         printf " %s\t" go
         $command $options ./${file} 2>&1 \
-        | tr -s '\n' '\t'
+        | extract_cycles | tr -s '\n' '\t'
         printf '\n'
     fi
 
@@ -189,7 +205,7 @@ do
         mv -f Program.cs ${file}.cs
         printf " %s\t" cs
         $command $options dotnet run 2>&1 \
-        | tr -s '\n' '\t'
+        | extract_cycles | tr -s '\n' '\t'
         printf '\n'
     fi
 
@@ -203,7 +219,7 @@ do
         printf " %s\t" java
         class=$(classname $file)
         $command $options java -cp '.:*' $class 2>&1 \
-        | tr -s '\n' '\t'
+        | extract_cycles | tr -s '\n' '\t'
         printf '\n'
         unset class
     fi
@@ -217,7 +233,7 @@ do
         # nvm
         # sudo ln -s $(which node) /usr/local/bin/node
         $command $options node --max-old-space-size=8192 ${file}.js 2>&1 \
-        | tr -s '\n' '\t'
+        | extract_cycles | tr -s '\n' '\t'
         printf '\n'
     fi
 
@@ -237,7 +253,7 @@ do
             # cd /opt/homebrew/bin/
             # ln -s ../Cellar/lua@5.1/5.1.5_8/bin/lua-5.1 lua
             $command $options lua ${file}.lua 2>&1 \
-            | tr -s '\n' '\t'
+            | extract_cycles | tr -s '\n' '\t'
             printf '\n'
         fi
 
@@ -251,7 +267,7 @@ do
 
             printf " %s\t" luajit
             $command $options luajit ${file}.lua 2>&1 \
-            | tr -s '\n' '\t'
+            | extract_cycles | tr -s '\n' '\t'
             printf '\n'
         fi
     fi
@@ -263,7 +279,7 @@ do
     then
         printf " %s\t" python3
         $command $options python3 ${file}.py 2>&1 \
-        | tr -s '\n' '\t'
+        | extract_cycles | tr -s '\n' '\t'
         printf '\n'
     fi
 
@@ -277,14 +293,14 @@ do
                 cargo build --release > /dev/null 2>&1
                 printf " %s\t" rust
                 $command $options ./target/release/${file} 2>&1 \
-                | tr -s '\n' '\t'
+                | extract_cycles | tr -s '\n' '\t'
                 printf '\n'
             fi
         else
             rustc -O ${file}.rs -o ${file}
             printf " %s\t" rust
             $command $options ./${file} 2>&1 \
-            | tr -s '\n' '\t'
+            | extract_cycles | tr -s '\n' '\t'
             printf '\n'
         fi
     fi
