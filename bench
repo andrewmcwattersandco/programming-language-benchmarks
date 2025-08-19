@@ -271,6 +271,17 @@ do
         fi
     fi
 
+    # PHP
+    if [ -f ${file}.php ] \
+    && command -v php > /dev/null \
+    && should_run_language "php"
+    then
+        printf " %s\t" php
+        $command $options php ${file}.php 2>&1 \
+        | format | tr -s '\n' '\t'
+        printf '\n'
+    fi
+
     # Python
     if [ -f ${file}.py ] \
     && command -v python3 > /dev/null \
