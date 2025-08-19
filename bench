@@ -277,7 +277,7 @@ do
     && should_run_language "php"
     then
         printf " %s\t" php
-        $command $options php ${file}.php 2>&1 \
+        $command $options php -d memory_limit=8G ${file}.php 2>&1 \
         | format | tr -s '\n' '\t'
         printf '\n'
     fi
