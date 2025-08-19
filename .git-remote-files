@@ -1,0 +1,7 @@
+[file "cJSON.c" from "https://github.com/DaveGamble/cJSON.git"]
+commit = acc76239bee01d8e9c858ae2cab296704e52d916
+target = json/cJSON.c
+
+[file "cJSON.h" from "https://github.com/DaveGamble/cJSON.git"]
+commit = acc76239bee01d8e9c858ae2cab296704e52d916
+target = json/cJSON.h

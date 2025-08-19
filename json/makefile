@@ -9,8 +9,8 @@ endif
 
 LDFLAGS=-llua -shared -fpic
 
-c : json.c yyjson.c
-	$(CC) $(CFLAGS) json.c yyjson.c
+c : json.c cJSON.c
+	$(CC) $(CFLAGS) json.c cJSON.c
 c++ : json.cpp simdjson.cpp
 	$(CXX) $(CXXFLAGS) json.cpp simdjson.cpp
 lua : dir.so

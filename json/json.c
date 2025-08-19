@@ -8,7 +8,7 @@
 #include <string.h>
 #include <sys/stat.h>
 #include <sys/types.h>
-#include "yyjson.h"
+#include "cJSON.h"
 
 int main()
 {
@@ -25,8 +25,8 @@ int main()
         struct stat stbuf;
         off_t size;
         FILE *fp;
-        char *json;
-        yyjson_doc *doc;
+        char *string;
+        cJSON *json;
 
         char *ext = strrchr(dp->d_name, '.');
         if (ext == NULL || strcmp(ext, ".json") != 0)
@@ -51,23 +51,21 @@ int main()
             continue;
         }
 
-        if ((json = malloc(size)) == NULL)
+        if ((string = malloc(size)) == NULL)
             continue;
 
-        if (fread(json, size, 1, fp) != 1
+        if (fread(string, size, 1, fp) != 1
             && (feof(fp) != 0 || ferror(fp) != 0)) {
             printf("json: can′t read %s\n", name);
-            free(json);
+            free(string);
             fclose(fp);
             continue;
         }
 
-        /* Read JSON */
-        doc = yyjson_read(json, size, 0);
+        json = cJSON_Parse(string);
 
-        /* Free the doc */
-        yyjson_doc_free(doc);
-        free(json);
+        cJSON_Delete(json);
+        free(string);
         fclose(fp);
     }
     closedir(dfd);
