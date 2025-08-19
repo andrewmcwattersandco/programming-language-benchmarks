@@ -352,4 +352,5 @@ record/record
 bin/
 obj/
 *.csproj
+*.sln
 *.orig

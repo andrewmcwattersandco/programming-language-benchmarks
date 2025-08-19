@@ -23,5 +23,6 @@ done
 echo 'bin/' >> .gitignore
 echo 'obj/' >> .gitignore
 echo '*.csproj' >> .gitignore
+echo '*.sln' >> .gitignore
 
 echo '*.orig' >> .gitignore
