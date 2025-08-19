@@ -10,6 +10,7 @@ Benchmarks for programming languages
 * JavaScript
 * Lua
 * LuaJIT
+* PHP
 * Python
 * Rust
 
