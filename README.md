@@ -69,29 +69,34 @@ sudo ln -s $(command -v node) /usr/local/bin/node
   See https://www.sec.gov/edgar/sec-api-documentation for more information.
 
 ## Results
-### Cloud
-*Last updated: Thu Aug 14 10:52:08 MST 2025*
+### Physical
+*Last updated: Tue Aug 19 08:39:38 MST 2025*
 ```sh
 % ./bench
 minimal
- c          real 0.00       user 0.00       sys 0.00	
- cpp        real 0.00       user 0.00       sys 0.00	
- go         real 0.00       user 0.00       sys 0.00	
  lua        real 0.00       user 0.00       sys 0.00	
  luajit     real 0.00       user 0.00       sys 0.00	
- python3    real 0.01       user 0.01       sys 0.00	
- js         real 0.03       user 0.02       sys 0.00	
- java       real 0.05       user 0.04       sys 0.01	
- cs         real 1.44       user 1.34       sys 0.17	
+ js         real 0.02       user 0.01       sys 0.00	
+ python3    real 0.02       user 0.01       sys 0.00	
+ java       real 0.03       user 0.01       sys 0.01	
+ php        real 0.05       user 0.03       sys 0.01	
+ cpp        real 0.10       user 0.00       sys 0.00	
+ c          real 0.14       user 0.00       sys 0.00	
+ go         real 0.15       user 0.00       sys 0.00	
+ rust       real 0.15       user 0.00       sys 0.00
+ cs         real 0.95       user 0.79       sys 0.25	
 record
- c          real 0.19       user 0.08       sys 0.10	
- go         real 0.22       user 0.04       sys 0.18	
- cpp        real 1.03       user 0.96       sys 0.07	
- cs         real 6.13       user 5.33       sys 1.51	
- js         real 10.39      user 10.80      sys 2.82	
- java       real 13.79      user 52.76      sys 0.55	
- lua        real 16.60      user 12.68      sys 3.82	
- python3    real 31.53      user 28.20      sys 3.31	
+ rust       real 0.23       user 0.04       sys 0.02
+ c          real 0.24       user 0.07       sys 0.02	
+ go         real 0.24       user 0.03       sys 0.04	
+ java       real 0.46       user 2.00       sys 0.17	
+ cpp        real 0.47       user 0.30       sys 0.02	
+ cs         real 3.98       user 3.76       sys 0.47	
+ js         real 4.41       user 5.67       sys 1.51	
+ luajit     real 5.07       user 4.09       sys 0.97	
+ php        real 5.57       user 4.86       sys 0.70	
+ lua        real 9.96       user 8.94       sys 1.00	
+ python3    real 35.71      user 33.66      sys 1.94	
 json
  c          real 82.87      user 73.13      sys 3.54	
  java       real 83.42      user 71.20      sys 10.54	
