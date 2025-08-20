@@ -5,3 +5,7 @@ target = json/cJSON.c
 [file "cJSON.h" from "https://github.com/DaveGamble/cJSON.git"]
 commit = acc76239bee01d8e9c858ae2cab296704e52d916
 target = json/cJSON.h
+
+[file "jsonexamples/twitter.json" from "https://github.com/simdjson/simdjson.git"]
+commit = 0c0ce1bd48baa0677dc7c0945ea7cd1e8b52b297
+target = json/twitter.json
