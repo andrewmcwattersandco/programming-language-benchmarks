@@ -134,9 +134,9 @@ should_run_language() {
 
 run_with_timeout() {
     if [ -n "$timeout_duration" ] && command -v timeout >/dev/null 2>&1; then
-        timeout "$timeout_duration" "$@"
+        timeout "$timeout_duration" "$@"  || echo "failed to complete within $timeout_duration seconds"
     elif [ -n "$timeout_duration" ] && command -v gtimeout >/dev/null 2>&1; then
-        gtimeout "$timeout_duration" "$@"
+        gtimeout "$timeout_duration" "$@" || echo "failed to complete within $timeout_duration seconds"
     else
         "$@"
     fi
