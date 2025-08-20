@@ -21,31 +21,33 @@ func main() {
 		}
 
 		name := dir + "/" + file.Name()
-		jsonFile, err := os.Open(name) // For read access.
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "json: can't open %s: %v\n", name, err)
-			continue
-		}
-		defer jsonFile.Close()
+		func() {
+			jsonFile, err := os.Open(name) // For read access.
+			if err != nil {
+				fmt.Fprintf(os.Stderr, "json: can't open %s: %v\n", name, err)
+				return
+			}
+			defer jsonFile.Close()
 
-		stat, err := jsonFile.Stat()
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "json: can't stat %s: %v\n", name, err)
-			continue
-		}
+			stat, err := jsonFile.Stat()
+			if err != nil {
+				fmt.Fprintf(os.Stderr, "json: can't stat %s: %v\n", name, err)
+				return
+			}
 
-		jsonBlob := make([]byte, stat.Size())
-		_, err = jsonFile.Read(jsonBlob)
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "json: can't read %s: %v\n", name, err)
-			continue
-		}
+			jsonBlob := make([]byte, stat.Size())
+			_, err = jsonFile.Read(jsonBlob)
+			if err != nil {
+				fmt.Fprintf(os.Stderr, "json: can't read %s: %v\n", name, err)
+				return
+			}
 
-		var f interface{}
-		err = json.Unmarshal(jsonBlob, &f)
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "json: can't parse %s: %v\n", name, err)
-			continue
-		}
+			var f interface{}
+			err = json.Unmarshal(jsonBlob, &f)
+			if err != nil {
+				fmt.Fprintf(os.Stderr, "json: can't parse %s: %v\n", name, err)
+				return
+			}
+		}()
 	}
 }
