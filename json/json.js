@@ -1,7 +1,7 @@
 (async () => {
   const { readdir, readFile } = require('fs/promises');
 
-  const path = 'companyfacts';
+  const path = 'jsonexamples';
 
   try {
     const files = await readdir(path);

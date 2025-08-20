@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	dir := "companyfacts"
+	dir := "jsonexamples"
 	files, err := os.ReadDir(dir)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "json: can't open %s: %v\n", dir, err)

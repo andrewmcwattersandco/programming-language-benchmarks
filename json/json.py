@@ -13,7 +13,7 @@ finally:
 
 
 def main():
-    directory = "companyfacts"
+    directory = "jsonexamples"
 
     try:
         files = os.listdir(directory)

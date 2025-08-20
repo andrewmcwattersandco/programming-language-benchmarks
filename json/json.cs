@@ -6,7 +6,7 @@ class Program
 {
     static int Main(string[] args)
     {
-        const string directory = "companyfacts";
+        const string directory = "jsonexamples";
 
         try
         {

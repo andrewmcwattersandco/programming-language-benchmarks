@@ -13,7 +13,7 @@ import java.util.stream.Stream;
  */
 class JsonApp {
     public static void main(String[] args) throws IOException {
-        String dir = "companyfacts";
+        String dir = "jsonexamples";
 
         try (Stream<Path> files = Files.list(Paths.get(dir))) {
             ObjectMapper mapper = new ObjectMapper(); // create once, reuse

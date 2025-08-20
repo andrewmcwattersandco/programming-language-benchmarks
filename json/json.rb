@@ -2,7 +2,7 @@
 require 'json'
 
 def main
-  directory = 'companyfacts'
+  directory = 'jsonexamples'
 
   begin
     files = Dir.entries(directory)

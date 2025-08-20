@@ -9,7 +9,7 @@ using namespace simdjson;
 
 int main()
 {
-    string dir = "companyfacts";
+    string dir = "jsonexamples";
     struct dirent *dp;
     DIR *dfd;
     ondemand::parser parser;

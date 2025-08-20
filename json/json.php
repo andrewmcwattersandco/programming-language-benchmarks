@@ -1,6 +1,6 @@
 <?php
 
-$dir = "companyfacts";
+$dir = "jsonexamples";
 
 if (!is_dir($dir)) {
     fprintf(STDERR, "json: can't open %s: directory not found\n", $dir);

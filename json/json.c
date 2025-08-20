@@ -12,7 +12,7 @@
 
 int main()
 {
-    const char dir[] = "companyfacts";
+    const char dir[] = "jsonexamples";
     struct dirent *dp;
     DIR *dfd;
 

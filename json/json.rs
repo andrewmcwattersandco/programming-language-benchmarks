@@ -1,7 +1,7 @@
 use std::fs;
 
 fn main() {
-    let dir = "companyfacts";
+    let dir = "jsonexamples";
     let entries = match fs::read_dir(dir) {
         Ok(entries) => entries,
         Err(e) => {
