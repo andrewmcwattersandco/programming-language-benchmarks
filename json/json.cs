@@ -17,7 +17,7 @@ class Program
                 try
                 {
                     string jsonContent = File.ReadAllText(filePath);
-                    JsonDocument.Parse(jsonContent);
+                    using JsonDocument document = JsonDocument.Parse(jsonContent);
                 }
                 catch (IOException ex)
                 {
