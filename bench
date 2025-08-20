@@ -5,18 +5,21 @@ tests=$(ls -d */ | grep -v 'http/')
 languages=""
 skip=""
 cpu_cycles=false
-while getopts t:l:s:c name
+timeout_duration="300"
+while getopts cl:s:t:T: name
 do
     case $name in
-    t)    tests="$OPTARG";;
+    c)    cpu_cycles=true;;
     l)    languages="$OPTARG";;
     s)    skip="$OPTARG";;
-    c)    cpu_cycles=true;;
-    ?)    printf "usage: %s: [-t tests...] [-l languages...] [-s languages...] [-c]\n" "$0"
-          printf "  -t: run specific tests (e.g., 'minimal/ record/')\n"
+    t)    tests="$OPTARG";;
+    T)    timeout_duration="$OPTARG";;
+    ?)    printf "usage: %s: [-c] [-l languages...] [-s languages...] [-t tests...] [-T timeout]\n" "$0"
+          printf "  -c: show CPU cycles elapsed instead of time (macOS only)\n"
           printf "  -l: run specific languages (e.g., 'c go rust')\n"
           printf "  -s: skip specific languages (e.g., 'lua python3')\n"
-          printf "  -c: show CPU cycles elapsed instead of time (macOS only)\n"
+          printf "  -t: run specific tests (e.g., 'minimal/ record/')\n"
+          printf "  -T: timeout for each test in seconds (e.g., '30')\n"
           exit 2;;
     esac
 done
@@ -129,6 +132,16 @@ should_run_language() {
     return 0
 }
 
+run_with_timeout() {
+    if [ -n "$timeout_duration" ] && command -v timeout >/dev/null 2>&1; then
+        timeout "$timeout_duration" "$@"
+    elif [ -n "$timeout_duration" ] && command -v gtimeout >/dev/null 2>&1; then
+        gtimeout "$timeout_duration" "$@"
+    else
+        "$@"
+    fi
+}
+
 format() {
     if [ "$cpu_cycles" = true ]; then
         grep "cycles elapsed" | awk '{printf "cycles elapsed %s", $1}'
@@ -156,7 +169,7 @@ do
             c89 ${file}.c
         fi
         printf " %s\t" c
-        $command $options ./a.out 2>&1 \
+        run_with_timeout $command $options ./a.out 2>&1 \
         | format | tr -s '\n' '\t'
         printf '\n'
     fi
@@ -172,7 +185,7 @@ do
             g++ ${file}.cpp
         fi
         printf " %s\t" cpp
-        $command $options ./a.out 2>&1 \
+        run_with_timeout $command $options ./a.out 2>&1 \
         | format | tr -s '\n' '\t'
         printf '\n'
     fi
@@ -188,7 +201,7 @@ do
         go build ./...
         restore *.c* *.cpp*
         printf " %s\t" go
-        $command $options ./${file} 2>&1 \
+        run_with_timeout $command $options ./${file} 2>&1 \
         | format | tr -s '\n' '\t'
         printf '\n'
     fi
@@ -203,7 +216,7 @@ do
         dotnet build > /dev/null 2>&1
         mv -f Program.cs ${file}.cs
         printf " %s\t" cs
-        $command $options dotnet run 2>&1 \
+        run_with_timeout $command $options dotnet run 2>&1 \
         | format | tr -s '\n' '\t'
         printf '\n'
     fi
@@ -217,7 +230,7 @@ do
         javac -cp '.:*' ${file}.java
         printf " %s\t" java
         class=$(classname $file)
-        $command $options java -cp '.:*' $class 2>&1 \
+        run_with_timeout $command $options java -cp '.:*' $class 2>&1 \
         | format | tr -s '\n' '\t'
         printf '\n'
         unset class
@@ -231,7 +244,7 @@ do
         printf " %s\t" js
         # nvm
         # sudo ln -s $(which node) /usr/local/bin/node
-        $command $options node --max-old-space-size=8192 ${file}.js 2>&1 \
+        run_with_timeout $command $options node --max-old-space-size=8192 ${file}.js 2>&1 \
         | format | tr -s '\n' '\t'
         printf '\n'
     fi
@@ -251,7 +264,7 @@ do
             # macOS
             # cd /opt/homebrew/bin/
             # ln -s ../Cellar/lua@5.1/5.1.5_8/bin/lua-5.1 lua
-            $command $options lua ${file}.lua 2>&1 \
+            run_with_timeout $command $options lua ${file}.lua 2>&1 \
             | format | tr -s '\n' '\t'
             printf '\n'
         fi
@@ -265,7 +278,7 @@ do
             fi
 
             printf " %s\t" luajit
-            $command $options luajit ${file}.lua 2>&1 \
+            run_with_timeout $command $options luajit ${file}.lua 2>&1 \
             | format | tr -s '\n' '\t'
             printf '\n'
         fi
@@ -277,7 +290,7 @@ do
     && should_run_language "php"
     then
         printf " %s\t" php
-        $command $options php -d memory_limit=8G ${file}.php 2>&1 \
+        run_with_timeout $command $options php -d memory_limit=8G ${file}.php 2>&1 \
         | format | tr -s '\n' '\t'
         printf '\n'
     fi
@@ -288,7 +301,7 @@ do
     && should_run_language "python3"
     then
         printf " %s\t" python3
-        $command $options python3 ${file}.py 2>&1 \
+        run_with_timeout $command $options python3 ${file}.py 2>&1 \
         | format | tr -s '\n' '\t'
         printf '\n'
     fi
@@ -302,14 +315,14 @@ do
             if command -v cargo > /dev/null; then
                 cargo build --release > /dev/null 2>&1
                 printf " %s\t" rust
-                $command $options ./target/release/${file} 2>&1 \
+                run_with_timeout $command $options ./target/release/${file} 2>&1 \
                 | format | tr -s '\n' '\t'
                 printf '\n'
             fi
         else
             rustc -O ${file}.rs -o ${file}
             printf " %s\t" rust
-            $command $options ./${file} 2>&1 \
+            run_with_timeout $command $options ./${file} 2>&1 \
             | format | tr -s '\n' '\t'
             printf '\n'
         fi
