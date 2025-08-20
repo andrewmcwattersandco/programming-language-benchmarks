@@ -33,8 +33,7 @@ jobs:
           # ~/jdk-8u331-linux-x64.tar.gz
           ~/lua-5.1.5.tar.gz
           ~/v2.1.0-beta3.tar.gz
-          ~/companyfacts.zip
-        key: ${{ runner.os }}-${{ hashFiles('~/*.tar.gz', '~/*.zip') }}
+        key: ${{ runner.os }}-${{ hashFiles('~/*.tar.gz') }}
         restore-keys: |
           ${{ runner.os }}-
 
@@ -77,21 +76,6 @@ jobs:
         make && sudo make install
         sudo ln -sf luajit-2.1.0-beta3 /usr/local/bin/luajit
         luajit -v
-
-    - name: Set up EDGAR API bulk data
-      run: |
-        cd ~
-        if [ ! -f companyfacts.zip ]
-        then
-          curl \
-            -H "User-Agent: Andrew McWatters and Co. andrew@andrewmcwatters.com" \
-            -H "Accept-Encoding: gzip, deflate" \
-            -H "Host: www.sec.gov" \
-            -O \
-            https://www.sec.gov/Archives/edgar/daily-index/xbrl/companyfacts.zip
-        fi
-        unzip -q companyfacts.zip -d ${{ github.workspace }}/json/companyfacts
-        ls -la
 
     - name: bench
       run: |

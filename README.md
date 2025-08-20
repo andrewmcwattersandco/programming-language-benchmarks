@@ -66,9 +66,6 @@ sudo ln -s $(command -v node) /usr/local/bin/node
 * **Parse JSON**  
   Test built-in or de facto standard JSON parser
 
-  Reads and parses 13.76 GB of EDGAR API bulk data.  
-  See https://www.sec.gov/edgar/sec-api-documentation for more information.
-
 ## Results
 ### Physical
 *Last updated: Tue Aug 19 08:39:38 MST 2025*
