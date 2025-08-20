@@ -306,6 +306,17 @@ do
         printf '\n'
     fi
 
+    # Ruby
+    if [ -f ${file}.rb ] \
+    && command -v ruby > /dev/null \
+    && should_run_language "ruby"
+    then
+        printf " %s\t" ruby
+        run_with_timeout $command $options ruby ${file}.rb 2>&1 \
+        | format | tr -s '\n' '\t'
+        printf '\n'
+    fi
+
     # Rust
     if [ -f ${file}.rs ] \
     && command -v rustc > /dev/null \
