@@ -8,4 +8,4 @@ target = json/cJSON.h
 
 [file "jsonexamples/twitter.json" from "https://github.com/simdjson/simdjson.git"]
 commit = 0c0ce1bd48baa0677dc7c0945ea7cd1e8b52b297
-target = json/twitter.json
+target = json/jsonexamples/twitter.json
