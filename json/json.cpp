@@ -12,6 +12,7 @@ int main()
     string dir = "companyfacts";
     struct dirent *dp;
     DIR *dfd;
+    ondemand::parser parser;
 
     if ((dfd = opendir (dir.c_str())) == nullptr) {
         cerr << "json: can′t open " << dir << endl;
@@ -22,7 +23,7 @@ int main()
         struct stat stbuf;
         off_t size;
         FILE *fp;
-        string json;
+        string str;
         ondemand::document doc;
 
         if (strcmp(strrchr(dp->d_name, '.'), ".json") != 0)
@@ -48,17 +49,17 @@ int main()
         }
 
         size_t padded_size = size+SIMDJSON_PADDING;
-        json.reserve(padded_size);
+        str.resize(padded_size);
 
-        if (fread(&json[0], size, 1, fp) != 1
+        if (fread(&str[0], size, 1, fp) != 1
             && (feof(fp) != 0 || ferror(fp) != 0)) {
             cout << "json: can′t read " << name << endl;
             fclose(fp);
             continue;
         }
-        json.resize(size);
+        str.resize(size);
 
-        ondemand::parser parser;
+        padded_string json(str);
         doc = parser.iterate(json);
 
         fclose(fp);
