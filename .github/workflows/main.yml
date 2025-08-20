@@ -16,13 +16,18 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - uses: actions/setup-go@v5
+    - uses: actions/setup-java@v4
+      with:
+        distribution: 'oracle'
+        java-version: '21'
 
     - name: Cache dependencies
       uses: actions/cache@v3
       with:
         path: |
-          ~/go1.25.0.linux-amd64.tar.gz
-          ~/jdk-8u331-linux-x64.tar.gz
+          # ~/go1.25.0.linux-amd64.tar.gz
+          # ~/jdk-8u331-linux-x64.tar.gz
           ~/lua-5.1.5.tar.gz
           ~/v2.1.0-beta3.tar.gz
           ~/companyfacts.zip
@@ -35,26 +40,10 @@ jobs:
 
     - name: Set up Go
       run: |
-        cd ~
-        if [ ! -f go1.25.0.linux-amd64.tar.gz ]
-        then
-          curl -LO https://go.dev/dl/go1.25.0.linux-amd64.tar.gz
-        fi
-        sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.25.0.linux-amd64.tar.gz
-        echo 'export PATH=$PATH:/usr/local/go/bin' >> .profile
-        source $HOME/.profile
         go version
 
     - name: Set up Java
       run: |
-        cd ~
-        if [ ! -f jdk-8u331-linux-x64.tar.gz ]
-        then
-          curl -LO https://github.com/andrewmcwattersandco/programming-language-benchmarks/releases/download/jdk-8u331-linux-x64/jdk-8u331-linux-x64.tar.gz
-        fi
-        sudo rm $(command -v java) && sudo tar -C /usr/local/ -xzf jdk-8u331-linux-x64.tar.gz
-        echo 'export PATH=/usr/local/jdk1.8.0_331/bin:$PATH' >> .profile
-        . .profile
         javac -version
         # https://docs.oracle.com/javase/8/docs/technotes/guides/vm/gctuning/parallel.html#default_heap_size
         java -XX:+PrintFlagsFinal -version | grep MaxHeapSize
