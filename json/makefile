@@ -1,5 +1,5 @@
-CFLAGS=-std=c89
-CXXFLAGS=-std=c++17
+CFLAGS=-std=c89 -O2
+CXXFLAGS=-std=c++17 -O2
 
 # macOS Homebrew detection
 ifeq ($(shell uname -s),Darwin)
