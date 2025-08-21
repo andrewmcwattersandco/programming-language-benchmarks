@@ -27,7 +27,6 @@ Benchmarks for programming languages
 
   **NEW** For web server benchmarks, see
   [andrewmcwattersandco/web-server-benchmarks][1].
-
 * **Use idiomatic code/Do not use micro-optimizations**  
   One can write inline assembly in C with the non-standard `asm` keyword or use
   `ffi.cdef` from LuaJIT to create C data structures instead of Lua tables, but
