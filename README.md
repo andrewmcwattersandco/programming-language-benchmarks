@@ -26,6 +26,9 @@ Benchmarks for programming languages
   evaluated without considering the ecosystems around them. When benchmarking
   an HTTPS server in Node.js, most developers will be considering the speed of
   Express, not `http.createServer()`.
+
+  **NEW** For web server benchmarks, see [andrewmcwattersandco/web-server-benchmarks][1].
+
 * **Use idiomatic code/Do not optimize**  
   One can write inline assembly in C with the non-standard `asm` keyword or use
   `ffi.cdef` from LuaJIT to create C data structures instead of Lua tables, but
@@ -126,4 +129,6 @@ GitHub Actions
 GNU General Public License v2.0
 
 ## References
-\[1]: https://luajit.org/install.html#embed
+\[1]: https://github.com/andrewmcwattersandco/web-server-benchmarks
+
+[1]: https://github.com/andrewmcwattersandco/web-server-benchmarks
