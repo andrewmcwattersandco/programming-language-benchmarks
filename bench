@@ -150,14 +150,14 @@ run_benchmark() {
         hyperfine_opts="$hyperfine_opts --export-${export_format} $output_file"
     fi
     
-    printf " %s\t" "$name"
+    printf " %s" "$name"
     
     # Run hyperfine and capture the mean time
     # Handle both single run format "Time (abs ≡)" and multiple run format "Time (mean ± σ)"
     result=$(hyperfine $hyperfine_opts --shell=sh "$cmd" 2>&1 | grep -E "Time \((abs|mean)" | sed -E 's/.*Time \([^:]*\): *([0-9.]+) *(.*s).*/\1 \2/' | awk '{print $1 " " $2}')
     
     if [ -n "$result" ]; then
-        printf "%s" "$result"
+        printf "%s mean" "$result"
     else
         printf "failed"
     fi
@@ -183,7 +183,7 @@ do
             # ISO POSIX-2:1993
             c89 ${file}.c
         fi
-        run_benchmark "./a.out" "c"
+        run_benchmark "./a.out" "c              "
     fi
 
     # C++
@@ -196,7 +196,7 @@ do
             # CXX
             g++ ${file}.cpp
         fi
-        run_benchmark "./a.out" "cpp"
+        run_benchmark "./a.out" "cpp            "
     fi
 
     # Go
@@ -209,7 +209,7 @@ do
         backup *.c *.cpp
         go build ./...
         restore *.c* *.cpp*
-        run_benchmark "./${file}" "go"
+        run_benchmark "./${file}" "go           "
     fi
 
     # C#
@@ -221,7 +221,7 @@ do
         mv -f ${file}.cs Program.cs
         dotnet build > /dev/null 2>&1
         mv -f Program.cs ${file}.cs
-        run_benchmark "dotnet run" "cs"
+        run_benchmark "dotnet run" "cs           "
     fi
 
     # Java
@@ -232,7 +232,7 @@ do
     then
         javac -cp '.:*' ${file}.java
         class=$(classname $file)
-        run_benchmark "java -cp '.:*' $class" "java"
+        run_benchmark "java -cp '.:*' $class" "java           "
         unset class
     fi
 
@@ -243,7 +243,7 @@ do
     then
         # nvm
         # sudo ln -s $(which node) /usr/local/bin/node
-        run_benchmark "node --max-old-space-size=8192 ${file}.js" "js"
+        run_benchmark "node --max-old-space-size=8192 ${file}.js" "js           "
     fi
 
     # Lua/LuaJIT
@@ -260,7 +260,7 @@ do
             # macOS
             # cd /opt/homebrew/bin/
             # ln -s ../Cellar/lua@5.1/5.1.5_8/bin/lua-5.1 lua
-            run_benchmark "lua ${file}.lua" "lua"
+            run_benchmark "lua ${file}.lua" "lua            "
         fi
 
         if command -v luajit > /dev/null \
@@ -271,7 +271,7 @@ do
                 make -s clean luajit
             fi
 
-            run_benchmark "luajit ${file}.lua" "luajit"
+            run_benchmark "luajit ${file}.lua" "luajit        "
         fi
     fi
 
@@ -280,7 +280,7 @@ do
     && command -v php > /dev/null \
     && should_run_language "php"
     then
-        run_benchmark "php -d memory_limit=8G ${file}.php" "php"
+        run_benchmark "php -d memory_limit=8G ${file}.php" "php            "
     fi
 
     # Python
@@ -288,7 +288,7 @@ do
     && command -v python3 > /dev/null \
     && should_run_language "python3"
     then
-        run_benchmark "python3 ${file}.py" "python3"
+        run_benchmark "python3 ${file}.py" "python3        "
     fi
 
     # Ruby
@@ -296,7 +296,7 @@ do
     && command -v ruby > /dev/null \
     && should_run_language "ruby"
     then
-        run_benchmark "ruby ${file}.rb" "ruby"
+        run_benchmark "ruby ${file}.rb" "ruby           "
     fi
 
     # Rust
@@ -311,7 +311,7 @@ do
             fi
         else
             rustc -O ${file}.rs -o ${file}
-            run_benchmark "./${file}" "rust"
+            run_benchmark "./${file}" "rust           "
         fi
     fi
 
@@ -321,7 +321,7 @@ do
     && should_run_language "zig"
     then
         zig build-exe -O ReleaseFast ${file}.zig > /dev/null 2>&1
-        run_benchmark "./${file}" "zig"
+        run_benchmark "./${file}" "zig            "
     fi
 
     cd ..
