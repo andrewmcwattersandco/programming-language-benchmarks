@@ -129,10 +129,10 @@ GitHub Actions
 GNU General Public License v2.0
 
 ###### Excluded Programming Languages
-<sub>\* We do not benchmark HTML/CSS, SQL, Bash/Shell, TypeScript, or PowerShell.
-We do not benchmark programming languages predominantly used for a single
-domain, like Kotlin for Android development, Dart for Flutter, Swift for iOS
-development, or MicroPython for embedded systems. We are unable to benchmark
+<sub>\* We do not benchmark Bash/Shell, TypeScript, or PowerShell. We do not
+benchmark programming languages predominantly used for a single domain, like
+Kotlin for Android development, Dart for Flutter, Swift for iOS development, or
+MicroPython for embedded systems. We are unable to benchmark HTML/CSS, SQL, and
 assembly. We do not benchmark programming languages that are not widely used in
 production, like Groovy, Elixir, Scala, Delphi, Lisp, Erlang, Fortran, Ada, F#,
 OCaml, Gleam, Prolog, COBOL, or Mojo. We do not benchmark programming languages
