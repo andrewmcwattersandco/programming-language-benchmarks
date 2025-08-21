@@ -1,7 +1,7 @@
 #include <stddef.h>
 #include <memory>
 
-#define  NRECORDS  67108864
+#define  NRECORDS  33554432
 
 class Record {
 public:

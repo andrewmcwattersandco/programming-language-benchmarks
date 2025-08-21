@@ -61,10 +61,12 @@ sudo ln -s $(command -v node) /usr/local/bin/node
 * **Create a record/structure/object**  
   Test memory allocation
 
-  _Note: Creates 67,108,864 records. Last tested against node v24.3.0, this is
-  the maximum array size. All other test languages have their tests calibrated
-  to this number, which is the smallest array length of all of the test
-  languages before one of the tests is terminated abnormally._
+  _Note: Creates 33,554,432 records. Last tested against node v24.3.0,
+  67,108,864 is the maximum array size. All other test languages have their
+  tests calibrated to this number, which is the smallest array length of all of
+  the test languages before one of the tests is terminated abnormally._
+
+  _Edit: This test previously created 67,108,864 records._
 * **Parse JSON**  
   Test built-in or de facto standard JSON parser
 

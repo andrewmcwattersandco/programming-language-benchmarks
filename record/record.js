@@ -2,7 +2,7 @@
 const records = [];
 
 // FAIL:  67108865
-for (let i = 0; i < 67108864; i++) {
+for (let i = 0; i < 33554432; i++) {
   const record = {};
 
   record.id = i;

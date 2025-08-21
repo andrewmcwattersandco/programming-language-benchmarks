@@ -10,7 +10,7 @@ class Record {
 
 $records = array();
 
-for ($i = 0; $i < 67108864; $i++) {
+for ($i = 0; $i < 33554432; $i++) {
     $record = new Record($i);
     $records[$i] = $record;
 }
