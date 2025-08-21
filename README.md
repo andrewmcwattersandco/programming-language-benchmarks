@@ -147,7 +147,7 @@ MicroPython for embedded systems. We are unable to benchmark HTML/CSS, SQL, and
 assembly. We do not benchmark programming languages that are not widely used in
 production, like Groovy, Elixir, Scala, Delphi, Lisp, Erlang, Fortran, Ada, F#,
 OCaml, Gleam, Prolog, COBOL, or Mojo. We do not benchmark programming languages
-no longer supported, updated, or one which "won't be extended to new workloads"
+no longer supported, updated, or ones which "won't be extended to new workloads"
 like Visual Basic (.NET) or VBA. We do not benchmark programming languages
 predominantly used for statistical computing or data analysis, like R or MATLAB.
 We do not benchmark custom scripting languages like GDScript. We do not
