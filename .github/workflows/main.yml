@@ -79,7 +79,7 @@ jobs:
 
     - name: Set up Zig
       run: |
-        snap install zig --classic --beta
+        sudo snap install zig --classic --beta
         zig version
 
     - name: Set up hyperfine
