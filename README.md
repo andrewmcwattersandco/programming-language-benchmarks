@@ -72,53 +72,53 @@ sudo ln -s $(command -v node) /usr/local/bin/node
 
 ## Results
 ### Physical
-*Last updated: Thu Aug 21 14:19:31 MST 2025*
+*Last updated: Thu Aug 21 14:20:27 MST 2025*
 ```sh
 % ./bench
 json
- c          real 0.38     user 0.00     sys 0.00
+ js         real 0.03     user 0.02     sys 0.00
+ python3    real 0.03     user 0.02     sys 0.00
+ php        real 0.05     user 0.04     sys 0.01
+ ruby       real 0.06     user 0.04     sys 0.01
+ luajit     real 0.16     user 0.01     sys 0.00
  cpp        real 0.17     user 0.00     sys 0.00
  go         real 0.17     user 0.00     sys 0.00
- cs         real 0.97     user 0.74     sys 0.19
  java       real 0.17     user 0.26     sys 0.02
- js         real 0.03     user 0.02     sys 0.00
- lua        real 0.23     user 0.06     sys 0.00
- luajit     real 0.16     user 0.01     sys 0.00
- php        real 0.05     user 0.04     sys 0.01
- python3    real 0.03     user 0.02     sys 0.00
- ruby       real 0.06     user 0.04     sys 0.01
  rust       real 0.16     user 0.00     sys 0.00
+ lua        real 0.23     user 0.06     sys 0.00
  zig        real 0.28     user 0.00     sys 0.00
+ c          real 0.38     user 0.00     sys 0.00
+ cs         real 0.97     user 0.74     sys 0.19
 
 minimal
+ lua        real 0.00     user 0.00     sys 0.00
+ luajit     real 0.00     user 0.00     sys 0.00
+ js         real 0.02     user 0.01     sys 0.00
+ python3    real 0.02     user 0.01     sys 0.00
+ java       real 0.03     user 0.01     sys 0.01
+ php        real 0.05     user 0.03     sys 0.00
+ ruby       real 0.05     user 0.03     sys 0.01
+ zig        real 0.15     user 0.00     sys 0.00
  c          real 0.16     user 0.00     sys 0.00
  cpp        real 0.16     user 0.00     sys 0.00
  go         real 0.16     user 0.00     sys 0.00
- cs         real 0.94     user 0.78     sys 0.25
- java       real 0.03     user 0.01     sys 0.01
- js         real 0.02     user 0.01     sys 0.00
- lua        real 0.00     user 0.00     sys 0.00
- luajit     real 0.00     user 0.00     sys 0.00
- php        real 0.05     user 0.03     sys 0.00
- python3    real 0.02     user 0.01     sys 0.00
- ruby       real 0.05     user 0.03     sys 0.01
  rust       real 0.16     user 0.00     sys 0.00
- zig        real 0.15     user 0.00     sys 0.00
+ cs         real 0.94     user 0.78     sys 0.25
 
 record
+ zig        real 0.20     user 0.01     sys 0.02
  c          real 0.24     user 0.07     sys 0.02
- cpp        real 0.50     user 0.30     sys 0.03
  go         real 0.24     user 0.02     sys 0.03
- cs         real 3.92     user 4.01     sys 0.59
+ rust       real 0.41     user 0.04     sys 0.03
  java       real 0.46     user 1.92     sys 0.17
+ cpp        real 0.50     user 0.30     sys 0.03
+ cs         real 3.92     user 4.01     sys 0.59
  js         real 4.34     user 5.57     sys 1.47
- lua        real 9.48     user 8.48     sys 0.98
  luajit     real 5.07     user 4.07     sys 0.98
  php        real 5.55     user 4.85     sys 0.69
- python3    real 35.60    user 33.81    sys 1.75
+ lua        real 9.48     user 8.48     sys 0.98
  ruby       real 11.86    user 11.18    sys 0.66
- rust       real 0.41     user 0.04     sys 0.03
- zig        real 0.20     user 0.01     sys 0.02
+ python3    real 35.60    user 33.81    sys 1.75
 ```
 
 ### Google Sheets
