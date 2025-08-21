@@ -27,7 +27,8 @@ Benchmarks for programming languages
   an HTTPS server in Node.js, most developers will be considering the speed of
   Express, not `http.createServer()`.
 
-  **NEW** For web server benchmarks, see [andrewmcwattersandco/web-server-benchmarks][1].
+  **NEW** For web server benchmarks, see
+  [andrewmcwattersandco/web-server-benchmarks][1].
 
 * **Use idiomatic code/Do not optimize**  
   One can write inline assembly in C with the non-standard `asm` keyword or use
