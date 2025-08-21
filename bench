@@ -57,6 +57,10 @@ clean() {
     if [ -f Cargo.toml ]; then
         rm -rf target
     fi
+
+    # Zig
+    rm -f ${1}
+    rm -f ${1}.o
 }
 
 # backup - backup files as *.orig
@@ -337,6 +341,18 @@ do
             | format | tr -s '\n' '\t'
             printf '\n'
         fi
+    fi
+
+    # Zig
+    if [ -f ${file}.zig ] \
+    && command -v zig > /dev/null \
+    && should_run_language "zig"
+    then
+        zig build-exe -O ReleaseFast ${file}.zig > /dev/null 2>&1
+        printf " %s\t" zig
+        run_with_timeout $command $options ./${file} 2>&1 \
+        | format | tr -s '\n' '\t'
+        printf '\n'
     fi
 
     cd ..

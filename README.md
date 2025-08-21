@@ -13,6 +13,7 @@ Benchmarks for programming languages
 * PHP
 * Python
 * Rust
+* Zig
 
 ## Philosophy
 * **No warm-ups**  
