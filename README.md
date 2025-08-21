@@ -1,7 +1,7 @@
 # programming-language-benchmarks
 Benchmarks for programming languages
 
-## Languages and Implementations
+## Languages and Implementations[*](#excluded-programming-languages)
 * C
 * C++
 * C#
@@ -14,21 +14,6 @@ Benchmarks for programming languages
 * Python
 * Rust
 * Zig
-
-###### Excluded Languages
-<sub>We do not benchmark HTML/CSS, SQL, Bash/Shell, TypeScript, or PowerShell.
-We do not benchmark programming languages predominantly used for a single
-domain, like Kotlin for Android development, Dart for Flutter, Swift for iOS
-development, or MicroPython for embedded systems. We are unable to benchmark
-assembly. We do not benchmark programming languages that are not widely used in
-production, like Groovy, Elixir, Scala, Delphi, Lisp, Erlang, Fortran, Ada, F#,
-OCaml, Gleam, Prolog, COBOL, or Mojo. We do not benchmark programming languages
-no longer supported, updated, or one which "won't be extended to new workloads"
-like Visual Basic (.NET) or VBA. We do not benchmark programming languages
-predominantly used for statistical computing or data analysis, like R or MATLAB.
-We do not benchmark custom scripting languages like GDScript. We do not
-benchmark programming languages that are write-ins in the Stack Overflow
-Developer Survey.</sub>
 
 ## Philosophy
 * **No warm-ups**  
@@ -143,7 +128,19 @@ GitHub Actions
 ## License
 GNU General Public License v2.0
 
-## References
-\[1]: https://github.com/andrewmcwattersandco/web-server-benchmarks
+###### Excluded Programming Languages
+<sub>\* We do not benchmark HTML/CSS, SQL, Bash/Shell, TypeScript, or PowerShell.
+We do not benchmark programming languages predominantly used for a single
+domain, like Kotlin for Android development, Dart for Flutter, Swift for iOS
+development, or MicroPython for embedded systems. We are unable to benchmark
+assembly. We do not benchmark programming languages that are not widely used in
+production, like Groovy, Elixir, Scala, Delphi, Lisp, Erlang, Fortran, Ada, F#,
+OCaml, Gleam, Prolog, COBOL, or Mojo. We do not benchmark programming languages
+no longer supported, updated, or one which "won't be extended to new workloads"
+like Visual Basic (.NET) or VBA. We do not benchmark programming languages
+predominantly used for statistical computing or data analysis, like R or MATLAB.
+We do not benchmark custom scripting languages like GDScript. We do not
+benchmark programming languages that are write-ins in the Stack Overflow
+Developer Survey.</sub>
 
 [1]: https://github.com/andrewmcwattersandco/web-server-benchmarks
