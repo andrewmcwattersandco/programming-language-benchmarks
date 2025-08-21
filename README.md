@@ -16,8 +16,6 @@ Benchmarks for programming languages
 * Zig
 
 ## Philosophy
-* **No warm-ups**  
-  Users do not warm up programs before use.
 * **Real-world tests only**  
   Most developers are not writing code that looks like the 1994 FANNKUCH
   Benchmark, nor running N-body simulations.
