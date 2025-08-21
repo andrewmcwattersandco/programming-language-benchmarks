@@ -4,33 +4,36 @@ set -e
 tests=$(ls -d */)
 languages=""
 skip=""
-cpu_cycles=false
-timeout_duration="300"
-while getopts cl:s:t:T: name
+runs="10"
+warmup="3"
+export_format=""
+while getopts r:w:l:s:t:e: name
 do
     case $name in
-    c)    cpu_cycles=true;;
+    r)    runs="$OPTARG";;
+    w)    warmup="$OPTARG";;
     l)    languages="$OPTARG";;
     s)    skip="$OPTARG";;
     t)    tests="$OPTARG";;
-    T)    timeout_duration="$OPTARG";;
-    ?)    printf "usage: %s: [-c] [-l languages...] [-s languages...] [-t tests...] [-T timeout]\n" "$0"
-          printf "  -c: show CPU cycles elapsed instead of time (macOS only)\n"
+    e)    export_format="$OPTARG";;
+    ?)    printf "usage: %s: [-r runs] [-w warmup] [-l languages...] [-s languages...] [-t tests...] [-e format]\n" "$0"
+          printf "  -r: number of benchmark runs (default: 10)\n"
+          printf "  -w: number of warmup runs (default: 3)\n"
           printf "  -l: run specific languages (e.g., 'c go rust')\n"
           printf "  -s: skip specific languages (e.g., 'lua python3')\n"
           printf "  -t: run specific tests (e.g., 'minimal/ record/')\n"
-          printf "  -T: timeout for each test in seconds (e.g., '30')\n"
+          printf "  -e: export format (json, csv, markdown, asciidoc, orgmode)\n"
           exit 2;;
     esac
 done
 shift $(($OPTIND - 1))
 unset name
 
-command=/usr/bin/time
-if [ "$cpu_cycles" = true ]; then
-    options="-l"
-else
-    options="-p"
+# Check if hyperfine is available
+if ! command -v hyperfine > /dev/null; then
+    echo "Error: hyperfine is required but not installed."
+    echo "Install with: brew install hyperfine (macOS) or cargo install hyperfine"
+    exit 1
 fi
 
 clean() {
@@ -136,22 +139,30 @@ should_run_language() {
     return 0
 }
 
-run_with_timeout() {
-    if [ -n "$timeout_duration" ] && command -v timeout >/dev/null 2>&1; then
-        timeout "$timeout_duration" "$@"  || echo "failed to complete within $timeout_duration seconds"
-    elif [ -n "$timeout_duration" ] && command -v gtimeout >/dev/null 2>&1; then
-        gtimeout "$timeout_duration" "$@" || echo "failed to complete within $timeout_duration seconds"
-    else
-        "$@"
+run_benchmark() {
+    cmd="$1"
+    name="$2"
+    
+    hyperfine_opts="--runs $runs --warmup $warmup --style basic"
+    
+    if [ -n "$export_format" ]; then
+        output_file="${file}_${name}_benchmark.${export_format}"
+        hyperfine_opts="$hyperfine_opts --export-${export_format} $output_file"
     fi
-}
-
-format() {
-    if [ "$cpu_cycles" = true ]; then
-        grep "cycles elapsed" | awk '{printf "cycles elapsed %s", $1}'
+    
+    printf " %s\t" "$name"
+    
+    # Run hyperfine and capture the mean time
+    # Handle both single run format "Time (abs ≡)" and multiple run format "Time (mean ± σ)"
+    result=$(hyperfine $hyperfine_opts --shell=sh "$cmd" 2>&1 | grep -E "Time \((abs|mean)" | sed -E 's/.*Time \([^:]*\): *([0-9.]+) *(.*s).*/\1 \2/' | awk '{print $1 " " $2}')
+    
+    if [ -n "$result" ]; then
+        printf "%s" "$result"
     else
-        cat
+        printf "failed"
     fi
+    
+    printf '\t\n'
 }
 
 for d in $tests
@@ -172,10 +183,7 @@ do
             # ISO POSIX-2:1993
             c89 ${file}.c
         fi
-        printf " %s\t" c
-        run_with_timeout $command $options ./a.out 2>&1 \
-        | format | tr -s '\n' '\t'
-        printf '\n'
+        run_benchmark "./a.out" "c"
     fi
 
     # C++
@@ -188,10 +196,7 @@ do
             # CXX
             g++ ${file}.cpp
         fi
-        printf " %s\t" cpp
-        run_with_timeout $command $options ./a.out 2>&1 \
-        | format | tr -s '\n' '\t'
-        printf '\n'
+        run_benchmark "./a.out" "cpp"
     fi
 
     # Go
@@ -204,10 +209,7 @@ do
         backup *.c *.cpp
         go build ./...
         restore *.c* *.cpp*
-        printf " %s\t" go
-        run_with_timeout $command $options ./${file} 2>&1 \
-        | format | tr -s '\n' '\t'
-        printf '\n'
+        run_benchmark "./${file}" "go"
     fi
 
     # C#
@@ -219,10 +221,7 @@ do
         mv -f ${file}.cs Program.cs
         dotnet build > /dev/null 2>&1
         mv -f Program.cs ${file}.cs
-        printf " %s\t" cs
-        run_with_timeout $command $options dotnet run 2>&1 \
-        | format | tr -s '\n' '\t'
-        printf '\n'
+        run_benchmark "dotnet run" "cs"
     fi
 
     # Java
@@ -232,11 +231,8 @@ do
     && should_run_language "java"
     then
         javac -cp '.:*' ${file}.java
-        printf " %s\t" java
         class=$(classname $file)
-        run_with_timeout $command $options java -cp '.:*' $class 2>&1 \
-        | format | tr -s '\n' '\t'
-        printf '\n'
+        run_benchmark "java -cp '.:*' $class" "java"
         unset class
     fi
 
@@ -245,12 +241,9 @@ do
     && command -v node > /dev/null \
     && should_run_language "js"
     then
-        printf " %s\t" js
         # nvm
         # sudo ln -s $(which node) /usr/local/bin/node
-        run_with_timeout $command $options node --max-old-space-size=8192 ${file}.js 2>&1 \
-        | format | tr -s '\n' '\t'
-        printf '\n'
+        run_benchmark "node --max-old-space-size=8192 ${file}.js" "js"
     fi
 
     # Lua/LuaJIT
@@ -264,13 +257,10 @@ do
                 make -s lua
             fi
 
-            printf " %s\t" lua
             # macOS
             # cd /opt/homebrew/bin/
             # ln -s ../Cellar/lua@5.1/5.1.5_8/bin/lua-5.1 lua
-            run_with_timeout $command $options lua ${file}.lua 2>&1 \
-            | format | tr -s '\n' '\t'
-            printf '\n'
+            run_benchmark "lua ${file}.lua" "lua"
         fi
 
         if command -v luajit > /dev/null \
@@ -281,10 +271,7 @@ do
                 make -s clean luajit
             fi
 
-            printf " %s\t" luajit
-            run_with_timeout $command $options luajit ${file}.lua 2>&1 \
-            | format | tr -s '\n' '\t'
-            printf '\n'
+            run_benchmark "luajit ${file}.lua" "luajit"
         fi
     fi
 
@@ -293,10 +280,7 @@ do
     && command -v php > /dev/null \
     && should_run_language "php"
     then
-        printf " %s\t" php
-        run_with_timeout $command $options php -d memory_limit=8G ${file}.php 2>&1 \
-        | format | tr -s '\n' '\t'
-        printf '\n'
+        run_benchmark "php -d memory_limit=8G ${file}.php" "php"
     fi
 
     # Python
@@ -304,10 +288,7 @@ do
     && command -v python3 > /dev/null \
     && should_run_language "python3"
     then
-        printf " %s\t" python3
-        run_with_timeout $command $options python3 ${file}.py 2>&1 \
-        | format | tr -s '\n' '\t'
-        printf '\n'
+        run_benchmark "python3 ${file}.py" "python3"
     fi
 
     # Ruby
@@ -315,10 +296,7 @@ do
     && command -v ruby > /dev/null \
     && should_run_language "ruby"
     then
-        printf " %s\t" ruby
-        run_with_timeout $command $options ruby ${file}.rb 2>&1 \
-        | format | tr -s '\n' '\t'
-        printf '\n'
+        run_benchmark "ruby ${file}.rb" "ruby"
     fi
 
     # Rust
@@ -329,17 +307,11 @@ do
         if [ -f Cargo.toml ]; then
             if command -v cargo > /dev/null; then
                 cargo build --release > /dev/null 2>&1
-                printf " %s\t" rust
-                run_with_timeout $command $options ./target/release/${file} 2>&1 \
-                | format | tr -s '\n' '\t'
-                printf '\n'
+                run_benchmark "./target/release/${file}" "rust"
             fi
         else
             rustc -O ${file}.rs -o ${file}
-            printf " %s\t" rust
-            run_with_timeout $command $options ./${file} 2>&1 \
-            | format | tr -s '\n' '\t'
-            printf '\n'
+            run_benchmark "./${file}" "rust"
         fi
     fi
 
@@ -349,10 +321,7 @@ do
     && should_run_language "zig"
     then
         zig build-exe -O ReleaseFast ${file}.zig > /dev/null 2>&1
-        printf " %s\t" zig
-        run_with_timeout $command $options ./${file} 2>&1 \
-        | format | tr -s '\n' '\t'
-        printf '\n'
+        run_benchmark "./${file}" "zig"
     fi
 
     cd ..
