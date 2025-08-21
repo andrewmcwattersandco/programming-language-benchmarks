@@ -77,6 +77,11 @@ jobs:
         sudo ln -sf luajit-2.1.0-beta3 /usr/local/bin/luajit
         luajit -v
 
+    - name: Set up Zig
+      run: |
+        snap install zig --classic --beta
+        zig version
+
     - name: Set up hyperfine
       run: |
         wget https://github.com/sharkdp/hyperfine/releases/download/v1.19.0/hyperfine_1.19.0_amd64.deb
