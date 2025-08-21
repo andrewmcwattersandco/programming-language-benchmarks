@@ -16,10 +16,10 @@ Benchmarks for programming languages
 * Zig
 
 ###### Excluded Languages
-<sub><sup>We do not benchmark HTML/CSS, SQL, Bash/Shell, TypeScript, or
-PowerShell. We do not benchmark programming languages predominantly used for a
-single domain, like Kotlin for Android development, Dart for Flutter, Swift for
-iOS development, or MicroPython for embedded systems. We are unable to benchmark
+<sub>We do not benchmark HTML/CSS, SQL, Bash/Shell, TypeScript, or PowerShell.
+We do not benchmark programming languages predominantly used for a single
+domain, like Kotlin for Android development, Dart for Flutter, Swift for iOS
+development, or MicroPython for embedded systems. We are unable to benchmark
 assembly. We do not benchmark programming languages that are not widely used in
 production, like Groovy, Elixir, Scala, Delphi, Lisp, Erlang, Fortran, Ada, F#,
 OCaml, Gleam, Prolog, COBOL, or Mojo. We do not benchmark programming languages
@@ -28,8 +28,7 @@ like Visual Basic (.NET) or VBA. We do not benchmark programming languages
 predominantly used for statistical computing or data analysis, like R or MATLAB.
 We do not benchmark custom scripting languages like GDScript. We do not
 benchmark programming languages that are write-ins in the Stack Overflow
-Developer Survey.
-</sup></sub>
+Developer Survey.</sub>
 
 ## Philosophy
 * **No warm-ups**  
