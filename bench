@@ -209,7 +209,7 @@ do
         backup *.c *.cpp
         go build ./...
         restore *.c* *.cpp*
-        run_benchmark "./${file}" "go           "
+        run_benchmark "./${file}" "go             "
     fi
 
     # C#
@@ -221,7 +221,7 @@ do
         mv -f ${file}.cs Program.cs
         dotnet build > /dev/null 2>&1
         mv -f Program.cs ${file}.cs
-        run_benchmark "dotnet run" "cs           "
+        run_benchmark "dotnet run" "cs             "
     fi
 
     # Java
@@ -243,7 +243,7 @@ do
     then
         # nvm
         # sudo ln -s $(which node) /usr/local/bin/node
-        run_benchmark "node --max-old-space-size=8192 ${file}.js" "js           "
+        run_benchmark "node --max-old-space-size=8192 ${file}.js" "js             "
     fi
 
     # Lua/LuaJIT
@@ -271,7 +271,7 @@ do
                 make -s clean luajit
             fi
 
-            run_benchmark "luajit ${file}.lua" "luajit        "
+            run_benchmark "luajit ${file}.lua" "luajit         "
         fi
     fi
 
@@ -307,7 +307,7 @@ do
         if [ -f Cargo.toml ]; then
             if command -v cargo > /dev/null; then
                 cargo build --release > /dev/null 2>&1
-                run_benchmark "./target/release/${file}" "rust"
+                run_benchmark "./target/release/${file}" "rust           "
             fi
         else
             rustc -O ${file}.rs -o ${file}
