@@ -249,6 +249,18 @@ do
         unset class
     fi
 
+    # C#
+    if [ -f ${file}.cs ] \
+    && command -v dotnet > /dev/null \
+    && should_run_language "cs"
+    then
+        dotnet new console > /dev/null 2>&1
+        mv -f ${file}.cs Program.cs
+        dotnet build -c Release > /dev/null 2>&1
+        mv -f Program.cs ${file}.cs
+        run_benchmark "dotnet ./bin/Release/net*/${file}.dll" "cs             "
+    fi
+
     # Node
     if [ -f ${file}.js ] \
     && command -v node > /dev/null \
@@ -272,18 +284,6 @@ do
 
             run_benchmark "luajit ${file}.lua" "luajit         "
         fi
-    fi
-
-    # C#
-    if [ -f ${file}.cs ] \
-    && command -v dotnet > /dev/null \
-    && should_run_language "cs"
-    then
-        dotnet new console > /dev/null 2>&1
-        mv -f ${file}.cs Program.cs
-        dotnet build -c Release > /dev/null 2>&1
-        mv -f Program.cs ${file}.cs
-        run_benchmark "dotnet ./bin/Release/net*/${file}.dll" "cs             "
     fi
 
     # PHP
