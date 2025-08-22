@@ -78,51 +78,51 @@ is not solely determined by its implementation, but also by the libraries and
 frameworks that are used with it.
 
 ### Physical
-*Last updated: Thu Aug 21 20:48:16 MST 2025*
+*Last updated: Thu Aug 21 21:34:46 MST 2025*
 ```sh
 % ./bench
 json
- cpp            mean 2282.7 µs	
- c              mean 3199.9 µs	
- zig            mean 4034.2 µs	
- rust           mean 3941.8 µs	
- go             mean 6938.2 µs	
- java           mean 172142.0 µs	
- cs             mean 35822.5 µs	
- js             mean 33301.7 µs	
- luajit         mean 10148.2 µs	
- php            mean 52501.4 µs	
- lua            mean 49141.5 µs	
- ruby           mean 59083.3 µs	
- python3        mean 30161.1 µs	
+ cpp            mean 1738.3 µs	
+ c              mean 3054.0 µs	
+ zig            mean 3906.9 µs	
+ rust           mean 3692.2 µs	
+ go             mean 6968.4 µs	
+ java           mean 170049.5 µs	
+ cs             mean 35628.1 µs	
+ js             mean 33187.1 µs	
+ luajit         mean 9938.0 µs	
+ php            mean 52403.9 µs	
+ lua            mean 49366.6 µs	
+ ruby           mean 59341.7 µs	
+ python3        mean 30460.8 µs	
 minimal
- cpp            mean 1955.8 µs	
- c              mean 1036.1 µs	
- zig            mean 1580.5 µs	
- rust           mean 1493.3 µs	
- go             mean 1989.9 µs	
- java           mean 32775.8 µs	
- cs             mean 22461.7 µs	
- js             mean 27081.8 µs	
- luajit         mean 2207.4 µs	
- php            mean 50554.3 µs	
- lua            mean 1696.5 µs	
- ruby           mean 55549.2 µs	
- python3        mean 21129.0 µs	
+ cpp            mean 1549.0 µs	
+ c              mean 1217.1 µs	
+ zig            mean 1534.4 µs	
+ rust           mean 1550.7 µs	
+ go             mean 1542.4 µs	
+ java           mean 31884.8 µs	
+ cs             mean 22668.2 µs	
+ js             mean 28519.2 µs	
+ luajit         mean 1602.0 µs	
+ php            mean 50319.9 µs	
+ lua            mean 1747.0 µs	
+ ruby           mean 51489.4 µs	
+ python3        mean 21472.0 µs	
 record
- cpp            mean 2060.7 µs	
- c              mean 1103.8 µs	
- zig            mean 4734.5 µs	
- rust           mean 7178.6 µs	
- go             mean 10906.6 µs	
- java           mean 81434.2 µs	
- cs             mean 383297.2 µs	
- js             mean 623008.2 µs	
- luajit         mean 653228.5 µs	
- php            mean 765170.3 µs	
- lua            mean 1269887.4 µs	
- ruby           mean 1460844.2 µs	
- python3        mean 4258079.6 µs	
+ cpp            mean 738.2 µs	
+ c              mean 1215.0 µs	
+ zig            mean 4460.7 µs	
+ rust           mean 7152.0 µs	
+ go             mean 9709.3 µs	
+ java           mean 80830.2 µs	
+ cs             mean 378984.8 µs	
+ js             mean 626475.8 µs	
+ luajit         mean 658569.1 µs	
+ php            mean 762029.6 µs	
+ lua            mean 1279559.3 µs	
+ ruby           mean 1446871.1 µs	
+ python3        mean 4236537.6 µs	
 ```
 
 ### Google Sheets
@@ -149,11 +149,11 @@ MicroPython for embedded systems. We are unable to benchmark HTML/CSS, SQL, and
 assembly. We do not benchmark programming languages that are not widely used in
 production, like Groovy, Elixir, Scala, Delphi, Lisp, Erlang, Fortran, Ada, F#,
 OCaml, Gleam, Prolog, COBOL, or Mojo. We do not benchmark programming languages
-no longer supported, updated, or ones which "won't be extended to new workloads"
-like Visual Basic (.NET) or VBA. We do not benchmark programming languages
-predominantly used for statistical computing or data analysis, like R or MATLAB.
-We do not benchmark custom scripting languages like GDScript. We do not
-benchmark programming languages that are write-ins in the Stack Overflow
+that are no longer supported, updated, or ones which "won't be extended to new
+workloads" like Visual Basic (.NET) or VBA. We do not benchmark programming
+languages predominantly used for statistical computing or data analysis, like R
+or MATLAB. We do not benchmark custom scripting languages like GDScript. We do
+not benchmark programming languages that are write-ins in the Stack Overflow
 Developer Survey.</sub>
 
 ## License
