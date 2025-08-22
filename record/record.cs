@@ -6,7 +6,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        const int nRecords = 33554432;
+        const int nRecords = 16777216;
 
         try
         {

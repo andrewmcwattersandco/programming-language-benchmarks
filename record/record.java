@@ -16,7 +16,7 @@ class RecordApp {
 
     public static void main(String[] args) {
         try {
-            records = new Record[33554432];
+            records = new Record[16777216];
 
             for (int i = 0; i < records.length; i++) {
                 Record r = new Record();

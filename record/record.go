@@ -1,7 +1,7 @@
 package main
 
 func main() {
-	records := make([]Record, 33554432)
+	records := make([]Record, 16777216)
 
 	for i := 0; i < len(records); i++ {
 		r := Record{id: i}
