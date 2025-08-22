@@ -157,7 +157,7 @@ run_benchmark() {
     result=$(hyperfine $hyperfine_opts --shell=sh "$cmd" 2>&1 | grep -E "Time \((abs|mean)" | sed -E 's/.*Time \([^:]*\): *([0-9.]+) *(.*s).*/\1 \2/' | awk '{print $1 " " $2}')
     
     if [ -n "$result" ]; then
-        printf "%s mean" "$result"
+        printf "mean %s" "$result"
     else
         printf "failed"
     fi
