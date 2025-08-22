@@ -219,7 +219,7 @@ do
             make -s
         else
             # ISO POSIX-2:1993
-            c89 ${file}.c
+            c89 -O2 ${file}.c
         fi
         run_benchmark "./a.out" "c              "
     fi
@@ -232,7 +232,7 @@ do
             make -s c++
         else
             # CXX
-            g++ ${file}.cpp
+            g++ -O2 ${file}.cpp
         fi
         run_benchmark "./a.out" "cpp            "
     fi
@@ -274,14 +274,6 @@ do
         fi
     fi
 
-    # PHP
-    if [ -f ${file}.php ] \
-    && command -v php > /dev/null \
-    && should_run_language "php"
-    then
-        run_benchmark "php -d memory_limit=8G ${file}.php" "php            "
-    fi
-
     # C#
     if [ -f ${file}.cs ] \
     && command -v dotnet > /dev/null \
@@ -289,9 +281,17 @@ do
     then
         dotnet new console > /dev/null 2>&1
         mv -f ${file}.cs Program.cs
-        dotnet build > /dev/null 2>&1
+        dotnet build -c Release > /dev/null 2>&1
         mv -f Program.cs ${file}.cs
-        run_benchmark "dotnet run" "cs             "
+        run_benchmark "dotnet ./bin/Release/net*/${file}.dll" "cs             "
+    fi
+
+    # PHP
+    if [ -f ${file}.php ] \
+    && command -v php > /dev/null \
+    && should_run_language "php"
+    then
+        run_benchmark "php -d memory_limit=8G ${file}.php" "php            "
     fi
 
     # Lua

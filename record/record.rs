@@ -1,4 +1,4 @@
-const NRECORDS: usize = 16_777_216;
+const NRECORDS: usize = 8_388_608;
 
 #[allow(dead_code)]
 struct Record {

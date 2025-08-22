@@ -1,7 +1,7 @@
 const std = @import("std");
 const allocator = std.heap.page_allocator;
 
-const NRECORDS = 16777216;
+const NRECORDS = 8388608;
 
 const Record = struct {
     id: i32,

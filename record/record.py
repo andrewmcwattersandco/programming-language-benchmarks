@@ -7,7 +7,7 @@ class Record:
 def main():
     records = []
 
-    for i in range(16777216):
+    for i in range(8388608):
         r = Record(i)
         records.append(r)
 

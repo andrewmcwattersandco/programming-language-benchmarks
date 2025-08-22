@@ -1,6 +1,6 @@
 t = {}
 
-for i=1, 16777216 do
+for i=1, 8388608 do
   local record = {}
 
   record.id = i

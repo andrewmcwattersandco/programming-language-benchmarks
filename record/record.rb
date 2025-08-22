@@ -11,7 +11,7 @@ end
 def main
   records = []
 
-  (0...16_777_216).each do |i|
+  (0...8_388_608).each do |i|
     r = Record.new(i)
     records << r
   end

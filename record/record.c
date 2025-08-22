@@ -1,7 +1,7 @@
 #include <stddef.h>
 #include <stdlib.h>
 
-#define  NRECORDS  16777216
+#define  NRECORDS  8388608
 
 struct record {
     int id;
