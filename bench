@@ -172,6 +172,19 @@ do
     echo "$file"
     clean "$file"
 
+    # C++
+    if [ -f ${file}.cpp ] && should_run_language "cpp"
+    then
+        if [ -f makefile ]
+        then
+            make -s c++
+        else
+            # CXX
+            g++ -O2 ${file}.cpp
+        fi
+        run_benchmark "./a.out" "cpp            "
+    fi
+
     # C
     if [ -f ${file}.c ] && should_run_language "c"
     then
@@ -184,19 +197,6 @@ do
             c89 -O2 ${file}.c
         fi
         run_benchmark "./a.out" "c              "
-    fi
-
-    # C++
-    if [ -f ${file}.cpp ] && should_run_language "cpp"
-    then
-        if [ -f makefile ]
-        then
-            make -s c++
-        else
-            # CXX
-            g++ -O2 ${file}.cpp
-        fi
-        run_benchmark "./a.out" "cpp            "
     fi
 
     # Zig
