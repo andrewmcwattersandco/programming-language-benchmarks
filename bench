@@ -172,6 +172,44 @@ do
     echo "$file"
     clean "$file"
 
+    # Zig
+    if [ -f ${file}.zig ] \
+    && command -v zig > /dev/null \
+    && should_run_language "zig"
+    then
+        zig build-exe -O ReleaseFast ${file}.zig > /dev/null 2>&1
+        run_benchmark "./${file}" "zig            "
+    fi
+
+    # Rust
+    if [ -f ${file}.rs ] \
+    && command -v rustc > /dev/null \
+    && should_run_language "rust"
+    then
+        if [ -f Cargo.toml ]; then
+            if command -v cargo > /dev/null; then
+                cargo build --release > /dev/null 2>&1
+                run_benchmark "./target/release/${file}" "rust           "
+            fi
+        else
+            rustc -O ${file}.rs -o ${file}
+            run_benchmark "./${file}" "rust           "
+        fi
+    fi
+
+    # Go
+    # C/C++ source files not allowed when not using cgo or SWIG
+    # Avoid setting CGO_ENABLED=0, backup and restore instead
+    if [ -f ${file}.go ] \
+    && command -v go > /dev/null \
+    && should_run_language "go"
+    then
+        backup *.c *.cpp
+        go build ./...
+        restore *.c* *.cpp*
+        run_benchmark "./${file}" "go             "
+    fi
+
     # C
     if [ -f ${file}.c ] && should_run_language "c"
     then
@@ -199,31 +237,6 @@ do
         run_benchmark "./a.out" "cpp            "
     fi
 
-    # Go
-    # C/C++ source files not allowed when not using cgo or SWIG
-    # Avoid setting CGO_ENABLED=0, backup and restore instead
-    if [ -f ${file}.go ] \
-    && command -v go > /dev/null \
-    && should_run_language "go"
-    then
-        backup *.c *.cpp
-        go build ./...
-        restore *.c* *.cpp*
-        run_benchmark "./${file}" "go             "
-    fi
-
-    # C#
-    if [ -f ${file}.cs ] \
-    && command -v dotnet > /dev/null \
-    && should_run_language "cs"
-    then
-        dotnet new console > /dev/null 2>&1
-        mv -f ${file}.cs Program.cs
-        dotnet build > /dev/null 2>&1
-        mv -f Program.cs ${file}.cs
-        run_benchmark "dotnet run" "cs             "
-    fi
-
     # Java
     if [ -f ${file}.java ] \
     && command -v javac > /dev/null \
@@ -246,29 +259,15 @@ do
         run_benchmark "node --max-old-space-size=8192 ${file}.js" "js             "
     fi
 
-    # Lua/LuaJIT
+    # LuaJIT
     if [ -f ${file}.lua ]
     then
-        if command -v lua > /dev/null \
-        && should_run_language "lua"
-        then
-            if [ -f makefile ]
-            then
-                make -s lua
-            fi
-
-            # macOS
-            # cd /opt/homebrew/bin/
-            # ln -s ../Cellar/lua@5.1/5.1.5_8/bin/lua-5.1 lua
-            run_benchmark "lua ${file}.lua" "lua            "
-        fi
-
         if command -v luajit > /dev/null \
         && should_run_language "luajit"
         then
             if [ -f makefile ]
             then
-                make -s clean luajit
+                make -s luajit
             fi
 
             run_benchmark "luajit ${file}.lua" "luajit         "
@@ -283,12 +282,34 @@ do
         run_benchmark "php -d memory_limit=8G ${file}.php" "php            "
     fi
 
-    # Python
-    if [ -f ${file}.py ] \
-    && command -v python3 > /dev/null \
-    && should_run_language "python3"
+    # C#
+    if [ -f ${file}.cs ] \
+    && command -v dotnet > /dev/null \
+    && should_run_language "cs"
     then
-        run_benchmark "python3 ${file}.py" "python3        "
+        dotnet new console > /dev/null 2>&1
+        mv -f ${file}.cs Program.cs
+        dotnet build > /dev/null 2>&1
+        mv -f Program.cs ${file}.cs
+        run_benchmark "dotnet run" "cs             "
+    fi
+
+    # Lua
+    if [ -f ${file}.lua ]
+    then
+        if command -v lua > /dev/null \
+        && should_run_language "lua"
+        then
+            if [ -f makefile ]
+            then
+                make -s clean lua
+            fi
+
+            # macOS
+            # cd /opt/homebrew/bin/
+            # ln -s ../Cellar/lua@5.1/5.1.5_8/bin/lua-5.1 lua
+            run_benchmark "lua ${file}.lua" "lua            "
+        fi
     fi
 
     # Ruby
@@ -299,29 +320,12 @@ do
         run_benchmark "ruby ${file}.rb" "ruby           "
     fi
 
-    # Rust
-    if [ -f ${file}.rs ] \
-    && command -v rustc > /dev/null \
-    && should_run_language "rust"
+    # Python
+    if [ -f ${file}.py ] \
+    && command -v python3 > /dev/null \
+    && should_run_language "python3"
     then
-        if [ -f Cargo.toml ]; then
-            if command -v cargo > /dev/null; then
-                cargo build --release > /dev/null 2>&1
-                run_benchmark "./target/release/${file}" "rust           "
-            fi
-        else
-            rustc -O ${file}.rs -o ${file}
-            run_benchmark "./${file}" "rust           "
-        fi
-    fi
-
-    # Zig
-    if [ -f ${file}.zig ] \
-    && command -v zig > /dev/null \
-    && should_run_language "zig"
-    then
-        zig build-exe -O ReleaseFast ${file}.zig > /dev/null 2>&1
-        run_benchmark "./${file}" "zig            "
+        run_benchmark "python3 ${file}.py" "python3        "
     fi
 
     cd ..
