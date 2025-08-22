@@ -135,8 +135,7 @@ https://www.apple.com/shop/buy-mac/macbook-pro/16-inch-space-gray-10-core-cpu-32
 ### Cloud
 GitHub Actions
 
-## License
-GNU General Public License v2.0
+* * *
 
 ###### Excluded Programming Languages
 <sub>\* We do not benchmark Bash/Shell, TypeScript, or PowerShell. We do not
@@ -152,5 +151,8 @@ predominantly used for statistical computing or data analysis, like R or MATLAB.
 We do not benchmark custom scripting languages like GDScript. We do not
 benchmark programming languages that are write-ins in the Stack Overflow
 Developer Survey.</sub>
+
+## License
+GNU General Public License v2.0
 
 [1]: https://github.com/andrewmcwattersandco/web-server-benchmarks
