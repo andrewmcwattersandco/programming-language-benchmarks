@@ -72,8 +72,8 @@ sudo ln -s $(command -v node) /usr/local/bin/node
 
 ## Results
 Our findings confirm conventional wisdom that low-level compiled languages are
-faster than managed code, and that managed code is faster than interpreted
-languages. The results also show that the performance of a programming language
+faster than managed code, and that managed code runs faster than interpreted
+code. The results also show that the performance of a programming language
 is not solely determined by its implementation, but also by the libraries and
 frameworks that are used with it.
 
