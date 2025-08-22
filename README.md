@@ -71,54 +71,58 @@ sudo ln -s $(command -v node) /usr/local/bin/node
   Test built-in or de facto standard JSON parser
 
 ## Results
+Our findings confirm conventional wisdom that low-level compiled languages are
+faster than managed code, and that managed code is faster than interpreted
+languages. The results also show that the performance of a programming language
+is not solely determined by its implementation, but also by the libraries and
+frameworks that are used with it.
+
 ### Physical
-*Last updated: Thu Aug 21 14:20:27 MST 2025*
+*Last updated: Thu Aug 21 20:48:16 MST 2025*
 ```sh
 % ./bench
 json
- js         real 0.03     user 0.02     sys 0.00
- python3    real 0.03     user 0.02     sys 0.00
- php        real 0.05     user 0.04     sys 0.01
- ruby       real 0.06     user 0.04     sys 0.01
- luajit     real 0.16     user 0.01     sys 0.00
- cpp        real 0.17     user 0.00     sys 0.00
- go         real 0.17     user 0.00     sys 0.00
- java       real 0.17     user 0.26     sys 0.02
- rust       real 0.16     user 0.00     sys 0.00
- lua        real 0.23     user 0.06     sys 0.00
- zig        real 0.28     user 0.00     sys 0.00
- c          real 0.38     user 0.00     sys 0.00
- cs         real 0.97     user 0.74     sys 0.19
-
+ cpp            mean 2282.7 µs	
+ c              mean 3199.9 µs	
+ zig            mean 4034.2 µs	
+ rust           mean 3941.8 µs	
+ go             mean 6938.2 µs	
+ java           mean 172142.0 µs	
+ cs             mean 35822.5 µs	
+ js             mean 33301.7 µs	
+ luajit         mean 10148.2 µs	
+ php            mean 52501.4 µs	
+ lua            mean 49141.5 µs	
+ ruby           mean 59083.3 µs	
+ python3        mean 30161.1 µs	
 minimal
- lua        real 0.00     user 0.00     sys 0.00
- luajit     real 0.00     user 0.00     sys 0.00
- js         real 0.02     user 0.01     sys 0.00
- python3    real 0.02     user 0.01     sys 0.00
- java       real 0.03     user 0.01     sys 0.01
- php        real 0.05     user 0.03     sys 0.00
- ruby       real 0.05     user 0.03     sys 0.01
- zig        real 0.15     user 0.00     sys 0.00
- c          real 0.16     user 0.00     sys 0.00
- cpp        real 0.16     user 0.00     sys 0.00
- go         real 0.16     user 0.00     sys 0.00
- rust       real 0.16     user 0.00     sys 0.00
- cs         real 0.94     user 0.78     sys 0.25
-
+ cpp            mean 1955.8 µs	
+ c              mean 1036.1 µs	
+ zig            mean 1580.5 µs	
+ rust           mean 1493.3 µs	
+ go             mean 1989.9 µs	
+ java           mean 32775.8 µs	
+ cs             mean 22461.7 µs	
+ js             mean 27081.8 µs	
+ luajit         mean 2207.4 µs	
+ php            mean 50554.3 µs	
+ lua            mean 1696.5 µs	
+ ruby           mean 55549.2 µs	
+ python3        mean 21129.0 µs	
 record
- zig        real 0.20     user 0.01     sys 0.02
- c          real 0.24     user 0.07     sys 0.02
- go         real 0.24     user 0.02     sys 0.03
- rust       real 0.41     user 0.04     sys 0.03
- java       real 0.46     user 1.92     sys 0.17
- cpp        real 0.50     user 0.30     sys 0.03
- cs         real 3.92     user 4.01     sys 0.59
- js         real 4.34     user 5.57     sys 1.47
- luajit     real 5.07     user 4.07     sys 0.98
- php        real 5.55     user 4.85     sys 0.69
- lua        real 9.48     user 8.48     sys 0.98
- ruby       real 11.86    user 11.18    sys 0.66
- python3    real 35.60    user 33.81    sys 1.75
+ cpp            mean 2060.7 µs	
+ c              mean 1103.8 µs	
+ zig            mean 4734.5 µs	
+ rust           mean 7178.6 µs	
+ go             mean 10906.6 µs	
+ java           mean 81434.2 µs	
+ cs             mean 383297.2 µs	
+ js             mean 623008.2 µs	
+ luajit         mean 653228.5 µs	
+ php            mean 765170.3 µs	
+ lua            mean 1269887.4 µs	
+ ruby           mean 1460844.2 µs	
+ python3        mean 4258079.6 µs	
 ```
 
 ### Google Sheets
