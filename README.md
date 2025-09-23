@@ -12,6 +12,7 @@ Benchmarks for programming languages
 * LuaJIT
 * PHP
 * Python
+* Ruby
 * Rust
 * Zig
 
