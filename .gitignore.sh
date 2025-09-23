@@ -8,21 +8,23 @@ do
 done
 
 # go.mod
-touch $TMPDIR/.gitignore
-grep -v '^\*.mod' .gitignore > $TMPDIR/.gitignore
-mv $TMPDIR/.gitignore .gitignore
+touch "$TMPDIR"/.gitignore
+grep -v '^\*.mod' .gitignore > "$TMPDIR"/.gitignore
+mv "$TMPDIR"/.gitignore .gitignore
 
 # C/C++
 for dir in */
 do
-    file=$(basename ${dir})
-    echo ${file}/${file} >> .gitignore
+    file=$(basename "${dir}")
+    echo "${file}"/"${file}" >> .gitignore
 done
 
 # C#
-echo 'bin/' >> .gitignore
-echo 'obj/' >> .gitignore
-echo '*.csproj' >> .gitignore
-echo '*.sln' >> .gitignore
+{
+    echo 'bin/'
+    echo 'obj/'
+    echo '*.csproj'
+    echo '*.sln'
+} >> .gitignore
 
 echo '*.orig' >> .gitignore
