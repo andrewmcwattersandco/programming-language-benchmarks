@@ -85,31 +85,31 @@ frameworks that are used with it.
 json
  cpp            mean 1738.3 µs	
  c              mean 3054.0 µs	
- zig            mean 3906.9 µs	
  rust           mean 3692.2 µs	
+ zig            mean 3906.9 µs	
  go             mean 6968.4 µs	
- java           mean 170049.5 µs	
- cs             mean 35628.1 µs	
- js             mean 33187.1 µs	
  luajit         mean 9938.0 µs	
- php            mean 52403.9 µs	
- lua            mean 49366.6 µs	
- ruby           mean 59341.7 µs	
  python3        mean 30460.8 µs	
+ js             mean 33187.1 µs	
+ cs             mean 35628.1 µs	
+ lua            mean 49366.6 µs	
+ php            mean 52403.9 µs	
+ ruby           mean 59341.7 µs	
+ java           mean 170049.5 µs	
 minimal
- cpp            mean 1549.0 µs	
  c              mean 1217.1 µs	
  zig            mean 1534.4 µs	
- rust           mean 1550.7 µs	
  go             mean 1542.4 µs	
- java           mean 31884.8 µs	
+ cpp            mean 1549.0 µs	
+ rust           mean 1550.7 µs	
+ luajit         mean 1602.0 µs	
+ lua            mean 1747.0 µs	
+ python3        mean 21472.0 µs	
  cs             mean 22668.2 µs	
  js             mean 28519.2 µs	
- luajit         mean 1602.0 µs	
+ java           mean 31884.8 µs	
  php            mean 50319.9 µs	
- lua            mean 1747.0 µs	
  ruby           mean 51489.4 µs	
- python3        mean 21472.0 µs	
 record
  cpp            mean 738.2 µs	
  c              mean 1215.0 µs	
