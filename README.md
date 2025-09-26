@@ -1,7 +1,7 @@
 # programming-language-benchmarks
 Benchmarks for programming languages
 
-## Languages and Implementations[*](#excluded-programming-languages)
+## Languages and implementations[*](#excluded-programming-languages)
 * C
 * C++
 * C#
@@ -142,7 +142,7 @@ GitHub Actions
 
 * * *
 
-###### Excluded Programming Languages
+###### Excluded programming languages
 <sub>\* We do not benchmark Bash/Shell, TypeScript, or PowerShell. We do not
 benchmark **programming languages predominantly used for a single domain**,
 like Kotlin for Android development, Dart for Flutter, Swift for iOS
