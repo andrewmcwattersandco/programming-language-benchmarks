@@ -144,18 +144,18 @@ GitHub Actions
 
 ###### Excluded Programming Languages
 <sub>\* We do not benchmark Bash/Shell, TypeScript, or PowerShell. We do not
-benchmark programming languages predominantly used for a single domain, like
-Kotlin for Android development, Dart for Flutter, Swift for iOS development, or
-MicroPython for embedded systems. We are unable to benchmark HTML/CSS, SQL, and
-assembly. We do not benchmark programming languages that are not widely used in
-production, like Groovy, Elixir, Scala, Delphi, Lisp, Erlang, Fortran, Ada, F#,
-OCaml, Gleam, Prolog, COBOL, or Mojo. We do not benchmark programming languages
-that are no longer supported, updated, or ones which "won't be extended to new
-workloads" like Visual Basic (.NET) or VBA. We do not benchmark programming
-languages predominantly used for statistical computing or data analysis, like R
-or MATLAB. We do not benchmark custom scripting languages like GDScript. We do
-not benchmark programming languages that are write-ins in the Stack Overflow
-Developer Survey.</sub>
+benchmark **programming languages predominantly used for a single domain**,
+like Kotlin for Android development, Dart for Flutter, Swift for iOS
+development, or MicroPython for embedded systems. We are unable to benchmark
+HTML/CSS, SQL, and assembly. We do not benchmark **programming languages that
+are not widely used in production,** like Groovy, Elixir, Scala, Delphi, Lisp,
+Erlang, Fortran, Ada, F#, OCaml, Gleam, Prolog, COBOL, or Mojo. We do not
+benchmark **programming languages that are no longer supported, updated, or
+ones which "won't be extended to new workloads"** like Visual Basic (.NET) or
+VBA. We do not benchmark **programming languages predominantly used for
+statistical computing or data analysis**, like R or MATLAB. We do not benchmark
+**custom scripting languages** like GDScript. We do not benchmark **programming
+languages that are write-ins in the Stack Overflow Developer Survey.**</sub>
 
 ## License
 GNU General Public License v2.0
