@@ -1,0 +1,25 @@
+# Match record/record.c: allocate NRECORDS structs, fill, free.
+extern {
+    function malloc(size: i64) -> ptr<void>
+    function free(p: ptr<void>) -> void
+}
+
+const NRECORDS: i64 = 8388608
+
+struct record {
+    id: i32
+}
+
+function main() -> i32 {
+    let records: ptr<record> = malloc(NRECORDS * 4) as ptr<record>
+    if records == null {
+        return 1
+    }
+    let mut i: i64 = 0
+    while i < NRECORDS {
+        records[i].id = i as i32
+        i = i + 1
+    }
+    free(records as ptr<void>)
+    return 0
+}

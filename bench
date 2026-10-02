@@ -64,6 +64,9 @@ clean() {
     # Zig
     rm -f ${1}
     rm -f ${1}.o
+
+    # Flow
+    rm -rf .flow-build
 }
 
 # backup - backup files as *.orig
@@ -206,6 +209,16 @@ do
     then
         zig build-exe -O ReleaseFast ${file}.zig > /dev/null 2>&1
         run_benchmark "./${file}" "zig            "
+    fi
+
+    # Flow
+    if [ -f ${file}.flow ] \
+    && command -v flow > /dev/null \
+    && should_run_language "flow"
+    then
+        mkdir -p .flow-build
+        FLOW_BUILD_ROOT=$PWD/.flow-build flow compile ${file}.flow > /dev/null 2>&1
+        run_benchmark "./.flow-build/${file}" "flow           "
     fi
 
     # Rust
